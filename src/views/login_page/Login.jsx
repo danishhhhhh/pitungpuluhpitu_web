@@ -2,7 +2,7 @@
 
 const Login = () => {
   return (
-      <h1>Login to your account</h1>
+      <p className="text-red-600 text-3xl font-poppins font-bold">Login to your account</p>
   )
 }
 
