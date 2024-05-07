@@ -1,4 +1,5 @@
 import React from "react";
+// import Navbar from "./Navbar";
 
 // const Navbar = () => {
 //   return (
@@ -14,8 +15,8 @@ import React from "react";
 const Login = () => {
   return (
       <div>
-        <Navbar/> {}
-        <div className="login-form bg-yellow-600">
+        {/* <Navbar/>  */}
+        <div className="login-form">
           <h1 className="text-4x1 text-blackfont-bold text-center mb-6">Login</h1>
           <form action="">
           <div className="relative my-4">
