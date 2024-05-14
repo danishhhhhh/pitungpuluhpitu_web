@@ -77,7 +77,7 @@ const Sidebar = () => {
               </div>
             </NavLink>
           </li>
-          <li className="mb-4 rounded-lg text-white py-4 bg-red active:bg-yellow active:text-bluegrey mt-36">
+          <li className="mb-4 rounded-lg text-white py-4 bg-red active:bg-yellow active:text-bluegrey mt-64">
             <a href="/" className="flex items-center justify-between">
               <div className="flex items-center justify-center text-center w-full">
                 Keluar
