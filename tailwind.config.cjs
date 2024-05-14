@@ -9,7 +9,7 @@ module.exports = {
     extend: {},
     colors: {
       lightyellow: '#FEFBEC',
-      yellow:'#F8D902',
+      yellow: '#F8D902',
       black: '#19191',
       white: '#FFFFFF',
       navy: '#141429',
@@ -24,9 +24,9 @@ module.exports = {
       lightred: '#FFD1D2',
     },
     fontFamily: {
-      poppins: ['Poppins', 'sans-serif'], 
-      
-    }, 
+      poppins: ['Poppins', 'sans-serif'],
+
+    },
   },
   plugins: [],
 }

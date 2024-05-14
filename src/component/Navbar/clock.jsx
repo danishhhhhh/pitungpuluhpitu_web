@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { FaRecordVinyl } from "react-icons/fa";
 import { FaSun } from "react-icons/fa";
 import { FaMoon } from "react-icons/fa";
+import { FaCloudSun } from "react-icons/fa";
 
 const Clock = () => {
   const [time, setTime] = useState(new Date());
@@ -39,7 +40,9 @@ const Clock = () => {
   };
   const getIcon = () => {
     const hours = time.getHours();
-    if (hours >= 6 && hours < 18) {
+    if (hours >= 6 && hours < 12) {
+      return <FaCloudSun className="text-yellow ml-2 mt-1 inline-flex items-center justify-center" />;
+    } else if (hours >= 12 && hours <= 18) {
       return <FaSun className="text-yellow ml-2 mt-1 inline-flex items-center justify-center" />;
     } else {
       return <FaMoon className="text-navy ml-2 mt-1 inline-flex items-center justify-center" />;
