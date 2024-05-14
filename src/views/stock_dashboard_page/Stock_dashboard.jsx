@@ -1,13 +1,16 @@
-import Sidebar from "../../component/Sidebar/sidebar"
-import Navbar from "../../component/Navbar/navbar"
+import Sidebar from "../../component/Sidebar/sidebar";
+import Dashboard from "../../component/Dashboard/Dashboard";
 
-const StockdashboardPage =()=> {
-    return (
-        <div className="flex gap-0 m-0 p-0">
-        <Sidebar/>
-        <Navbar/>
-        </div>
-    )
-}
+const StockdashboardPage = () => {
+  return (
+    <div className="flex ">
+      <Sidebar />
+
+      <div className="w-full h-1 ">
+    <Dashboard/>
+      </div>
+    </div>
+  );
+};
 
 export default StockdashboardPage;
