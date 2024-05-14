@@ -24,9 +24,9 @@ module.exports = {
       lightred: '#FFD1D2',
     },
     fontFamily: {
-      poppins: ['Poppins', 'sans-serif'], 
-      
-    }, 
+      poppins: ['Poppins', 'sans-serif'],
+
+    },
   },
   plugins: [],
 }

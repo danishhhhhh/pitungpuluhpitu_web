@@ -3,9 +3,7 @@ import { FaBox, FaToolbox, FaMotorcycle, FaTools, FaUserCog, FaUserCircle } from
 import { Link , useLocation} from "react-router-dom";
 
 const Sidebar = () => {
- let {path} = useLocation();
- console.log(path)
- 
+
   return (
     <div className="w-80 2xl:w-80 md:w-60 bg-lightnavy fixed h-screen left-0 top-0 p-5 transition-transform translate-x-full sm:translate-x-0">
       <div>

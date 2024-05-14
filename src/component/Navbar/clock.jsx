@@ -41,11 +41,11 @@ const Clock = () => {
   const getIcon = () => {
     const hours = time.getHours();
     if (hours >= 6 && hours < 12) {
-      return   <FaCloudSun className="text-yellow ml-2 mt-1 inline-flex items-center justify-center" />;
+      return <FaCloudSun className="text-yellow ml-2 mt-1 inline-flex items-center justify-center" />;
     } else if (hours >= 12 && hours <= 18) {
-      return   <FaSun className="text-yellow ml-2 mt-1 inline-flex items-center justify-center" />;
+      return <FaSun className="text-yellow ml-2 mt-1 inline-flex items-center justify-center" />;
     } else {
-      return   <FaMoon className="text-navy ml-2 mt-1 inline-flex items-center justify-center" />;
+      return <FaMoon className="text-navy ml-2 mt-1 inline-flex items-center justify-center" />;
     }
   };
 
@@ -55,8 +55,8 @@ const Clock = () => {
       <div className="w-64">
         <h1 className="text-l font-bold font-poppins mb-2 flex justify-end">
           {getGreeting()} {getIcon()}
-        
-        
+
+
 
         </h1>
 
