@@ -1,5 +1,5 @@
 import React from "react";
-import Navbar from "../../component/Navbar/navbar";
+
 import { FaSearch } from "react-icons/fa";
 
 import Cardrekap from "./cardrekap";
@@ -7,11 +7,7 @@ import Cardtim from "./Cardtim";
 
 const Dashboard = () => {
   return (
-    <div>
-      <div className="">
-        <Navbar />
-      </div>
-      <div className="mt-20 ">
+    <div className="mt-20 ">
       <div className="flex justify-between ">
         <div className="left-0 flex justify-start bg-lightgrey rounded-xl w-80 ">
           <input
@@ -26,13 +22,11 @@ const Dashboard = () => {
         </button>
       </div>
       <div className="my-6 flex justify-start">
-        
-      <Cardtim tim="Tim 1" />
-      <Cardtim tim="Tim 2" />
-      <Cardtim tim="Tim 3" />
-      <Cardtim tim="Tim 4" />
-      <Cardtim tim="Tim 5" />
-
+        <Cardtim tim="Tim 1" />
+        <Cardtim tim="Tim 2" />
+        <Cardtim tim="Tim 3" />
+        <Cardtim tim="Tim 4" />
+        <Cardtim tim="Tim 5" />
       </div>
       <div className="mt-20">
         <div className="left-0 flex justify-start bg-lightgrey rounded-xl w-80 ">
@@ -45,14 +39,12 @@ const Dashboard = () => {
         </div>
       </div>
       <div className="grid gap-4 grid-cols-3 grid-rows-3 mt-8">
-       <Cardrekap/>
-       <Cardrekap/>
-       <Cardrekap/>
-       <Cardrekap/>
-       <Cardrekap/>
-       <Cardrekap/>
-        
-      </div>
+        <Cardrekap />
+        <Cardrekap />
+        <Cardrekap />
+        <Cardrekap />
+        <Cardrekap />
+        <Cardrekap />
       </div>
     </div>
   );

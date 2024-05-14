@@ -3,7 +3,7 @@ import Clock from "../../component/Navbar/clock";
 const Navbar = () => {
   return (
     <div className="bg-lightyellow w-full h-20   fixed top-0 2xl:left-80 left-80 xl:left-60 md:left-60 flex justify-start items-center">
-      <div className="mx-4 my-6 flex-initial w-32 basis-1/5">
+      <div className="ml-10 my-6 flex-initial w-32 basis-1/5">
         <h1 className="font-poppins text-left font-semibold text-xl">
           Data Stock
         </h1>
