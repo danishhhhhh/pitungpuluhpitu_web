@@ -5,7 +5,7 @@ const JasaPage = () => {
   return (
     <div className="flex ">
     <Sidebar />
-    <Navbar/>
+    <Navbar data="Data Jasa"/>
 
   </div>
   )

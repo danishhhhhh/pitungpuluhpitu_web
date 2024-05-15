@@ -6,7 +6,7 @@ const PekerjaanPage = () => {
   return (
     <div className="flex ">
     <Sidebar />
-    <Navbar/>
+    <Navbar data="Data Pekerjaan"/>
 
   </div>
   )
