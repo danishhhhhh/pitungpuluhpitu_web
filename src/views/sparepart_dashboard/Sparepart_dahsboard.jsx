@@ -7,6 +7,7 @@ import TableKecil from "../../component/TabelKecil/tabel_kecil";
 import TableBesar from "../../component/TabelBesar/tabel_besar";
 
 const SparepartdashboardPage = () => {
+
   return (
     <div className="flex">
       <Sidebar />
@@ -35,77 +36,78 @@ const SparepartdashboardPage = () => {
             </div>
           </div>
 
-          <div className="flex justify-start bg-gray-800 mt-10">
-            <TableBesar />
-            <TableKecil />
-          </div>
 
-          <div className="max-w-2xl mt-14">
-            <nav aria-label="Page navigation example">
-              <ul className="inline-flex -space-x-px">
-                <li>
-                  <a
-                    href="#"
-                    className="bg-white border border-lightgrey text-yellow hover:bg-gray-100 hover:text-gray-700 ml-0 rounded-l-lg leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-yellow dark:hover:text-white"
-                  >
-                    Previous
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="bg-white border border-lightgrey text-yellow hover:bg-gray-100 hover:text-gray-700 leading-tight py-2 px-3 dark:bg-white dark:border-gray-700 dark:text-black dark:hover:bg-yellow dark:hover:text-white"
-                  >
-                    1
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="bg-white border border-lightgrey text-yellow hover:bg-gray-100 hover:text-gray-700 leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-yellow dark:hover:text-white"
-                  >
-                    2
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="bg-white border border-lightgrey text-yellow hover:bg-gray-100 hover:text-gray-700 leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-yellow dark:hover:text-white"
-                  >
-                    3
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="bg-white border border-lightgrey text-yellow hover:bg-gray-100 hover:text-gray-700 leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-yellow dark:hover:text-white"
-                  >
-                    4
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="bg-white border border-lightgrey text-yellow hover:bg-gray-100 hover:text-gray-700 leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-yellow dark:hover:text-white"
-                  >
-                    5
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="bg-white border border-lightgrey text-yellow hover:bg-gray-100 hover:text-gray-700 rounded-r-lg leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-yellow dark:hover:text-white"
-                  >
-                    Next
-                  </a>
-                </li>
-              </ul>
-            </nav>
-          </div>
+                    <div className="flex justify-start bg-gray-800 mt-10">
+                        <TableBesar />
+                        <TableKecil />
+                    </div>
+
+                    <div className="max-w-2xl mt-14">
+                        <nav aria-label="Page navigation example">
+                            <ul className="inline-flex -space-x-px">
+                                <li>
+                                    <a
+                                        href="#"
+                                        className="bg-white border border-lightgrey text-yellow hover:bg-gray-100 hover:text-gray-700 ml-0 rounded-l-lg leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-yellow dark:hover:text-white"
+                                    >
+                                        Previous
+                                    </a>
+                                </li>
+                                <li>
+                                    <a
+                                        href="#"
+                                        className="bg-white border border-lightgrey text-yellow hover:bg-gray-100 hover:text-gray-700 leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-yellow dark:hover:text-white"
+                                    >
+                                        1
+                                    </a>
+                                </li>
+                                <li>
+                                    <a
+                                        href="#"
+                                        className="bg-white border border-lightgrey text-yellow hover:bg-gray-100 hover:text-gray-700 leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-yellow dark:hover:text-white"
+                                    >
+                                        2
+                                    </a>
+                                </li>
+                                <li>
+                                    <a
+                                        href="#"
+                                        className="bg-white border border-lightgrey text-yellow hover:bg-gray-100 hover:text-gray-700 leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-yellow dark:hover:text-white"
+                                    >
+                                        3
+                                    </a>
+                                </li>
+                                <li>
+                                    <a
+                                        href="#"
+                                        className="bg-white border border-lightgrey text-yellow hover:bg-gray-100 hover:text-gray-700 leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-yellow dark:hover:text-white"
+                                    >
+                                        4
+                                    </a>
+                                </li>
+                                <li>
+                                    <a
+                                        href="#"
+                                        className="bg-white border border-lightgrey text-yellow hover:bg-gray-100 hover:text-gray-700 leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-yellow dark:hover:text-white"
+                                    >
+                                        5
+                                    </a>
+                                </li>
+                                <li>
+                                    <a
+                                        href="#"
+                                        className="bg-white border border-lightgrey text-yellow hover:bg-gray-100 hover:text-gray-700 rounded-r-lg leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-yellow dark:hover:text-white"
+                                    >
+                                        Next
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  );
+    );
 };
 
 export default SparepartdashboardPage;
