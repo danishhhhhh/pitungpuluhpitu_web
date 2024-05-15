@@ -5,7 +5,7 @@ const AkunPage = () => {
   return (
     <div className="flex ">
     <Sidebar />
-    <Navbar/>
+    <Navbar  data="Data Akun"/>
 
   </div>
   )
