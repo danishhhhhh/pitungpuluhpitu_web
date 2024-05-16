@@ -12,7 +12,6 @@ const SparepartdashboardPage = () => {
             <Sidebar />
             <div className="w-full h-1 ">
                 <Navbar />
-
                 <div className="flex flex-col w-full">
                     <div className="flex mt-20 ml-45 bg-gray-800 mt-20">
                         <div className="relative">
@@ -20,16 +19,16 @@ const SparepartdashboardPage = () => {
                                 type="text"
                                 placeholder="Cari sparepart ..."
                                 className="w-96 h-9 md:pl-2 pr-10 bg-lightgrey rounded-xl text-darkgrey focus:outline-none font-poppins text-sm"
-                            />
+                            />``
                             <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
                                 <IoSearchOutline className="text-gray-400" />
                             </div>
                         </div>
                         <div className="ml-auto flex">
-                            <button className="bg-yellow px-4 py-2 rounded-lg text-black font-normal font-poppins text-sm">
+                            <button className="bg-yellow px-5 py-2 rounded-lg text-black font-normal font-poppins text-sm">
                                 Tambah Sparepart
                             </button>
-                            <button className="bg-yellow px-4 py-2 rounded-lg text-black font-normal font-poppins text-sm ml-40">
+                            <button className="bg-yellow px-5 py-2 rounded-lg text-black font-normal font-poppins text-sm ml-40">
                                 Tambah Kategori
                             </button>
                         </div>

@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from 'react';
 import Clock from "../../component/Navbar/clock";
 const Navbar = () => {
   return (
