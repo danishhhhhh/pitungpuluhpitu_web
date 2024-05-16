@@ -6,6 +6,7 @@ import MotordashboardPage from "../views/motor_dashboard/Motor_dashboard.jsx";
 import PekerjaanPage from "../views/pekerjaan_page/Pekerjaan_page.jsx";
 import JasaPage from "../views/jasa_page/Jasa_page.jsx";
 import AkunPage from "../views/akun_page/Akun_page.jsx";
+import EditProfilePage from "../views/Edit_profile_page/Edit_Profile_Page.jsx";
 
 const Router = () => {
     return (
@@ -17,6 +18,7 @@ const Router = () => {
                 <Route path="/pekerjaan" element={<PekerjaanPage />} />
                 <Route path="/jasa" element={<JasaPage />} />
                 <Route path="/akun" element={<AkunPage />} />
+                <Route path="/edit" element={<EditProfilePage />} />
                 <Route path="/motor" element={<MotordashboardPage />} />
             </Routes>
         </BrowserRouter>

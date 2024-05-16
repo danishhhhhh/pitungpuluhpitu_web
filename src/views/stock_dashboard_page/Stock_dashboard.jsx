@@ -5,8 +5,9 @@ const StockdashboardPage = () => {
   return (
     <div className="flex ">
       <Sidebar />
+      <Navbar data="Data Stock" />
       <div className="w-full h-1 ">
-        <Navbar />
+
         <Dashboard />
       </div>
     </div>
