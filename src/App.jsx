@@ -5,7 +5,7 @@ import Login from './views/login_page/Login.jsx';
 function App() {
   return (
     <div className='App'>
-      <Login/>
+      <Route />
     </div>
   )
 }
