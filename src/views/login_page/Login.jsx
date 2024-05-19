@@ -1,48 +1,38 @@
 import React from "react";
-import { FaUser } from "react-icons/fa";
-import { IoMdEyeOff } from "react-icons/io";
+import './Login.css';
 
 const Login = () => {
-    return (
-    <section >
-      <div className="login mb-4">   
-
-        <form id="form" className="flex flex-col justify-end w-1/2 ">
-        <h1 className="text-2xl font-bold mb-0 font-poppins">Selamat Datang!</h1>
-        <div className="flex justify-center">
-        <h1 className="text-xs flex mb-4 font-poppins">Mari masuk untuk mengakses kontrol stok.</h1>
+  return (
+    <div className="h-screen w-screen flex items-center justify-center background-image">
+      <div className="flex flex-row h-5/6 w-2/3 rounded-3xl overflow-clip">
+        <div className="flex justify-center items-center px-20 bg-yellow w-1/2">
+          <img src="../src/assets/logo7.png" className=""/>
         </div>
-          <div className="flex flex-col items-start relative mb-1">
-            <label htmlFor="username" className="font-bold font-poppins text-sm ml-10"  >
-              Username
-            </label>
-            <input
+        <div className="flex flex-col bg-white text-center px-20 justify-center w-1/2">
+          <h1 className="text-max-xl font-semibold font-poppins">Selamat datang!</h1>
+          <h1 className="text-md font-medium font-poppins">Mari masuk untuk mengakses kontrol stok.</h1>
+          <div className="h-12"/>
+          <h1 className="text-xl font-medium font-poppins text-left">Username</h1>
+          <input
               id="username"
               type="text"
               placeholder="Masukkan username"
-              className="w-3/4 h-8 rounded-lg bg-white text-gray-300 border border-darkgrey focus:ring-2 focus:ring-indigo-600 focus:outline-none py-1 px-3 text-xs pr-10 ml-10"
-            />
-            <FaUser className="absolute right-12 top-11 text-gray-400" />
-          </div>
-          <div className="flex flex-col items-start relative mb-4">
-            <label htmlFor="password" className="font-bold font-poppins text-sm ml-10">
-              Password
-            </label>
-            <input
+              className="h-12 rounded-lg bg-white border border-lightgrey py-1 px-3 text-lg font-medium text-darkgrey input-custom "
+          />
+          <h1 className="text-xl font-medium font-poppins text-left">Password</h1>
+          <input
               id="password"
               type="password"
               placeholder="Masukkan password"
-              className="w-3/4 h-8  rounded-lg bg-white text-gray-300 border border-darkgrey focus:ring-2 focus:ring-indigo-600 focus:outline-none py-1 px-3 text-xs pr-10 ml-10"
-            />
-            <IoMdEyeOff className="absolute right-12 top-11 text-gray-400" />
-          </div>
-          <button className="btn w-3/4 ml-10 rounded-lg bg-lightnavy text-x">Login</button>
-        </form>
+              className="h-12 rounded-lg bg-white border border-lightgrey py-1 px-3 text-lg font-medium text-darkgrey input-custom"
+          />
+          <div className="h-12"/>
+          <button className="btn rounded-xl bg-lightnavy font-medium font-poppins text-white text-xl p-3">Login</button>
+          <div className="h-20"/>
+
+        </div>
       </div>
-      <div className="relative login-image-container ">
-        <img src="../src/assets/logo7.png" className="w-3/4 max-w-md"/>
-      </div>
-    </section>
+    </div>
   );
 }
 
