@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import "../../App.css"
+import Pagination from "./pagination.jsx";
 
 const TableBesar = ({ spareparts, setSpareparts }) => {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);

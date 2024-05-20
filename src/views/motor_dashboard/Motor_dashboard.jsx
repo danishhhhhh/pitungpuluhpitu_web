@@ -11,35 +11,35 @@ const MotordashboardPage = () => {
         <div className="flex">
             <Sidebar />
             <div className="w-full h-1 ">
-                <Navbar />
+                <Navbar data="Data Motor" />
                 <div className="flex flex-col w-full">
-                    <div className="flex mt-20 ml-45 bg-gray-800 mt-20">
-                        <div className="relative">
-                            <input
-                                type="text"
-                                placeholder="Cari Motor ..."
-                                className="w-96 h-9 md:pl-2 pr-10 bg-lightgrey rounded-xl text-darkgrey focus:outline-none font-poppins text-sm"
-                            />
-                            <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                                <IoSearchOutline className="text-gray-400" />
+                        {/* <div className="flex mt-20 ml-45 bg-gray-800 mt-20">
+                            <div className="relative">
+                                <input
+                                    type="text"
+                                    placeholder="Cari Motor ..."
+                                    className="w-96 h-9 md:pl-2 pr-10 bg-lightgrey rounded-xl text-darkgrey focus:outline-none font-poppins text-sm"
+                                />
+                                <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                                    <IoSearchOutline className="text-gray-400" />
+                                </div>
                             </div>
-                        </div>
-                        <div className="ml-auto flex">
-                            <button className="bg-yellow px-5 py-2 rounded-lg text-black font-normal font-poppins text-sm">
-                                Tambah Motor
-                            </button>
-                            <button className="bg-yellow px-5 py-2 rounded-lg text-black font-normal font-poppins text-sm ml-40">
-                                Tambah Motor
-                            </button>
-                        </div>
-                    </div>
+                            <div className="ml-auto flex">
+                                <button className="bg-yellow px-5 py-2 rounded-lg text-black font-normal font-poppins text-sm">
+                                    Tambah Motor
+                                </button>
+                                <button className="bg-yellow px-5 py-2 rounded-lg text-black font-normal font-poppins text-sm ml-40">
+                                    Tambah Motor
+                                </button>
+                            </div>
+                        </div> */}
 
-                    <div className="flex justify-start bg-gray-800 mt-10">
-                        <TableBesar />
-                        <TableKecil />
-                    </div>
+                        {/* <div className="flex justify-start bg-gray-800 mt-10">
+                            <TableBesar />
+                            <TableKecil />
+                    </div> */}
 
-                    <div className="max-w-2xl mt-14">
+                    {/* <div className="max-w-2xl mt-14">
                         <nav aria-label="Page navigation example">
                             <ul className="inline-flex -space-x-px">
                                 <li>
@@ -100,7 +100,7 @@ const MotordashboardPage = () => {
                                 </li>
                             </ul>
                         </nav>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </div>

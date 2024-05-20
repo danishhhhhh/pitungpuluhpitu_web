@@ -1,154 +1,145 @@
 import React from "react";
 import {
-  FaBox,
-  FaToolbox,
-  FaMotorcycle,
-  FaTools,
-  FaUserCog,
-  FaUserCircle,
+    FaBox,
+    FaToolbox,
+    FaMotorcycle,
+    FaTools,
+    FaUserCog,
+    FaUserCircle,
 } from "react-icons/fa";
-import { NavLink, useLocation } from "react-router-dom";
-import { MdModeEditOutline } from "react-icons/md";
+import {NavLink, useLocation} from "react-router-dom";
+import {MdModeEditOutline} from "react-icons/md";
 
 const Sidebar = () => {
-  const location = useLocation();
-  const activeClass = "bg-yellow text-bluegrey";
-  const inactiveClass = "bg-bluegrey text-white";
+    const location = useLocation();
+    const activeClass = "bg-yellow text-bluegrey";
+    const inactiveClass = "bg-bluegrey text-white";
+    const handleNavigation = (route) => {
+        window.location.href = route;
+    };
 
-  return (
-    <div className="w-80 2xl:w-80 md:w-60 bg-lightnavy fixed h-full left-0 top-0 p-5">
-      <div>
-        <img
-          src="src/assets/img/logo.svg"
-          alt=""
-          className="w-52 top-0 2xl:m-8 xl:m-1 rounded"
-        />
-        <div className="top-10 my-14 flex">
-          <img
-            src="src/assets/img/profile.svg"
-            alt=""
-            className="rounded-lg w-10"
-          />
-          <div className="2xl:mx-4 2xl:w-auto xl:mx-2">
-            <p className="font-poppins text-white 2xl:text-base 2xl:w-36 xl:mr-26 2xl:text-left xl:text-xs xl:w-28 xl:flex xl:justify-start">
-              Danish Ardiyanta
-            </p>
-            <p className="font-poppins text-yellow 2xl:text-left 2xl:text-sm xl:text-xs xl:text-left">
-              Admin
-            </p>
-          </div>
-          <div
-            className={`mb-4 rounded-lg py-4 ${
-              location.pathname === "/edit" ? activeClass : inactiveClass
-            }  rounded-xl 2xl:w-10 2xl:h-10 2xl:flex 2xl:justify-center 2xl:items-center xl:flex xl:justify-center xl:items-center ml-4`}
-          >
-            <NavLink to="/edit">
-              <MdModeEditOutline className="w-6 h-6" />
-            </NavLink>
-          </div>
+    return (
+        <div className="w-80 bg-lightnavy h-screen left-0 sticky top-0 p-5">
+            <img
+                src="src/assets/img/logo.svg"
+                alt=""
+                className="w-52 top-0 rounded mx-auto mt-8"
+            />
+            <div className="top-10 my-14 flex items-center justify-between">
+                <div className="flex flex-row">
+                    <img
+                        src="src/assets/img/profile.svg"
+                        alt=""
+                        className="rounded-lg w-10"
+                    />
+                    <div className="w-3"/>
+                    <div className="">
+                        <p className="font-poppins text-white">
+                            Danish Ardiyanta
+                        </p>
+                        <p className="font-poppins text-yellow text-sm">
+                            Admin
+                        </p>
+                    </div>
+                </div>
+                <div
+                    className={`rounded-lg p-2 ${
+                        location.pathname === "/edit" ? activeClass : inactiveClass
+                    }  rounded-xl`}
+                >
+                    <NavLink to="/edit">
+                        <MdModeEditOutline className="w-5 h-5"/>
+                    </NavLink>
+                </div>
+            </div>
+            <div className="justify-between flex flex-col">
+                <ul className="text-white font-poppins">
+                    <li
+                        className={`mb-4 rounded-lg py-4 px-10 ${
+                            location.pathname === "/stock" || location.pathname === "/detail"  ? activeClass : inactiveClass
+                        }`}
+                        onClick={() => handleNavigation("/stock")}
+                    >
+                        <div className="flex flex-row items-center">
+                            <FaBox/>
+                            <div className="w-3"/>
+                            Stock
+                        </div>
+                    </li>
+
+                    <li
+                        className={`mb-4 rounded-lg py-4 px-10 ${
+                            location.pathname === "/sparepart" ? activeClass : inactiveClass
+                        }`}
+                        onClick={() => handleNavigation("/sparepart")}
+                    >
+                        <div className="flex flex-row items-center">
+                            <FaToolbox/>
+                            <div className="w-3"/>
+                            Sparepart
+                        </div>
+                    </li>
+
+                    <li
+                        className={`mb-4 rounded-lg py-4 px-10 ${
+                            location.pathname === "/motor" ? activeClass : inactiveClass
+                        }`}
+                        onClick={() => handleNavigation("/motor")}
+                    >
+                        <div className="flex flex-row items-center">
+                            <FaMotorcycle/>
+                            <div className="w-3"/>
+                            Motor
+                        </div>
+                    </li>
+
+                    <li
+                        className={`mb-4 rounded-lg py-4 px-10 ${
+                            location.pathname === "/pekerjaan" ? activeClass : inactiveClass
+                        }`}
+                        onClick={() => handleNavigation("/pekerjaan")}
+                    >
+                        <div className="flex flex-row items-center">
+                            <FaTools/>
+                            <div className="w-3"/>
+                            Pekerjaan
+                        </div>
+                    </li>
+
+                    <li
+                        className={`mb-4 rounded-lg py-4 px-10 ${
+                            location.pathname === "/jasa" ? activeClass : inactiveClass
+                        }`}
+                        onClick={() => handleNavigation("/jasa")}
+                    >
+                        <div className="flex flex-row items-center">
+                            <FaUserCog/>
+                            <div className="w-3"/>
+                            Jasa
+                        </div>
+                    </li>
+
+                    <li
+                        className={`mb-4 rounded-lg py-4 px-10 ${
+                            location.pathname === "/akun" ? activeClass : inactiveClass
+                        }`}
+                        onClick={() => handleNavigation("/akun")}
+                    >
+                        <div className="flex flex-row items-center">
+                            <FaUserCircle/>
+                            <div className="w-3"/>
+                            Akun
+                        </div>
+                    </li>
+                </ul>
+                <a href="/" className="bg-red rounded-lg py-4 px-10 flex items-center justify-between">
+                    <div className="flex items-center justify-center text-center w-full text-md font-medium text-white">
+                        Keluar
+                    </div>
+                </a>
+            </div>
         </div>
-        <ul className="text-white font-poppins 2xl:font-normal xl:text-sm">
-          <li
-            className={`mb-4 rounded-lg py-4 ${
-              location.pathname === "/stock" ? activeClass : inactiveClass
-            }`}
-          >
-            <NavLink
-              to="/stock"
-              className="flex items-center justify-between px-8"
-            >
-              <div className="flex items-center">
-                <FaBox className="inline-flex 2xl:w-4 2xl:h-4 2xl:mr-2 xl:w-3 xl:mr-2" />
-                Stock
-              </div>
-            </NavLink>
-          </li>
-          <li
-            className={`mb-4 rounded-lg py-4 ${
-              location.pathname === "/sparepart" ? activeClass : inactiveClass
-            }`}
-          >
-            <NavLink
-              to="/sparepart"
-              className="flex items-center justify-between px-8"
-            >
-              <div className="flex items-center">
-                <FaToolbox className="inline-flex 2xl:w-4 2xl:h-4 2xl:mr-2 xl:w-3 xl:mr-2" />
-                Sparepart
-              </div>
-            </NavLink>
-          </li>
-          <li
-            className={`mb-4 rounded-lg py-4 ${
-              location.pathname === "/motor" ? activeClass : inactiveClass
-            }`}
-          >
-            <NavLink
-              to="/motor"
-              className="flex items-center justify-between px-8"
-            >
-              <div className="flex items-center">
-                <FaMotorcycle className="inline-flex 2xl:w-4 2xl:h-4 2xl:mr-2 xl:w-3 xl:mr-2" />
-                Motor
-              </div>
-            </NavLink>
-          </li>
-          <li
-            className={`mb-4 rounded-lg py-4 ${
-              location.pathname === "/pekerjaan" ? activeClass : inactiveClass
-            }`}
-          >
-            <NavLink
-              to="/pekerjaan"
-              className="flex items-center justify-between px-8"
-            >
-              <div className="flex items-center">
-                <FaTools className="inline-flex 2xl:w-4 2xl:h-4 2xl:mr-2 xl:w-3 xl:mr-2" />
-                Pekerjaan
-              </div>
-            </NavLink>
-          </li>
-          <li
-            className={`mb-4 rounded-lg py-4 ${
-              location.pathname === "/jasa" ? activeClass : inactiveClass
-            }`}
-          >
-            <NavLink
-              to="/jasa"
-              className="flex items-center justify-between px-8"
-            >
-              <div className="flex items-center">
-                <FaUserCog className="inline-flex 2xl:w-4 2xl:h-4 2xl:mr-2 xl:w-3 xl:mr-2" />
-                Jasa
-              </div>
-            </NavLink>
-          </li>
-          <li
-            className={`mb-4 rounded-lg py-4 ${
-              location.pathname === "/akun" ? activeClass : inactiveClass
-            }`}
-          >
-            <NavLink
-              to="/akun"
-              className="flex items-center justify-between px-8"
-            >
-              <div className="flex items-center">
-                <FaUserCircle className="inline-flex 2xl:w-4 2xl:h-4 2xl:mr-2 xl:w-3 xl:mr-2" />
-                Akun
-              </div>
-            </NavLink>
-          </li>
-          <li className="mb-4 rounded-lg text-white py-4 bg-red active:bg-yellow active:text-bluegrey mt-64">
-            <a href="/" className="flex items-center justify-between">
-              <div className="flex items-center justify-center text-center w-full">
-                Keluar
-              </div>
-            </a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  );
+    );
 };
 
 export default Sidebar;

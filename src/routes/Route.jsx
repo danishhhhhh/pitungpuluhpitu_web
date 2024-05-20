@@ -7,6 +7,9 @@ import PekerjaanPage from "../views/pekerjaan_page/Pekerjaan_page.jsx";
 import JasaPage from "../views/jasa_page/Jasa_page.jsx";
 import AkunPage from "../views/akun_page/Akun_page.jsx";
 import EditProfilePage from "../views/Edit_profile_page/Edit_Profile_Page.jsx";
+import DetailtimPage from "../views/detail_tim_page/Detail_tim_page.jsx";
+import CabangPage from "../views/cabang_page/Cabang_page.jsx";
+import RekapPage from "../views/rekap_page/Rekap_page.jsx";
 
 const Router = () => {
     return (
@@ -20,6 +23,9 @@ const Router = () => {
                 <Route path="/akun" element={<AkunPage />} />
                 <Route path="/edit" element={<EditProfilePage />} />
                 <Route path="/motor" element={<MotordashboardPage />} />
+                <Route path="/detail" element={<DetailtimPage />} />
+                <Route path="/cabang" element={<CabangPage />} />
+                <Route path="/rekap" element={<RekapPage />} />
             </Routes>
         </BrowserRouter>
     );

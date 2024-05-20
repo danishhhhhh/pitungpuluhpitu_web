@@ -4,9 +4,8 @@ import Sidebar from "../../component/Sidebar/sidebar";
 const AkunPage = () => {
   return (
     <div className="flex ">
-
-      <Sidebar />
-      <Navbar data="Data Akun" />
+    <Sidebar />
+    <Navbar  data="Data Akun"/>
 
     </div>
   )
