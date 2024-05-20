@@ -41,6 +41,8 @@ const SparepartdashboardPage = () => {
         toggleModal();
     };
 
+
+
     return (
         <div className="min-h-screen flex flex-row">
             <Sidebar />
