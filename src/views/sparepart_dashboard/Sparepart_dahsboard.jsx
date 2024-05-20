@@ -1,12 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import Sidebar from "../../component/Sidebar/sidebar";
 import Navbar from "../../component/Navbar/navbar";
 import { IoSearchOutline } from "react-icons/io5";
 import "./sparepart.css";
 import TableKecil from "../../component/TabelKecil/tabel_kecil";
 import TableBesar from "../../component/TabelBesar/tabel_besar";
+import ButtonSparepart from "../../views/sparepart_dashboard/button_sparepart";
 
 const SparepartdashboardPage = () => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const toggleModal = () => {
+        setIsModalOpen(!isModalOpen);
+    };
 
     return (
         <div className="flex">
@@ -26,13 +32,13 @@ const SparepartdashboardPage = () => {
                                 <IoSearchOutline className="text-gray-400" />
                             </div>
                         </div>
+                        {/* <div className="ml-auto flex">
+                            <ButtonSparepart onClick={toggleModal} label="Tambah Sparepart" />
+                            <ButtonSparepart onClick={() => { }} label="Tambah Kategori" className="ml-40" />
+                        </div> */}
                         <div className="ml-auto flex">
-                            <button className="bg-yellow px-4 py-2 rounded-lg text-black font-normal font-poppins text-sm">
-                                Tambah Sparepart
-                            </button>
-                            <button className="bg-yellow px-4 py-2 rounded-lg text-black font-normal font-poppins text-sm ml-40">
-                                Tambah Kategori
-                            </button>
+                            <button className="bg-yellow mr-30 px-4 py-2 rounded-lg text-black font-normal font-poppins text-sm">Tambah Sparepart</button>
+                            <button className="bg-yellow mr-2  ml-32 px-4 py-2 rounded-lg text-black font-normal font-poppins text-sm">Tambah Kategori</button>
                         </div>
                     </div>
 
@@ -106,6 +112,20 @@ const SparepartdashboardPage = () => {
                     </div>
                 </div>
             </div>
+            {isModalOpen && (
+                <div className="fixed inset-0 flex items-center justify-center z-50">
+                    <div className="fixed inset-0 bg-black opacity-50"></div>
+                    <div className="bg-white rounded-lg p-8 z-10">
+                        <h2 className="text-lg font-semibold">Tambah Sparepart</h2>
+                        <button
+                            className="mt-4 px-4 py-2 bg-red-500 text-white rounded"
+                            onClick={toggleModal}
+                        >
+                            Close
+                        </button>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

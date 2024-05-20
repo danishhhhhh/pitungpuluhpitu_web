@@ -11,9 +11,9 @@ const MotordashboardPage = () => {
         <div className="flex">
             <Sidebar />
             <div className="w-full h-1 ">
-                <Navbar />
+                <Navbar data="Data Motor" />
                 <div className="flex flex-col w-full">
-                    <div className="flex mt-20 ml-45 bg-gray-800 mt-20">
+                    <div className="flex mt-20 ml-45 bg-gray-800 ">
                         <div className="relative">
                             <input
                                 type="text"
