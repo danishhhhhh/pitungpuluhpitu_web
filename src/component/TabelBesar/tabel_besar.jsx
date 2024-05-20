@@ -45,7 +45,7 @@ const TableBesar = () => {
                             <td className="px-4 py-2 font-poppins border border-grey">{sparepart.kategori}</td>
                             <td className="px-4 py-2 border border-grey text-center">
                                 <button className="bg-yellow font-poppins font-medium text-sm text-bluegray px-4 py-1.5 rounded-md mr-2">Edit</button>
-                                <button className="bg-red font-poppins font-medium text-sm text-white px-4 py-1.5 rounded-md mr-2">Delete</button>
+                                <button className="bg-red font-poppins font-medium text-sm text-white px-4 py-1.5 rounded-md mr-2">Hapus</button>
                             </td>
                         </tr>
                     ))}

@@ -1,12 +1,12 @@
 import React from 'react';
 import "../../App.css"
 
-const TableBesar = () => {
+const TableKecilDetail = () => {
     const spareparts = [
+        { nama: 'Moh. Dani'},
+        { nama: 'Dimas Galuh'},
         { nama: 'Badri'},
-        { nama: 'Badri'},
-        { nama: 'Badri'},
-        { nama: 'Badri'},
+       
     ];
 
     return (
@@ -42,4 +42,4 @@ const TableBesar = () => {
     );
 };
 
-export default TableBesar;
+export default TableKecilDetail;

@@ -56,7 +56,7 @@ const Sidebar = () => {
                 <ul className="text-white font-poppins">
                     <li
                         className={`mb-4 rounded-lg py-4 px-10 ${
-                            location.pathname === "/stock" ? activeClass : inactiveClass
+                            location.pathname === "/stock" || location.pathname === "/detail"  ? activeClass : inactiveClass
                         }`}
                         onClick={() => handleNavigation("/stock")}
                     >
