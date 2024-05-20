@@ -62,7 +62,10 @@ const SparepartdashboardPage = () => {
             </div>
             {isModalOpen && (
                 <div className="fixed inset-0 flex items-center justify-center z-50">
-                    <div className="w-[500px] h-[391px] px-[35px] py-[45px] bg-white rounded-[15px] shadow flex-col justify-center items-center gap-[30px] inline-flex">
+                    {/* Background overlay */}
+                    <div className="absolute inset-0 z-0 bg-black bg-opacity-50"></div>
+
+                    <div className="w-[500px] h-[391px] px-[35px] py-[45px] bg-white rounded-[15px] shadow-lg flex-col justify-center items-center gap-[30px] inline-flex relative z-10">
                         <div className="text-center text-zinc-900 text-2xl font-semibold font-['Poppins'] leading-9">Tambah Sparepart</div>
                         <div className="self-stretch h-[235px] flex-col justify-center items-center gap-5 flex">
                             <div className="self-stretch h-[164px] flex-col justify-center items-center gap-2.5 flex">
@@ -74,9 +77,14 @@ const SparepartdashboardPage = () => {
                                             name="nama"
                                             value={nama}
                                             onChange={handleChange}
-                                            className="w-full px-3 bg-transparent font-semibold border-none focus:outline-none placeholder-black text-gray-900"
+                                            className="w-full focus:outline-none text-black"
                                             placeholder="Tambahkan Sparepart"
-                                            style={{ caretColor: 'black', fontSize: '14px' }}
+                                            style={{
+                                                caretColor: 'black',
+                                                fontSize: 14,
+                                                color: 'black',
+                                                backgroundColor: 'transparent', // Mengatur background input menjadi transparan
+                                            }}
                                         />
                                     </div>
                                 </div>
@@ -119,6 +127,7 @@ const SparepartdashboardPage = () => {
                     </div>
                 </div>
             )}
+
         </div>
     );
 };
