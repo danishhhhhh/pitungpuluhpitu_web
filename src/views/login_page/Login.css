@@ -1,0 +1,31 @@
+.background-image{
+    background-image: url('src/assets/background1.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.placeholder-text-xl::placeholder {
+    font-size: 1.15rem;
+    font-family: Poppins, serif;
+    color: lightgrey;
+    font-weight: normal;
+}
+
+.text-max-xl {
+    font-size: 3rem;
+}
+
+.input-custom {
+    font-size: 1.25rem; /* Corresponds to text-xl (20px) */
+}
+
+.input-custom::placeholder {
+    font-size: 1.15rem;
+    font-family: Poppins, serif;
+    color: lightgrey;
+    font-weight: normal;
+}
+
+.input-custom:focus {
+    border-color: green; /* Change border to green on focus */
+}

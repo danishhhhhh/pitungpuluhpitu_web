@@ -51,13 +51,10 @@ const Clock = () => {
 
 
   return (
-    <div className="flex items-center justify-center bg-gray-800 text-navy">
+    <div className="flex items-center justify-center text-navy">
       <div className="w-64">
         <h1 className="text-l font-bold font-poppins mb-2 flex justify-end">
           {getGreeting()} {getIcon()}
-
-
-
         </h1>
 
         <p className="text-l font-poppins flex justify-end">

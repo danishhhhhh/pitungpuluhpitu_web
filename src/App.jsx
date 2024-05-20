@@ -1,13 +1,13 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import './App.css';
 import Route from "./routes/Route.jsx";
+import Login from './views/login_page/Login.jsx';
 
 function App() {
   return (
-      <Route/>
+    <div className='App'>
+      <Route />
+    </div>
   )
 }
 
-export default App
+export default App;
