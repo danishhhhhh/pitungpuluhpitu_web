@@ -43,7 +43,7 @@ const EditProfilePage = () => {
               Perbarui detail foto dan nama anda di sini.
             </div>
           </div>
-          <div className="self-stretch h-[0px] border-grey border border-neutral-300"></div>
+          <div className="self-stretch h-[0px] border-grey border "></div>
           <div className="flex-col justify-start items-start gap-5 flex">
             <div className="justify-start items-start gap-5 inline-flex">
               <div className="w-[150px] h-[150px] bg-grey rounded-[20px] overflow-hidden">
