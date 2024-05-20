@@ -27,21 +27,17 @@ const SparepartdashboardPage = () => {
     };
 
     const handleChange = (e) => {
-        if (e.target.name === 'nama') {
-            setNama(e.target.value);
-        } else if (e.target.name === 'kategori') {
-            setKategori(e.target.value);
+        const { name, value } = e.target;
+        if (name === 'nama') {
+            setNama(value);
+        } else if (name === 'kategori') {
+            setKategori(value);
         }
     };
 
     const handleTambahSparepart = () => {
-        // Buat objek baru untuk sparepart yang akan ditambahkan
         const newSparepart = { nama, kategori };
-
-        // Perbarui state spareparts dengan menambahkan objek baru
         setSpareparts([...spareparts, newSparepart]);
-
-        // Tutup modal setelah berhasil menambahkan
         toggleModal();
     };
 
@@ -52,7 +48,20 @@ const SparepartdashboardPage = () => {
                 <Navbar data="Data Sparepart" />
                 <div className="p-12 flex flex-row">
                     <div className="w-3/5">
-                        <TableBesar spareparts={spareparts} onAddSparepartClick={toggleModal} />
+                        <div className="flex justify-between items-center mb-6">
+                            <input
+                                type="text"
+                                placeholder="Cari sparepart ..."
+                                className="w-1/2 py-2 px-4 bg-lightgrey rounded-lg text-darkgrey focus:outline-none font-poppins text-sm"
+                            />
+                            <button
+                                className="bg-yellow px-4 py-2 rounded-lg text-black font-normal font-poppins text-sm"
+                                onClick={toggleModal}
+                            >
+                                Tambah Sparepart
+                            </button>
+                        </div>
+                        <TableBesar spareparts={spareparts} setSpareparts={setSpareparts} />
                     </div>
                     <div className="w-8" />
                     <div className="w-2/6">
@@ -60,9 +69,9 @@ const SparepartdashboardPage = () => {
                     </div>
                 </div>
             </div>
+
             {isModalOpen && (
                 <div className="fixed inset-0 flex items-center justify-center z-50">
-                    {/* Background overlay */}
                     <div className="absolute inset-0 z-0 bg-black bg-opacity-50"></div>
 
                     <div className="w-[500px] h-[391px] px-[35px] py-[45px] bg-white rounded-[15px] shadow-lg flex-col justify-center items-center gap-[30px] inline-flex relative z-10">
@@ -83,7 +92,7 @@ const SparepartdashboardPage = () => {
                                                 caretColor: 'black',
                                                 fontSize: 14,
                                                 color: 'black',
-                                                backgroundColor: 'transparent', // Mengatur background input menjadi transparan
+                                                backgroundColor: 'transparent',
                                             }}
                                         />
                                     </div>
@@ -127,7 +136,6 @@ const SparepartdashboardPage = () => {
                     </div>
                 </div>
             )}
-
         </div>
     );
 };
