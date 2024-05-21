@@ -1,6 +1,7 @@
 import React from "react";
 import "../../App.css";
 import Pagination from "./pagination.jsx";
+import { FaSearch } from "react-icons/fa";
 
 const TableBesarRekap = () => {
   const spareparts = [
@@ -18,54 +19,57 @@ const TableBesarRekap = () => {
       tanggal: "18-12-2024",
     },
     {
-        NamaCabang: "Kalisat (Jember)",
-        namaMekanik: "Moh. Dani",
-        platNomor: "K 9998 HB",
-        tipeMotor: "Beat",
-        tahunMotor: 2021,
-        kmMotor: 99999,
-        Pekerjaan: "Servis Rutin",
-        jasa: "Setting Throttle Position (TP), Stel Velg Belakang",
-        sparepart:
-          "Ban Tubeless Belakang Matic, Ban Tubeless Belakang Verza, Kanvas Rem Belakang Matic, Ban Tubeless Belakang Matic, Ban Tubeless Belakang Verza ",
-        tanggal: "18-12-2024",
-      },
-      {
-        NamaCabang: "Kalisat (Jember)",
-        namaMekanik: "Moh. Dani",
-        platNomor: "K 9998 HB",
-        tipeMotor: "Beat",
-        tahunMotor: 2021,
-        kmMotor: 99999,
-        Pekerjaan: "Servis Rutin",
-        jasa: "Setting Throttle Position (TP), Stel Velg Belakang",
-        sparepart:
-          "Ban Tubeless Belakang Matic, Ban Tubeless Belakang Verza, Kanvas Rem Belakang Matic, Ban Tubeless Belakang Matic, Ban Tubeless Belakang Verza ",
-        tanggal: "18-12-2024",
-      },
-      {
-        NamaCabang: "Kalisat (Jember)",
-        namaMekanik: "Moh. Dani",
-        platNomor: "K 9998 HB",
-        tipeMotor: "Beat",
-        tahunMotor: 2021,
-        kmMotor: 99999,
-        Pekerjaan: "Servis Rutin",
-        jasa: "Setting Throttle Position (TP), Stel Velg Belakang",
-        sparepart:
-          "Ban Tubeless Belakang Matic, Ban Tubeless Belakang Verza, Kanvas Rem Belakang Matic, Ban Tubeless Belakang Matic, Ban Tubeless Belakang Verza ",
-        tanggal: "18-12-2024",
-      },
+      NamaCabang: "Kalisat (Jember)",
+      namaMekanik: "Moh. Dani",
+      platNomor: "K 9998 HB",
+      tipeMotor: "Beat",
+      tahunMotor: 2021,
+      kmMotor: 99999,
+      Pekerjaan: "Servis Rutin",
+      jasa: "Setting Throttle Position (TP), Stel Velg Belakang",
+      sparepart:
+        "Ban Tubeless Belakang Matic, Ban Tubeless Belakang Verza, Kanvas Rem Belakang Matic, Ban Tubeless Belakang Matic, Ban Tubeless Belakang Verza ",
+      tanggal: "18-12-2024",
+    },
+    {
+      NamaCabang: "Kalisat (Jember)",
+      namaMekanik: "Moh. Dani",
+      platNomor: "K 9998 HB",
+      tipeMotor: "Beat",
+      tahunMotor: 2021,
+      kmMotor: 99999,
+      Pekerjaan: "Servis Rutin",
+      jasa: "Setting Throttle Position (TP), Stel Velg Belakang",
+      sparepart:
+        "Ban Tubeless Belakang Matic, Ban Tubeless Belakang Verza, Kanvas Rem Belakang Matic, Ban Tubeless Belakang Matic, Ban Tubeless Belakang Verza ",
+      tanggal: "18-12-2024",
+    },
+    {
+      NamaCabang: "Kalisat (Jember)",
+      namaMekanik: "Moh. Dani",
+      platNomor: "K 9998 HB",
+      tipeMotor: "Beat",
+      tahunMotor: 2021,
+      kmMotor: 99999,
+      Pekerjaan: "Servis Rutin",
+      jasa: "Setting Throttle Position (TP), Stel Velg Belakang",
+      sparepart:
+        "Ban Tubeless Belakang Matic, Ban Tubeless Belakang Verza, Kanvas Rem Belakang Matic, Ban Tubeless Belakang Matic, Ban Tubeless Belakang Verza ",
+      tanggal: "18-12-2024",
+    },
   ];
 
   return (
     <div className="grid grid-rows-1 ">
       <div className="flex justify-between items-center">
-        <input
-          type="text"
-          placeholder="Cari Rekap Pengerjaan ..."
-          className="w-1/2 py-2 px-4 bg-lightgrey rounded-lg text-darkgrey focus:outline-none font-poppins text-sm"
-        />
+        <div className="flex flex-row justify-between bg-lightgrey rounded-lg w-1/4">
+          <input
+            type="text"
+            placeholder="Cari sparepart ..."
+            className="w-64 py-2 px-4 bg-lightgrey rounded-lg text-darkgrey focus:outline-none font-poppins text-sm"
+          />
+          <FaSearch className="my-auto mx-4  text-darkgrey" />
+        </div>
       </div>
       <div className="h-4" />
       <div className="flex flex-col">

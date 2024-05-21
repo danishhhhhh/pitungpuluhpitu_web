@@ -1,6 +1,8 @@
 import React from "react";
 import "../../App.css";
 import Pagination from "./pagination.jsx";
+import { FaSearch } from "react-icons/fa";
+
 
 const TableBesarDetail = () => {
   const spareparts = [
@@ -19,17 +21,26 @@ const TableBesarDetail = () => {
   return (
     <div className="grid grid-rows-1 ">
       <div className="flex justify-between items-center">
-        <input
-          type="text"
-          placeholder="Cari Sparepart ..."
-          className="w-1/2 py-2 px-4 bg-lightgrey rounded-lg text-darkgrey focus:outline-none font-poppins text-sm"
-        />
+        <div className="flex flex-row justify-between bg-lightgrey rounded-lg w-1/2">
+          <input
+            type="text"
+            placeholder="Cari sparepart ..."
+            className="w-64 py-2 px-4 bg-lightgrey rounded-lg text-darkgrey focus:outline-none font-poppins text-sm"
+          />
+          <FaSearch className="my-auto mx-4  text-darkgrey" />
+        </div>
         <div className="flex flex-row gap-4">
-          <a href="/cabang" className="bg-yellow px-4 py-2 rounded-lg text-black font-normal font-poppins text-sm">
+          <a
+            href="/cabang"
+            className="bg-yellow px-4 py-2 rounded-lg text-black font-normal font-poppins text-sm"
+          >
             Cabang
           </a>
 
-          <a href="/rekap" className="bg-yellow px-4 py-2 rounded-lg text-black font-normal font-poppins text-sm">
+          <a
+            href="/rekap"
+            className="bg-yellow px-4 py-2 rounded-lg text-black font-normal font-poppins text-sm"
+          >
             Rekap Pengerjaan
           </a>
         </div>
