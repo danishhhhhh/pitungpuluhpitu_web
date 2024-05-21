@@ -4,10 +4,10 @@ import { IoIosClose } from "react-icons/io";
 
 const TableBesar = () => {
   const [spareparts, setSpareparts] = useState([
-    { nama: "Badri" },
-    { nama: "Badri" },
-    { nama: "Badri" },
-    { nama: "Badri" },
+    { nama: "Ban" },
+    { nama: "Oli" },
+    { nama: "Lampu" },
+    { nama: "Busi" },
   ]);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [editIndex, setEditIndex] = useState(null);
@@ -76,7 +76,7 @@ const TableBesar = () => {
           className="ml-4 bg-yellow px-4 py-2 rounded-lg text-black font-normal font-poppins text-sm"
           onClick={toggleTambahModal}
         >
-          Tambah Mekanik
+          Tambah Kategori
         </button>
       </div>
       <div className="h-6" />
@@ -85,7 +85,7 @@ const TableBesar = () => {
           <thead>
             <tr className="text-black">
               <th className="py-3 px-20 font-poppins border border-grey text-darkgrey font-medium">
-                Nama Mekanik
+                Nama Kategori
               </th>
               <th className="py-3 px-20 font-poppins border border-grey text-darkgrey font-medium">
                 Action
@@ -134,12 +134,12 @@ const TableBesar = () => {
                 <IoIosClose className="w-8 h-8 relative" />
               </button>
               <div className="text-center text-zinc-900 text-2xl font-semibold font-['Poppins'] leading-9">
-                Tambah Mekanik
+                Tambah Kategori
               </div>
             </div>
             <div className="self-stretch h-[76px] flex-col justify-start items-start gap-[5px] flex">
               <div className="text-center text-black text-sm font-medium font-['Poppins']">
-                Nama Mekanik
+                Nama Kategori
               </div>
               <div className="self-stretch px-[15px] py-3 bg-white rounded-2xl border border-zinc-200 justify-start items-center gap-2.5 inline-flex">
                 <input
@@ -147,7 +147,7 @@ const TableBesar = () => {
                   value={kategoriBaru}
                   onChange={handleChangeKategori}
                   className="w-full focus:outline-none text-black text-base font-poppins placeholder:text-sm"
-                  placeholder="Tambahkan Mekanik"
+                  placeholder="Tambahkan Kategori"
                   style={{
                     caretColor: "black",
 
@@ -183,13 +183,13 @@ const TableBesar = () => {
                 <IoIosClose className="w-8 h-8 relative" />
               </button>
               <div className="text-center text-zinc-900 text-2xl font-semibold font-['Poppins'] leading-9">
-                Edit Mekanik
+                Edit Kategori
               </div>
             </div>
 
             <div className="self-stretch h-[76px] flex-col justify-start items-start gap-[5px] flex">
               <div className="text-center text-black text-sm font-medium font-['Poppins']">
-                Nama Mekanik
+                Nama Kategori
               </div>
               <div className="self-stretch px-[15px] py-3 bg-white rounded-2xl border border-zinc-200 justify-start items-center gap-2.5 inline-flex">
                 <input
@@ -197,7 +197,7 @@ const TableBesar = () => {
                   value={editNama}
                   onChange={(e) => setEditNama(e.target.value)}
                   className="w-full focus:outline-none text-black text-base font-poppins placeholder:text-sm"
-                  placeholder="Edit Nama Mekanik"
+                  placeholder="Edit Nama Kategori"
                   style={{
                     caretColor: "black",
                     backgroundColor: "transparent",
@@ -208,7 +208,7 @@ const TableBesar = () => {
             <button
               type="button"
               className="w-full text-center text-zinc-900 text-sm font-medium font-poppins rounded-xl py-3 bg-yellow"
-              onClick={handleChangeKategori}
+              onClick={handleEdit}
             >
               Simpan
             </button>
@@ -236,7 +236,7 @@ const TableBesar = () => {
               </div>
             </div>
             <div className="text-center text-black text-sm font-medium font-['Poppins']">
-              Apakah Anda yakin ingin menghapus mekanik ini?
+              Apakah Anda yakin ingin menghapus Kategori ini?
             </div>
             <button
               type="button"
