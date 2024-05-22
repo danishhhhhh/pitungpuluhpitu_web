@@ -1,5 +1,6 @@
 import React from 'react';
 import { FaUserFriends } from "react-icons/fa";
+import { MdGroups } from "react-icons/md";
 
 import { FaAngleDoubleRight } from "react-icons/fa";
 
@@ -10,7 +11,7 @@ const Cardtim = (props) => {
     <div>
      <a href='/detail' className="w-[237.68px] h-[187.50px] p-0.5 bg-yellow rounded-[10px] flex-col justify-start items-center gap-0.5 inline-flex mr-4 ">
           <div className="px-[50px] py-[15px] bg-white rounded-lg flex-col justify-start items-center gap-2.5 flex">
-            <FaUserFriends className="w-[50px] h-[50px] relative text-yellow" />
+            <MdGroups className="w-14 h-14 relative text-yellow" />
             <div className="w-[133.68px] h-[24.75px] text-center text-gray-800 text-xl font-bold font-poppins leading-snug">
              {tim}
             </div>
