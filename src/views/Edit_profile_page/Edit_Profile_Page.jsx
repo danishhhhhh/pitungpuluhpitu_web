@@ -33,7 +33,7 @@ const EditProfilePage = () => {
     <div className="min-h-screen flex flex-row">
       <Sidebar />
       <div className="flex-grow">
-        <Navbar data="Edit" />
+        <Navbar data="Edit" showBackButton={true} />
         <div className="w-full p-10 flex-col justify-start items-start gap-[30px] inline-flex">
           <div className="flex-col justify-start items-start gap-[5px] flex">
             <div className="text-slate-800 text-2xl font-semibold font-['Poppins'] leading-7">

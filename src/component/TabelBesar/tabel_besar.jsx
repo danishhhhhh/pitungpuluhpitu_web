@@ -100,7 +100,7 @@ const TableBesar = ({ spareparts, setSpareparts }) => {
                   className="bg-red font-poppins font-medium text-sm text-white px-4 py-1.5 rounded-md mr-2"
                   onClick={() => toggleDeleteModal(index)}
                 >
-                  Delete
+                  Hapus
                 </button>
               </td>
             </tr>
