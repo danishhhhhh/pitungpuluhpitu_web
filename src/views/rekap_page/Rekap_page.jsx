@@ -1,7 +1,7 @@
 import React from "react";
 import Navbar from "../../component/Navbar/navbar";
 
-import TableBesarRekap from "../../component/TabelBesar/tabel_besar_rekap";
+import RekapMainTable from "../../component/Table/RekapMainTable.jsx";
 
 const RekapPage = () => {
   return (
@@ -10,7 +10,7 @@ const RekapPage = () => {
         <Navbar data="Rekap Pengerjaan Tim 1" showBackButton={true} />
         <div className="p-12 flex flex-row justify-start">
           <div className="w-3/5">
-            <TableBesarRekap />
+            <RekapMainTable />
           </div>
           <div className="w-8" />
         </div>

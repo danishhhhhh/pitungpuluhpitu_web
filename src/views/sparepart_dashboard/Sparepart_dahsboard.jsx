@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import Sidebar from "../../component/Sidebar/sidebar";
 import Navbar from "../../component/Navbar/navbar";
 import "./sparepart.css";
-import TableKecil from "../../component/TabelKecil/tabel_kecil";
-import TableBesar from "../../component/TabelBesar/tabel_besar";
 import { FaSearch } from "react-icons/fa";
 import { IoIosClose } from "react-icons/io";
+import SparepartMainTable from "../../component/Table/SparepartMainTable.jsx";
+import DefaultSecondaryTable from "../../component/Table/DefaultSecondaryTable.jsx";
 
 const SparepartdashboardPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -23,6 +23,18 @@ const SparepartdashboardPage = () => {
     { nama: "Spion", kategori: "Aksesoris" },
     { nama: "Jok", kategori: "Jok" },
   ]);
+
+  const [category, setCategory] = useState([
+    { nama: "Ban" },
+    { nama: "Oli" },
+    { nama: "Lampu" },
+    { nama: "Busi" },
+  ]);
+
+  const [column] = useState([
+      'Nama Sparepart',
+      'Kategori'
+  ])
 
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
@@ -53,7 +65,7 @@ const SparepartdashboardPage = () => {
         <Navbar data="Data Sparepart" />
         <div className="p-12 flex flex-row">
           <div className="w-3/5">
-            <div className="flex justify-between items-center mb-6">
+            <div className="flex justify-between items-center">
               <div className="flex flex-row justify-between bg-lightgrey rounded-lg w-1/2">
                 <input
                   type="text"
@@ -69,14 +81,16 @@ const SparepartdashboardPage = () => {
                 Tambah Sparepart
               </button>
             </div>
-            <TableBesar spareparts={spareparts} setSpareparts={setSpareparts} />
+            <div className="h-6" />
+            <SparepartMainTable spareparts={spareparts} setSpareparts={setSpareparts} columns={column}/>
           </div>
           <div className="w-8" />
           <div className="w-2/6">
-            <TableKecil />
+            <DefaultSecondaryTable name={"Kategori"} data={category} setData={setCategory}/>
           </div>
         </div>
       </div>
+
       {isModalOpen && (
         <div className="fixed inset-0 flex items-center justify-center ">
           <div
