@@ -2,14 +2,17 @@ import React from 'react';
 import { IoIosClose } from 'react-icons/io';
 
 const EditSparepartModal = ({
-    editNama,
-    editKategori,
-    handleChangeEdit,
-    handleCloseModal,
-    handleUpdateSparepart
-}) => {
+                                isEditModalOpen,
+                                handleCloseModal,
+                                editNama,
+                                handleChangeEdit,
+                                editKategori,
+                                handleUpdateSparepart,
+                            }) => {
+    if (!isEditModalOpen) return null;
+
     return (
-        <div className="fixed inset-0 flex items-center justify-center">
+        <div className="fixed inset-0 flex items-center justify-center ">
             <div
                 className="absolute inset-0 z-0 bg-black bg-opacity-50"
                 onClick={handleCloseModal}

@@ -1,40 +1,44 @@
 import React, { useState } from "react";
 import "../../App.css";
 import { IoIosClose } from "react-icons/io";
+import DeleteModal from "../Modal/DeleteModal.jsx";
+import CommonModal from "../Modal/CommonModal.jsx";
 
-const   DefaultSecondaryTable = ({ name, data, setData }) => {
+const DefaultSecondaryTable = ({ name, data, setData }) => {
+    const [isTambahModalOpen, setIsTambahModalOpen] = useState(false);
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+    const [value, setValue] = useState("");
 
     const [editIndex, setEditIndex] = useState(null);
-    const [editNama, setEditNama] = useState("");
     const [deleteIndex, setDeleteIndex] = useState(null);
-    const [isTambahModalOpen, setIsTambahModalOpen] = useState(false);
-    const [kategoriBaru, setKategoriBaru] = useState("");
 
     const toggleTambahModal = () => {
+        setValue("");
         setIsTambahModalOpen(!isTambahModalOpen);
-        setKategoriBaru("");
     };
 
     const toggleEditModal = (index) => {
-        setIsEditModalOpen(true);
         setEditIndex(index);
-        setEditNama(data[index].nama);
+        setValue(data[index].nama);
+        setIsEditModalOpen(true);
     };
 
     const toggleDeleteModal = (index) => {
-        setIsDeleteModalOpen(true);
         setDeleteIndex(index);
+        setIsDeleteModalOpen(true);
+    };
+
+    const handleTambahKategori = () => {
+        setData([...data, {nama: value}]);
+        setIsTambahModalOpen(false);
     };
 
     const handleEdit = () => {
         const updatedSpareparts = [...data];
-        updatedSpareparts[editIndex] = { nama: editNama };
+        updatedSpareparts[editIndex] = { nama: value };
         setData(updatedSpareparts);
         setIsEditModalOpen(false);
-        setEditIndex(null);
-        setEditNama("");
     };
 
     const handleDelete = () => {
@@ -43,19 +47,6 @@ const   DefaultSecondaryTable = ({ name, data, setData }) => {
         setData(updatedSpareparts);
         setIsDeleteModalOpen(false);
         setDeleteIndex(null);
-    };
-
-    const handleChangeKategori = (e) => {
-        setKategoriBaru(e.target.value);
-    };
-
-    const handleTambahKategori = () => {
-        if (kategoriBaru.trim() !== "") {
-            const newSparepart = { nama: "Badri", kategori: kategoriBaru }; // Ganti 'Badri' dengan nilai default yang sesuai
-            setData([...data, newSparepart]);
-            setIsTambahModalOpen(false);
-            setKategoriBaru("");
-        }
     };
 
     const handleCloseModal = () => {
@@ -113,57 +104,13 @@ const   DefaultSecondaryTable = ({ name, data, setData }) => {
                 </table>
             </div>
 
-            {/* Tambah Modal */}
-            {isTambahModalOpen && (
-                <div className="fixed inset-0 flex items-center justify-center ">
-                    <div
-                        className="absolute inset-0 z-0 bg-black bg-opacity-50"
-                        onClick={handleCloseModal}
-                    />
-                    <div className="p-10 bg-white rounded-2xl flex flex-col gap-8 z-10 w-1/4">
-                        <div className="flex flex-col justify-end">
-                            <button
-                                className=" text-zinc-900 flex justify-end"
-                                onClick={handleCloseModal}
-                            >
-                                <IoIosClose className="w-8 h-8 relative" />
-                            </button>
-                            <div className="text-center text-zinc-900 text-2xl font-semibold font-['Poppins'] leading-9">
-                                Tambah {name}
-                            </div>
-                        </div>
-                        <div className="self-stretch h-[76px] flex-col justify-start items-start gap-[5px] flex">
-                            <div className="text-center text-black text-sm font-medium font-['Poppins']">
-                                Nama {name}
-                            </div>
-                            <div className="self-stretch px-[15px] py-3 bg-white rounded-2xl border border-zinc-200 justify-start items-center gap-2.5 inline-flex">
-                                <input
-                                    type="text"
-                                    value={kategoriBaru}
-                                    onChange={handleChangeKategori}
-                                    className="w-full focus:outline-none text-black text-base font-poppins placeholder:text-sm"
-                                    placeholder={`Tambahkan ${name}`}
-                                    style={{
-                                        caretColor: "black",
+            {/* Add Modal */}
+            <CommonModal name={name} isOpen={isTambahModalOpen} value={value} setValue={setValue}
+                         handleSubmit={handleTambahKategori} handleCloseModal={handleCloseModal} isEdit={false}/>
 
-                                        backgroundColor: "transparent",
-                                    }}
-                                />
-                            </div>
-                        </div>
-                        <button
-                            type="button"
-                            className="w-full text-center text-zinc-900 text-sm font-medium font-poppins rounded-xl py-3 bg-yellow"
-                            onClick={handleTambahKategori}
-                        >
-                            Tambah
-                        </button>
-                    </div>
-                </div>
-            )}
 
             {/* Edit Modal */}
-            {isEditModalOpen && (
+            {/*{isEditModalOpen && (
                 <div className="fixed inset-0 flex items-center justify-center ">
                     <div
                         className="absolute inset-0 z-0 bg-black bg-opacity-50"
@@ -189,7 +136,7 @@ const   DefaultSecondaryTable = ({ name, data, setData }) => {
                             <div className="self-stretch px-[15px] py-3 bg-white rounded-2xl border border-zinc-200 justify-start items-center gap-2.5 inline-flex">
                                 <input
                                     type="text"
-                                    value={editNama}
+                                    value={value}
                                     onChange={(e) => setEditNama(e.target.value)}
                                     className="w-full focus:outline-none text-black text-base font-poppins placeholder:text-sm"
                                     placeholder={`Edit Nama ${name}`}
@@ -209,40 +156,12 @@ const   DefaultSecondaryTable = ({ name, data, setData }) => {
                         </button>
                     </div>
                 </div>
-            )}
+            )}*/}
+            <CommonModal name={name} isOpen={isEditModalOpen} value={value} setValue={setValue}
+                         handleSubmit={handleEdit} handleCloseModal={handleCloseModal} isEdit={true}/>
 
-            {/* Delete Confirmation Modal */}
-            {isDeleteModalOpen && (
-                <div className="fixed inset-0 flex items-center justify-center ">
-                    <div
-                        className="absolute inset-0 z-0 bg-black bg-opacity-50"
-                        onClick={() => setIsDeleteModalOpen(false)}
-                    ></div>
-                    <div className="p-10 bg-white rounded-2xl flex flex-col gap-8 z-10 w-1/4">
-                        <div className="flex flex-col justify-end">
-                            <button
-                                className=" text-zinc-900 flex justify-end"
-                                onClick={handleCloseModal}
-                            >
-                                <IoIosClose className="w-8 h-8 relative" />
-                            </button>
-                            <div className="text-center text-zinc-900 text-2xl font-semibold font-['Poppins'] leading-9">
-                                Konfirmasi Hapus
-                            </div>
-                        </div>
-                        <div className="text-center text-black text-sm font-medium font-['Poppins']">
-                            Apakah Anda yakin ingin menghapus {name.toLowerCase()} ini?
-                        </div>
-                        <button
-                            type="button"
-                            className="w-full text-center text-white text-sm font-medium font-poppins rounded-xl py-3 bg-red"
-                            onClick={handleDelete}
-                        >
-                            Hapus
-                        </button>
-                    </div>
-                </div>
-            )}
+            {/* Delete Modal */}
+            <DeleteModal name={name.toLowerCase()} isOpen={isDeleteModalOpen} handleDelete={handleDelete} handleCloseModal={handleCloseModal}/>
         </div>
     );
 };
