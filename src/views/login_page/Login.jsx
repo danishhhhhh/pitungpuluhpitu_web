@@ -24,12 +24,11 @@ const Login = () => {
               id="password"
               type="password"
               placeholder="Masukkan password"
-              className="h-12 rounded-lg bg-white border border-lightgrey py-1 px-3 text-lg font-medium text-darkgrey input-custom"
+              className="h-12 rounded-lg bg-white border border-lightgrey py-1 px-3 font-medium text-darkgrey input-custom"
           />
           <div className="h-12"/>
-          <button className="btn rounded-xl bg-lightnavy font-medium font-poppins text-white text-xl p-3">Login</button>
+          <button className="btn rounded-xl bg-lightnavy font-medium font-poppins text-white text-s p-3">Login</button>
           <div className="h-20"/>
-
         </div>
       </div>
     </div>
