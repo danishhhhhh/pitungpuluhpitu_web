@@ -1,8 +1,6 @@
 import React, {useState} from 'react'
 import Sidebar from "../../component/Sidebar/sidebar.jsx";
 import Navbar from "../../component/Navbar/navbar.jsx";
-import DefaultSecondaryTable from "../../component/Table/DefaultSecondaryTable.jsx";
-import DetailMainTable from "../../component/Table/DetailMainTable.jsx";
 import DefaultMainTable from '../../component/Table/DefaultMainTable.jsx';
 
 const JasaPage = () => {
@@ -22,7 +20,7 @@ const JasaPage = () => {
                     <DefaultMainTable name={"Jasa"} data={jasa} setData={setJasa}/>
                     </div>
                     <div className="w-8"/>
-                  
+
                 </div>
             </div>
         </div>

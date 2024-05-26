@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Navbar from "../../component/Navbar/navbar";
 import Sidebar from "../../component/Sidebar/sidebar";
 import { MdOutlineFileUpload } from "react-icons/md";

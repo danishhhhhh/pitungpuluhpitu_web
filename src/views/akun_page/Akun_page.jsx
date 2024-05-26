@@ -4,6 +4,7 @@ import Navbar from "../../component/Navbar/navbar.jsx";
 import DefaultSecondaryTable from "../../component/Table/DefaultSecondaryTable.jsx";
 import DetailMainTable from "../../component/Table/DetailMainTable.jsx";
 import DefaultMainTable from '../../component/Table/DefaultMainTable.jsx';
+import AkunMainTable from "../../component/Table/AkunMainTable.jsx";
 
 const AkunPage = () => {
     const [akun, setAkun] = useState([
@@ -25,7 +26,7 @@ const AkunPage = () => {
                 <Navbar data="Detail Tim 1" showBackButton={true}/>
                 <div className="p-12 flex flex-row">
                     <div className="w-3/5">
-                    <DefaultMainTable name={"Akun"} data={akun} setData={setAkun}/>
+                    <AkunMainTable/>
                     </div>
                     <div className="w-8"/>
                     <div className="w-2/6">

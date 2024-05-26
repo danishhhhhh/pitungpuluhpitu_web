@@ -9,7 +9,7 @@ const RekapPage = () => {
       <div className="flex-grow">
         <Navbar data="Rekap Pengerjaan Tim 1" showBackButton={true} />
         <div className="p-12 flex flex-row justify-start">
-          <div className="w-3/5">
+          <div className="w-full">
             <RekapMainTable />
           </div>
           <div className="w-8" />

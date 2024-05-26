@@ -79,8 +79,8 @@ const DefaultMainTable = ({name, data, setData}) => {
                 <table className="border-collapse border-gray-300 rounded-lg">
                     <thead>
                     <tr className="text-black">
-                        <th className="py-3 px-20 font-poppins border border-grey text-darkgrey font-medium">Nama {name}</th>
-                        <th className="py-3 px-20 font-poppins border border-grey text-darkgrey font-medium">Action</th>
+                        <th className="py-3 font-poppins border border-grey text-darkgrey font-medium">Nama {name}</th>
+                        <th className="py-3 font-poppins border border-grey text-darkgrey font-medium">Action</th>
                     </tr>
                     </thead>
                     <tbody>

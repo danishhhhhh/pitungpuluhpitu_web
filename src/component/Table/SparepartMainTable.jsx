@@ -1,18 +1,22 @@
 import React, {useState} from "react";
 import "../../App.css";
-// import Pagination from "../TabelBesar/pagination.jsx    ";
-import {IoIosClose} from "react-icons/io";
 import DeleteModal from "../Modal/DeleteModal.jsx";
-import EditSparepartModal from "../Modal/EditSparepartModal.jsx";
+import SparepartModal from "../Modal/SparepartModal.jsx";
+import {FaSearch} from "react-icons/fa";
 
-const SparepartMainTable = ({spareparts, setSpareparts, columns}) => {
+const SparepartMainTable = ({spareparts, setSpareparts }) => {
+    const [isAddModalOpen, setIsAddModalOpen] = useState(false);
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
     const [editIndex, setEditIndex] = useState(null);
-    const [editNama, setEditNama] = useState("");
-    const [editKategori, setEditKategori] = useState("");
+    const [sparepartValue, setSparepartValue] = useState("");
+    const [kategoriValue, setKategoriValue] = useState("");
     const [deleteIndex, setDeleteIndex] = useState(null);
+
+    const toggleAddModal = () => {
+        setIsAddModalOpen(!isAddModalOpen);
+    };
 
     const toggleEditModal = () => {
         setIsEditModalOpen(!isEditModalOpen);
@@ -25,13 +29,13 @@ const SparepartMainTable = ({spareparts, setSpareparts, columns}) => {
 
     const handleEditClick = (index) => {
         setEditIndex(index);
-        setEditNama(spareparts[index].nama);
-        setEditKategori(spareparts[index].kategori);
+        setSparepartValue(spareparts[index].nama);
+        setKategoriValue(spareparts[index].kategori);
         toggleEditModal();
     };
 
     const handleUpdateSparepart = () => {
-        const updatedSparepart = {nama: editNama, kategori: editKategori};
+        const updatedSparepart = {nama: sparepartValue, kategori: kategoriValue};
         const updatedSpareparts = [...spareparts];
         updatedSpareparts[editIndex] = updatedSparepart;
         setSpareparts(updatedSpareparts);
@@ -41,9 +45,9 @@ const SparepartMainTable = ({spareparts, setSpareparts, columns}) => {
     const handleChangeEdit = (e) => {
         const {name, value} = e.target;
         if (name === "editNama") {
-            setEditNama(value);
+            setSparepartValue(value);
         } else if (name === "editKategori") {
-            setEditKategori(value);
+            setKategoriValue(value);
         }
     };
 
@@ -54,8 +58,11 @@ const SparepartMainTable = ({spareparts, setSpareparts, columns}) => {
     };
 
     const handleCloseModal = () => {
+        setIsAddModalOpen(false);
         setIsEditModalOpen(false);
         setIsDeleteModalOpen(false);
+        setKategoriValue("")
+        setSparepartValue("")
     };
 
     const handleDelete = () => {
@@ -68,16 +75,34 @@ const SparepartMainTable = ({spareparts, setSpareparts, columns}) => {
 
     return (
         <div className="grid grid-rows-1">
+            <div className="flex justify-between items-center">
+                <div className="flex flex-row justify-between bg-lightgrey rounded-lg w-1/2">
+                    <input
+                        type="text"
+                        placeholder="Cari sparepart ..."
+                        className="w-64 py-2 px-4 bg-lightgrey rounded-lg text-darkgrey focus:outline-none font-poppins text-sm"
+                    />
+                    <FaSearch className="my-auto mx-4  text-darkgrey" />
+                </div>
+                <button
+                    className="bg-yellow px-4 py-2 rounded-lg text-black font-normal font-poppins text-sm"
+                    onClick={toggleAddModal}
+                >
+                    Tambah Sparepart
+                </button>
+            </div>
+            <div className="h-6" />
             {/* Tabel */}
             <table className="border-collapse border-gray-300 rounded-lg">
                 <thead>
                 <tr className="text-black">
-                    {columns.map((column, index) => (
-                        <th className="py-3 px-20 font-poppins border border-grey text-darkgrey font-medium">
-                            {column}
-                        </th>
-                    ))}
-                    <th className="py-3 px-20 font-poppins border border-grey text-darkgrey font-medium">
+                    <th className="py-3 font-poppins border border-grey text-darkgrey font-medium">
+                        Nama Sparepart
+                    </th>
+                    <th className="py-3 font-poppins border border-grey text-darkgrey font-medium">
+                        Kategori
+                    </th>
+                    <th className="py-3 font-poppins border border-grey text-darkgrey font-medium">
                         Action
                     </th>
                 </tr>
@@ -110,14 +135,26 @@ const SparepartMainTable = ({spareparts, setSpareparts, columns}) => {
                 </tbody>
             </table>
 
-            {/* Edit Modal */}
-            <EditSparepartModal
-                isEditModalOpen={isEditModalOpen}
+            {/* Add Modal */}
+            <SparepartModal
+                isEdit={false}
+                isOpen={isAddModalOpen}
                 handleCloseModal={handleCloseModal}
-                editNama={editNama}
-                handleChangeEdit={handleChangeEdit}
-                editKategori={editKategori}
-                handleUpdateSparepart={handleUpdateSparepart}
+                sparepartValue={sparepartValue}
+                kategoriValue={kategoriValue}
+                onChange={handleChangeEdit}
+                handleSubmit={handleUpdateSparepart}
+            />
+
+            {/* Edit Modal */}
+            <SparepartModal
+                isEdit={true}
+                isOpen={isEditModalOpen}
+                handleCloseModal={handleCloseModal}
+                sparepartValue={sparepartValue}
+                kategoriValue={kategoriValue}
+                onChange={handleChangeEdit}
+                handleSubmit={handleUpdateSparepart}
             />
 
             {/* Delete Modal */}

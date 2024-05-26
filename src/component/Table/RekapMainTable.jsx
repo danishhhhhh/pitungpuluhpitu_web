@@ -76,34 +76,34 @@ const RekapMainTable = () => {
                 <table className="border-collapse border-gray-300 rounded-lg">
                     <thead>
                     <tr className="text-black">
-                        <th className="py-3 px-14 font-poppins border border-grey text-darkgrey font-medium">
+                        <th className="py-3 font-poppins border border-grey text-darkgrey font-medium">
                             Nama Cabang
                         </th>
-                        <th className="py-3 px-12 font-poppins border border-grey text-darkgrey font-medium">
+                        <th className="px-3 py-3 font-poppins border border-grey text-darkgrey font-medium">
                             Nama Mekanik
                         </th>
-                        <th className="py-3 px-12 font-poppins border border-grey text-darkgrey font-medium">
+                        <th className="px-3 py-3 font-poppins border border-grey text-darkgrey font-medium">
                             Plat Nomor
                         </th>
-                        <th className="py-3 px-12 font-poppins border border-grey text-darkgrey font-medium">
+                        <th className="px-3 py-3 font-poppins border border-grey text-darkgrey font-medium">
                             Tipe Motor
                         </th>
-                        <th className="py-3 px-12 font-poppins border border-grey text-darkgrey font-medium">
+                        <th className="px-3 py-3 font-poppins border border-grey text-darkgrey font-medium">
                             Tahun Motor
                         </th>
-                        <th className="py-3 px-14 font-poppins border border-grey text-darkgrey font-medium">
+                        <th className="px-3 py-3 font-poppins border border-grey text-darkgrey font-medium">
                             Km Motor
                         </th>
-                        <th className="py-3 px-20 font-poppins border border-grey text-darkgrey font-medium">
+                        <th className="px-3 py-3 font-poppins border border-grey text-darkgrey font-medium">
                             Pekerjaan
                         </th>
-                        <th className="py-3 px-20 font-poppins border border-grey text-darkgrey font-medium">
+                        <th className="px-3 py-3 font-poppins border border-grey text-darkgrey font-medium">
                             Jasa
                         </th>
-                        <th className="py-3 px-24 font-poppins border border-grey text-darkgrey font-medium">
+                        <th className="px-3 py-3 font-poppins border border-grey text-darkgrey font-medium">
                             Sparepart
                         </th>
-                        <th className="py-3 px-10 font-poppins border border-grey text-darkgrey font-medium">
+                        <th className="px-3 py-3 font-poppins border border-grey text-darkgrey font-medium">
                             Tanggal
                         </th>
                     </tr>
@@ -111,34 +111,34 @@ const RekapMainTable = () => {
                     <tbody>
                     {spareparts.map((sparepart, index) => (
                         <tr key={index}>
-                            <td className="px-4 py-2 font-poppins border border-grey">
+                            <td className="px-3 py-2 font-poppins border border-grey">
                                 {sparepart.NamaCabang}
                             </td>
-                            <td className="px-4 py-2 font-poppins border border-grey">
+                            <td className="px-3 py-2 font-poppins border border-grey">
                                 {sparepart.namaMekanik}
                             </td>
-                            <td className="px-4 py-2 font-poppins border border-grey">
+                            <td className="px-3 py-2 font-poppins border border-grey">
                                 {sparepart.platNomor}
                             </td>
-                            <td className="px-4 py-2 font-poppins border border-grey">
+                            <td className="px-3 py-2 font-poppins border border-grey">
                                 {sparepart.tipeMotor}
                             </td>
-                            <td className="px-4 py-2 font-poppins border border-grey">
+                            <td className="px-3 py-2 font-poppins border border-grey">
                                 {sparepart.tahunMotor}
                             </td>
-                            <td className="px-4 py-2 font-poppins border border-grey">
+                            <td className="px-3 py-2 font-poppins border border-grey">
                                 {sparepart.kmMotor}
                             </td>
-                            <td className="px-4 py-2 font-poppins border border-grey">
+                            <td className="px-3 py-2 font-poppins border border-grey">
                                 {sparepart.Pekerjaan}
                             </td>
-                            <td className="px-4 py-2 font-poppins border border-grey">
+                            <td className="px-3 py-2 font-poppins border border-grey">
                                 {sparepart.jasa}
                             </td>
-                            <td className="px-4 py-2 font-poppins border border-grey">
+                            <td className="px-3 py-2 font-poppins border border-grey">
                                 {sparepart.sparepart}
                             </td>
-                            <td className="px-4 py-2 font-poppins border border-grey">
+                            <td className="px-3 py-2 font-poppins border border-grey">
                                 {sparepart.tanggal}
                             </td>
                         </tr>
