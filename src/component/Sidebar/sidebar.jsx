@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   FaBox,
   FaToolbox,
@@ -7,15 +7,16 @@ import {
   FaUserCog,
   FaUserCircle,
 } from "react-icons/fa";
-
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { MdModeEditOutline } from "react-icons/md";
+import LogoutModal from "../Modal/LogoutModal.jsx";
 
 const Sidebar = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const activeClass = "bg-yellow text-bluegrey";
   const inactiveClass = "bg-bluegrey text-white";
+  const [isModalOpen, setModalOpen] = useState(false);  // State to manage modal visibility
 
   const handleNavigation = (route) => {
     navigate(route);
@@ -23,6 +24,14 @@ const Sidebar = () => {
 
   const handleLogout = () => {
     navigate("/login", { replace: true });
+  };
+
+  const handleOpenModal = () => {
+    setModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setModalOpen(false);
   };
 
   return (
@@ -137,16 +146,20 @@ const Sidebar = () => {
             </div>
           </li>
         </ul>
-        <a
-          href="/login"
-          onClick={handleLogout}
+        <button
+          onClick={handleOpenModal}
           className="bg-red rounded-lg py-4 px-10 flex items-center justify-between"
         >
           <div className="flex items-center justify-center text-center w-full text-md font-medium text-white">
             Keluar
           </div>
-        </a>
+        </button>
       </div>
+      <LogoutModal
+        isOpen={isModalOpen}
+        handleCloseModal={handleCloseModal}
+        handleLogout={handleLogout}
+      />
     </div>
   );
 };

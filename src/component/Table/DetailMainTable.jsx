@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import "../../App.css";
-import Pagination from "./pagination.jsx";
+import Pagination from "./Pagination.jsx";
 import {FaSearch, FaMinus, FaPlus} from "react-icons/fa";
 import {IoIosClose} from "react-icons/io";
 import EditStockModal from "../Modal/EditStockModal.jsx";

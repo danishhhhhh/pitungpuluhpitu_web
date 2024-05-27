@@ -19,8 +19,6 @@ const JasaPage = () => {
                     <div className="w-3/5">
                     <DefaultMainTable name={"Jasa"} data={jasa} setData={setJasa}/>
                     </div>
-                    <div className="w-8"/>
-
                 </div>
             </div>
         </div>
