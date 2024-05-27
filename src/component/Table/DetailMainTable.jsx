@@ -1,138 +1,180 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import "../../App.css";
-import Pagination from "./Pagination.jsx";
-import {FaSearch, FaMinus, FaPlus} from "react-icons/fa";
-import {IoIosClose} from "react-icons/io";
+import DeleteModal from "../Modal/DeleteModal.jsx";
 import EditStockModal from "../Modal/EditStockModal.jsx";
+import SparepartModal from "../Modal/SparepartModal.jsx";
+import { FaSearch } from "react-icons/fa";
 
-const TableBesarDetail = () => {
-    const [spareparts, setSpareparts] = useState([
-        {nama: "Ban Tubeless Belakang Matic", kategori: "Ban", stok: 20},
-        {nama: "Oli Mesin", kategori: "Oli", stok: 12},
-        {nama: "Kampas Rem", kategori: "Rem", stok: 19},
-        {nama: "Busi", kategori: "Busi", stok: 18},
-        {nama: "Lampu LED Depan", kategori: "Lampu", stok: 17},
-        {nama: "Aki", kategori: "Aki", stok: 21},
-        {nama: "Gear Set", kategori: "Rantai", stok: 23},
-        {nama: "Filter Udara", kategori: "Filter", stok: 22},
-        {nama: "Spion", kategori: "Aksesoris", stok: 2},
-        {nama: "Jok", kategori: "Jok", stok: 10},
-    ]);
+const TableBesarDetail = ({ name, data, setData }) => {
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
-    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-    const [editIndex, setEditIndex] = useState(null);
-    const [editStok, setEditStok] = useState(0);
+  const [editIndex, setEditIndex] = useState(null);
+  const [sparepartValue, setSparepartValue] = useState({
+    name: "",
+    stok: 0,
+    kategori: "",
+  });
+  const [deleteIndex, setDeleteIndex] = useState(null);
 
-    const toggleEditModal = (index) => {
-        setEditIndex(index);
-        setEditStok(spareparts[index].stok);
-        setIsEditModalOpen(true);
-    };
+  const toggleAddModal = () => {
+    setIsAddModalOpen(!isAddModalOpen);
+  };
 
-    const handleEdit = () => {
-        const updatedSpareparts = [...spareparts];
-        updatedSpareparts[editIndex] = {
-            ...updatedSpareparts[editIndex],
-            stok: editStok,
-        };
-        setSpareparts(updatedSpareparts);
-        setIsEditModalOpen(false);
-    };
+  const toggleEditModal = () => {
+    setIsEditModalOpen(!isEditModalOpen);
+  };
 
-    const handleCloseModal = () => {
-        setIsEditModalOpen(false);
-    };
+  const toggleDeleteModal = (index) => {
+    setIsDeleteModalOpen(true);
+    setDeleteIndex(index);
+  };
 
-    const incrementStock = () => setEditStok((prevStok) => prevStok + 1);
-    const decrementStock = () => setEditStok((prevStok) => (prevStok > 0 ? prevStok - 1 : 0));
+  const handleEditClick = (index) => {
+    setEditIndex(index);
+    setSparepartValue(data[index]);
+    toggleEditModal();
+  };
 
-    return (
-        <div className="grid grid-rows-1 ">
-            <div className="flex justify-between items-center">
-                <div className="flex flex-row justify-between bg-lightgrey rounded-lg w-1/2">
-                    <input
-                        type="text"
-                        placeholder="Cari sparepart ..."
-                        className="w-64 py-2 px-4 bg-lightgrey rounded-lg text-darkgrey focus:outline-none font-poppins text-sm"
-                    />
-                    <FaSearch className="my-auto mx-4  text-darkgrey"/>
-                </div>
-                <div className="flex flex-row gap-4">
-                    <a
-                        href="/cabang"
-                        className="bg-yellow px-4 py-2 rounded-lg text-black font-normal font-poppins text-sm"
-                    >
-                        Cabang
-                    </a>
+  const handleUpdateSparepart = () => {
+    const updatedSparepart = { ...sparepartValue };
+    const updatedData = [...data];
+    updatedData[editIndex] = updatedSparepart;
+    setData(updatedData);
+    toggleEditModal();
+  };
 
-                    <a
-                        href="/rekap"
-                        className="bg-yellow px-4 py-2 rounded-lg text-black font-normal font-poppins text-sm"
-                    >
-                        Rekap Pengerjaan
-                    </a>
-                </div>
-            </div>
-            <div className="h-6"/>
-            <div className="flex flex-col">
-                <table className="border-collapse border-gray-300 rounded-lg ">
-                    <thead>
-                    <tr className="text-black">
-                        <th className="py-3 font-poppins border border-grey text-darkgrey font-medium">
-                            Nama Sparepart
-                        </th>
-                        <th className="py-3 font-poppins border border-grey text-darkgrey font-medium">
-                            Stok
-                        </th>
-                        <th className="py-3 font-poppins border border-grey text-darkgrey font-medium">
-                            Kategori
-                        </th>
-                        <th className="py-3 font-poppins border border-grey text-darkgrey font-medium">
-                            Action
-                        </th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {spareparts.map((sparepart, index) => (
-                        <tr key={index}>
-                            <td className="px-4 py-2 font-poppins border border-grey">
-                                {sparepart.nama}
-                            </td>
-                            <td className="px-4 py-2 font-poppins border border-grey">
-                                {sparepart.stok}
-                            </td>
-                            <td className="px-4 py-2 font-poppins border border-grey">
-                                {sparepart.kategori}
-                            </td>
-                            <td className="px-4 py-2 border border-grey text-center">
-                                <button
-                                    className="bg-yellow font-poppins font-medium text-sm text-bluegray px-4 py-1.5 rounded-md mr-2"
-                                    onClick={() => toggleEditModal(index)}
-                                >
-                                    Edit
-                                </button>
-                            </td>
-                        </tr>
-                    ))}
-                    </tbody>
-                </table>
-            </div>
-            <div className="h-6"/>
-            <Pagination/>
+  const handleChangeEdit = (e) => {
+    const { name, value } = e.target;
+    setSparepartValue((prev) => ({ ...prev, [name]: value }));
+  };
 
-            {/* Edit Modal */}
-            <EditStockModal
-                isEditModalOpen={isEditModalOpen}
-                handleCloseModal={handleCloseModal}
-                spareparts={spareparts}
-                editIndex={editIndex}
-                editStok={editStok}
-                decrementStock={decrementStock}
-                incrementStock={incrementStock}
-                handleEdit={handleEdit}
-            />
+  const handleDeleteClick = () => {
+    const updatedData = [...data];
+    updatedData.splice(deleteIndex, 1);
+    setData(updatedData);
+    setIsDeleteModalOpen(false);
+  };
+
+  const handleCloseModal = () => {
+    setIsAddModalOpen(false);
+    setIsEditModalOpen(false);
+    setIsDeleteModalOpen(false);
+    setSparepartValue({ nama: "", stok: 0, kategori: "" });
+  };
+
+  return (
+    <div className="grid grid-rows-1">
+      <div className="flex justify-between items-center">
+        <div className="flex flex-row justify-between bg-lightgrey rounded-lg w-1/2">
+          <input
+            type="text"
+            placeholder="Cari sparepart ..."
+            className="w-64 py-2 px-4 bg-lightgrey rounded-lg text-darkgrey focus:outline-none font-poppins text-sm"
+          />
+          <FaSearch className="my-auto mx-4 text-darkgrey" />
         </div>
-    );
+        <div className="flex flex-row gap-4">
+          <button
+            className="bg-yellow px-4 py-2 rounded-lg text-black font-normal font-poppins text-sm"
+            onClick={toggleAddModal}
+          >
+            Tambah Sparepart
+          </button>
+          <a
+            href="/cabang"
+            className="bg-yellow px-4 py-2 rounded-lg text-black font-normal font-poppins text-sm"
+          >
+            Cabang
+          </a>
+          <a
+            href="/rekap"
+            className="bg-yellow px-4 py-2 rounded-lg text-black font-normal font-poppins text-sm"
+          >
+            Rekap Pengerjaan
+          </a>
+        </div>
+      </div>
+      <div className="h-6" />
+      {/* Table */}
+      <table className="border-collapse border-gray-300 rounded-lg">
+        <thead>
+          <tr className="text-black">
+            <th className="py-3 font-poppins border border-grey text-darkgrey font-medium">
+              Nama Sparepart
+            </th>
+            <th className="py-3 font-poppins border border-grey text-darkgrey font-medium">
+              Stok
+            </th>
+            <th className="py-3 font-poppins border border-grey text-darkgrey font-medium">
+              Kategori
+            </th>
+            <th className="py-3 font-poppins border border-grey text-darkgrey font-medium">
+              Action
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {data.map((sparepart, index) => (
+            <tr key={index}>
+              <td className="px-4 py-2 font-poppins border border-grey">
+                {sparepart.sparepart}
+              </td>
+              <td className="px-4 py-2 font-poppins border border-grey">
+                {sparepart.quantity}
+              </td>
+              <td className="px-4 py-2 font-poppins border border-grey">
+                {sparepart.kategori}
+              </td>
+              <td className="px-4 py-2 border border-grey text-center">
+                <button
+                  className="bg-yellow font-poppins font-medium text-sm text-bluegray px-4 py-1.5 rounded-md mr-2"
+                  onClick={() => handleEditClick(index)}
+                >
+                  Edit
+                </button>
+                <button
+                  className="bg-red font-poppins font-medium text-sm text-white px-4 py-1.5 rounded-md mr-2"
+                  onClick={() => toggleDeleteModal(index)}
+                >
+                  Hapus
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
+      {/* Add Modal */}
+      <SparepartModal
+        isEdit={false}
+        isOpen={isAddModalOpen}
+        handleCloseModal={handleCloseModal}
+        sparepartValue={sparepartValue}
+        onChange={handleChangeEdit}
+        handleSubmit={handleUpdateSparepart}
+      />
+
+      {/* Edit Modal */}
+      <SparepartModal
+        isEdit={true}
+        isOpen={isEditModalOpen}
+        handleCloseModal={handleCloseModal}
+        sparepartValue={sparepartValue}
+        onChange={handleChangeEdit}
+        handleSubmit={handleUpdateSparepart}
+      />
+
+      {/* Delete Modal */}
+      <DeleteModal
+        name="sparepart"
+        isOpen={isDeleteModalOpen}
+        handleCloseModal={handleCloseModal}
+        handleDelete={handleDeleteClick}
+      />
+    </div>
+  );
 };
 
 export default TableBesarDetail;
