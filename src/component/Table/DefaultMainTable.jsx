@@ -86,7 +86,7 @@ const DefaultMainTable = ({name, data, setData}) => {
                     <tbody>
                     {data.map((sparepart, index) => (
                         <tr key={index}>
-                            <td className="px-4 py-2 font-poppins border border-grey">{sparepart.nama}</td>
+                            <td className="px-4 py-2 font-poppins border border-grey">{sparepart.name}</td>
                             <td className="px-4 py-2 border border-grey text-center">
                                 <button
                                     className="bg-yellow font-poppins font-medium text-sm text-bluegray px-4 py-1.5 rounded-md mr-2"

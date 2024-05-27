@@ -1,8 +1,8 @@
 import { apiRequest } from "../features/Api.jsx";
 
-export const getSparepartRequest = async () => {
-  const token = localStorage.getItem("token");
-  console.log(token);
+export const getMotorRequest = async () => {
+    const token = localStorage.getItem("token");
+    console.log(token);
   const additionalHeaders = {
     "Content-Type": "application/json",
     "Authorization": `Bearer ${token}`,
@@ -11,7 +11,7 @@ export const getSparepartRequest = async () => {
   console.log(additionalHeaders);
   const response = await apiRequest(
     "GET",
-    "/sparepart",
+    "/motor",
     null,
     additionalHeaders
   );
@@ -21,16 +21,21 @@ export const getSparepartRequest = async () => {
   return response;
 };
 
-export const getKategoriRequest = async () => {
-  const token = localStorage.getItem("token");
-  console.log(token);
+export const getTahunRequest = async () => {
+    const token = localStorage.getItem("token");
+    console.log(token);
   const additionalHeaders = {
     "Content-Type": "application/json",
     "Authorization": `Bearer ${token}`,
   };
 
   console.log(additionalHeaders);
-  const response = await apiRequest("GET", "/kategori", null, additionalHeaders);
+  const response = await apiRequest(
+    "GET",
+    "/tahun",
+    null,
+    additionalHeaders
+  );
 
   console.log(response.data);
 
