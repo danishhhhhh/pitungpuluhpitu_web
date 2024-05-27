@@ -28,7 +28,7 @@ const SparepartDashboard = () => {
 
         setSpareparts(responseSparepart.data);
         setCategory(responseKategori.data);
-        console.log(responseSparepart.data);
+        
       } catch (error) {
         console.error("Error fetching data:", error);
       }

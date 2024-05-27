@@ -24,7 +24,7 @@ const MotordashboardPage = () => {
         setMotor(responseMotor.data);
         setYear(responseTahun.data);
 
-        console.log(responseTahun.data);
+       
       } catch (error) {
         console.error("Error fetching data:", error);
       }
