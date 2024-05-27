@@ -32,7 +32,7 @@ const AkunPage = () => {
     <div className="min-h-screen flex flex-row">
       <Sidebar />
       <div className="flex-grow">
-        <Navbar data="Detail Tim 1" showBackButton={true} />
+        <Navbar data="Data Akun" />
         <div className="p-12 flex flex-row">
           <div className="w-3/5">
             <AkunMainTable name={"Akun"} data={akun} setData={setAkun}/>

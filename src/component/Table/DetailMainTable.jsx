@@ -125,7 +125,7 @@ const TableBesarDetail = ({ name, data, setData }) => {
                 {sparepart.quantity}
               </td>
               <td className="px-4 py-2 font-poppins border border-grey">
-                {sparepart.kategori}
+                {sparepart.kategori ?? "Lainnya"}
               </td>
               <td className="px-4 py-2 border border-grey text-center">
                 <button
