@@ -1,131 +1,172 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import "../../App.css";
-import Pagination from "./Pagination.jsx";
-import {FaSearch, FaMinus, FaPlus} from "react-icons/fa";
-import {IoIosClose} from "react-icons/io";
-import EditStockModal from "../Modal/EditStockModal.jsx";
+import DeleteModal from "../Modal/DeleteModal.jsx";
 import AkunModal from "../Modal/AkunModal.jsx";
+import { FaSearch } from "react-icons/fa";
 
-const TableBesarDetail = () => {
-    const [spareparts, setSpareparts] = useState([
-        {nama: "Ban Tubeless Belakang Matic", kategori: "Ban", stok: 20},
-        {nama: "Oli Mesin", kategori: "Oli", stok: 12},
-        {nama: "Kampas Rem", kategori: "Rem", stok: 19},
-        {nama: "Busi", kategori: "Busi", stok: 18},
-        {nama: "Lampu LED Depan", kategori: "Lampu", stok: 17},
-        {nama: "Aki", kategori: "Aki", stok: 21},
-        {nama: "Gear Set", kategori: "Rantai", stok: 23},
-        {nama: "Filter Udara", kategori: "Filter", stok: 22},
-        {nama: "Spion", kategori: "Aksesoris", stok: 2},
-        {nama: "Jok", kategori: "Jok", stok: 10},
-    ]);
+const AkunMainTable = ({ name, data, setData }) => {
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
-    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-    const [editIndex, setEditIndex] = useState(null);
-    const [editStok, setEditStok] = useState(0);
+  const [editIndex, setEditIndex] = useState(null);
+  const [akunValue, setAkunValue] = useState({
+    nama: "",
+    username: "",
+    password: "",
+    role: "",
+  });
+  const [deleteIndex, setDeleteIndex] = useState(null);
 
-    const toggleEditModal = (index) => {
-        setEditIndex(index);
-        setEditStok(spareparts[index].stok);
-        setIsEditModalOpen(true);
-    };
+  const toggleAddModal = () => {
+    setIsAddModalOpen(!isAddModalOpen);
+  };
 
-    const handleEdit = () => {
-        const updatedSpareparts = [...spareparts];
-        updatedSpareparts[editIndex] = {
-            ...updatedSpareparts[editIndex],
-            stok: editStok,
-        };
-        setSpareparts(updatedSpareparts);
-        setIsEditModalOpen(false);
-    };
+  const toggleEditModal = () => {
+    setIsEditModalOpen(!isEditModalOpen);
+  };
 
-    const handleCloseModal = () => {
-        setIsEditModalOpen(false);
-    };
+  const toggleDeleteModal = (index) => {
+    setIsDeleteModalOpen(true);
+    setDeleteIndex(index);
+  };
 
-    const incrementStock = () => setEditStok((prevStok) => prevStok + 1);
-    const decrementStock = () => setEditStok((prevStok) => (prevStok > 0 ? prevStok - 1 : 0));
+  const handleEditClick = (index) => {
+    setEditIndex(index);
+    setAkunValue(data[index]);
+    toggleEditModal();
+  };
 
-    return (
-        <div className="grid grid-rows-1 ">
-            <div className="flex justify-between items-center">
-                <div className="flex flex-row justify-between bg-lightgrey rounded-lg w-1/2">
-                    <input
-                        type="text"
-                        placeholder="Cari akun ..."
-                        className="w-64 py-2 px-4 bg-lightgrey rounded-lg text-darkgrey focus:outline-none font-poppins text-sm"
-                    />
-                    <FaSearch className="my-auto mx-4  text-darkgrey"/>
-                </div>
-                <button
-                    className="bg-yellow px-4 py-2 rounded-lg text-black font-normal font-poppins text-sm"
-                >
-                    Tambah Akun
-                </button>
-            </div>
-            <div className="h-6"/>
-            <div className="flex flex-col">
-                <table className="border-collapse border-gray-300 rounded-lg ">
-                    <thead>
-                    <tr className="text-black">
-                        <th className="py-3 font-poppins border border-grey text-darkgrey font-medium">
-                            Nama akun
-                        </th>
-                        <th className="py-3 font-poppins border border-grey text-darkgrey font-medium">
-                            Username
-                        </th>
-                        <th className="py-3 font-poppins border border-grey text-darkgrey font-medium">
-                            Password
-                        </th>
-                        <th className="py-3 font-poppins border border-grey text-darkgrey font-medium">
-                            Role
-                        </th>
-                        <th className="py-3 font-poppins border border-grey text-darkgrey font-medium">
-                            Action
-                        </th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {spareparts.map((sparepart, index) => (
-                        <tr key={index}>
-                            <td className="px-4 py-2 font-poppins border border-grey">
-                                {sparepart.nama}
-                            </td>
-                            <td className="px-4 py-2 font-poppins border border-grey">
-                                {sparepart.stok}
-                            </td>
-                            <td className="px-4 py-2 font-poppins border border-grey">
-                                {sparepart.kategori}
-                            </td>
-                            <td className="px-4 py-2 font-poppins border border-grey">
-                                {sparepart.kategori}
-                            </td>
-                            <td className="px-4 py-2 border border-grey text-center">
-                                <button
-                                    className="bg-yellow font-poppins font-medium text-sm text-bluegray px-4 py-1.5 rounded-md mr-2"
-                                    onClick={() => toggleEditModal(index)}
-                                >
-                                    Edit
-                                </button>
-                            </td>
-                        </tr>
-                    ))}
-                    </tbody>
-                </table>
-            </div>
-            <div className="h-6"/>
-            <Pagination/>
+  const handleUpdateAkun = () => {
+    const updatedAkun = { ...akunValue };
+    const updatedData = [...data];
+    updatedData[editIndex] = updatedAkun;
+    setData(updatedData);
+    toggleEditModal();
+  };
 
-            {/* Edit Modal */}
-            <AkunModal
-                isEditModalOpen={isEditModalOpen}
-                handleCloseModal={handleCloseModal}
-                editNama={editStok}
-                handleChangeEdit={handleEdit}
-            />
+  const handleChangeEdit = (e) => {
+    const { name, value } = e.target;
+    setAkunValue((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleDeleteClick = () => {
+    const updatedData = [...data];
+    updatedData.splice(deleteIndex, 1);
+    setData(updatedData);
+    setIsDeleteModalOpen(false);
+  };
+
+  const handleCloseModal = () => {
+    setIsAddModalOpen(false);
+    setIsEditModalOpen(false);
+    setIsDeleteModalOpen(false);
+    setAkunValue({ nama: "", username: "", password: "", role: "" });
+  };
+
+  return (
+    <div className="grid grid-rows-1">
+      <div className="flex justify-between items-center">
+        <div className="flex flex-row justify-between bg-lightgrey rounded-lg w-1/2">
+          <input
+            type="text"
+            placeholder="Cari akun ..."
+            className="w-64 py-2 px-4 bg-lightgrey rounded-lg text-darkgrey focus:outline-none font-poppins text-sm"
+          />
+          <FaSearch className="my-auto mx-4  text-darkgrey" />
         </div>
-    );
+        <button
+          className="bg-yellow px-4 py-2 rounded-lg text-black font-normal font-poppins text-sm"
+          onClick={toggleAddModal}
+        >
+          Tambah Akun
+        </button>
+      </div>
+      <div className="h-6" />
+      {/* Table */}
+      <table className="border-collapse border-gray-300 rounded-lg">
+        <thead>
+          <tr className="text-black">
+            <th className="py-3 font-poppins border border-grey text-darkgrey font-medium">
+              Nama akun
+            </th>
+            <th className="py-3 font-poppins border border-grey text-darkgrey font-medium">
+              Username
+            </th>
+            <th className="py-3 font-poppins border border-grey text-darkgrey font-medium">
+              Password
+            </th>
+            <th className="py-3 font-poppins border border-grey text-darkgrey font-medium">
+              Role
+            </th>
+            <th className="py-3 font-poppins border border-grey text-darkgrey font-medium">
+              Action
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {data.map((akun, index) => (
+            <tr key={index}>
+              <td className="px-4 py-2 font-poppins border border-grey">
+                {akun.name}
+              </td>
+              <td className="px-4 py-2 font-poppins border border-grey">
+                {akun.username}
+              </td>
+              <td className="px-4 py-2 font-poppins border border-grey">
+                {akun.password}
+              </td>
+              <td className="px-4 py-2 font-poppins border border-grey">
+                {akun.role}
+              </td>
+              <td className="px-4 py-2 border border-grey text-center">
+                <button
+                  className="bg-yellow font-poppins font-medium text-sm text-bluegray px-4 py-1.5 rounded-md mr-2"
+                  onClick={() => handleEditClick(index)}
+                >
+                  Edit
+                </button>
+                <button
+                  className="bg-red font-poppins font-medium text-sm text-white px-4 py-1.5 rounded-md mr-2"
+                  onClick={() => toggleDeleteModal(index)}
+                >
+                  Hapus
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
+      {/* Add Modal */}
+      <AkunModal
+        isEdit={false}
+        isOpen={isAddModalOpen}
+        handleCloseModal={handleCloseModal}
+        akunValue={akunValue}
+        onChange={handleChangeEdit}
+        handleSubmit={handleUpdateAkun}
+      />
+
+      {/* Edit Modal */}
+      <AkunModal
+        isEdit={true}
+        isOpen={isEditModalOpen}
+        handleCloseModal={handleCloseModal}
+        akunValue={akunValue}
+        onChange={handleChangeEdit}
+        handleSubmit={handleUpdateAkun}
+      />
+
+      {/* Delete Modal */}
+      <DeleteModal
+        name={name.toLowerCase()}
+        isOpen={isDeleteModalOpen}
+        handleCloseModal={handleCloseModal}
+        handleDelete={handleDeleteClick}
+      />
+    </div>
+  );
 };
 
-export default TableBesarDetail;
+export default AkunMainTable;
