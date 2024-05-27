@@ -50,8 +50,8 @@ const Sidebar = () => {
           />
           <div className="w-3" />
           <div className="">
-            <p className="font-poppins text-white">Danish Ardiyanta</p>
-            <p className="font-poppins text-yellow text-sm">Admin</p>
+            <p className="font-poppins text-white">{localStorage.getItem("name")}</p>
+            <p className="font-poppins text-yellow text-sm">{localStorage.getItem("role")}</p>
           </div>
         </div>
         <div
