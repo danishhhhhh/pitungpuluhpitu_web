@@ -82,7 +82,7 @@ const DefaultSecondaryTable = ({ name, data, setData }) => {
                     {data.map((sparepart, index) => (
                         <tr key={index}>
                             <td className="px-4 py-2 font-poppins border border-grey">
-                                {sparepart.nama}
+                                {sparepart.name}
                             </td>
                             <td className="px-4 py-2 border border-grey text-center">
                                 <button

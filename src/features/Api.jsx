@@ -12,15 +12,15 @@ const axiosInstance = axios.create({
   },
 });
 
-export const apiRequest = async (method, endpoint, data = null, headers = {}) => {
+export const apiRequest = async (method, endpoint, data = null, header = {}) => {
   const defaultHeaders = { 'Accept': 'application/json' };
-  const header = { ...defaultHeaders, ...headers };
+  const headers = { ...defaultHeaders, ...header };
   try {
     const response = await axiosInstance({
       method,
       url: endpoint,
       data,
-      header,
+      headers,
     });
 
     if(response.status == 401) {
