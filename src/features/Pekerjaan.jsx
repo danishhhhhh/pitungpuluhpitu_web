@@ -23,7 +23,7 @@ export const getPekerjaanRequest = async (page = 1) => {
   return response;
 };
 
-export const postAddPekerjaanRequest = async (name, timId) => {
+export const postAddPekerjaanRequest = async (name) => {
   const token = localStorage.getItem("token");
   console.log(token);
   const additionalHeaders = {
