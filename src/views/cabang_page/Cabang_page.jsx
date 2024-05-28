@@ -1,21 +1,57 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Navbar from "../../component/Navbar/navbar";
 import DefaultMainTable from "../../component/Table/DefaultMainTable.jsx";
-import { getCabangRequest } from "../../features/Cabang.jsx";
+import {
+  getCabangRequest,
+  postAddCabangRequest,
+  postEditCabangRequest,
+  deleteCabangRequest,
+} from "../../features/Cabang.jsx";
+import { TimContext } from "../../context/Context.jsx";
 
 const CabangPage = () => {
+  const { timId } = useContext(TimContext);
   const [cabang, setCabang] = useState([]);
+  const [cabangValue, setCabangValue] = useState([]);
+
+  const fetchData = async () => {
+    try {
+      const responseCabang = await getCabangRequest();
+
+      setCabang(responseCabang.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  const postAddCabang = async () => {
+    try {
+      await postAddCabangRequest(cabangValue, timId);
+      console.log("sadasdsadasdasdsa");
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  const postEditCabang = async (id) => {
+    try {
+      await postEditCabangRequest(cabangValue, id);
+      console.log("sadasdsadasdasdsa");
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+    const deleteCabang = async (id) => {
+    try {
+      await deleteCabangRequest(id);
+      console.log("sadasdsadasdasdsa");
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+  
+
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const responseCabang = await getCabangRequest();
-
-        setCabang(responseCabang.data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-
     fetchData();
   }, []);
   return (
@@ -28,6 +64,11 @@ const CabangPage = () => {
               name={"Cabang"}
               data={cabang}
               setData={setCabang}
+              value={cabangValue}
+              setValue={setCabangValue}
+              handleSubmitPost={postAddCabang}
+              handleEditPost={postEditCabang}
+              handleDeletePost={deleteCabang}
             />
           </div>
           <div className="w-8" />

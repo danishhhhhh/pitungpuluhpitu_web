@@ -4,7 +4,7 @@ import { IoIosClose } from "react-icons/io";
 import DeleteModal from "../Modal/DeleteModal.jsx";
 import CommonModal from "../Modal/CommonModal.jsx";
 
-const DefaultSecondaryTable = ({ name, data, setData, value, setValue,handleSubmitPost ,handleEditPost,handleDeletePost }) => {
+const DefaultSecondaryTable = ({ name, data, setData, value, setValue,handleSubmitPost ,handleEditPost, handleDeletePost }) => {
   const [isTambahModalOpen, setIsTambahModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -38,6 +38,7 @@ const DefaultSecondaryTable = ({ name, data, setData, value, setValue,handleSubm
   };
 
   const handleDelete = () => {
+    console.log(`skajdlksajdas;ljdsa;ljdas ${index}`)
     handleDeletePost(index);
     setIsDeleteModalOpen(false);
   };

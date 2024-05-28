@@ -3,6 +3,7 @@ import Sidebar from "../../component/Sidebar/sidebar";
 import Navbar from "../../component/Navbar/navbar";
 import DefaultSecondaryTable from "../../component/Table/DefaultSecondaryTable.jsx";
 import DetailMainTable from "../../component/Table/DetailMainTable.jsx";
+import {TimContext} from "../../context/Context.jsx";
 import {
   getMekanikRequest,
   getDetailTimRequest,
@@ -10,7 +11,6 @@ import {
   postEditMekanikRequest,
   deleteMekanikRequest
 } from "../../features/Detail.jsx";
-import { TimContext } from "../../context/Context.jsx";
 
 const DetailtimPage = () => {
   const { timId } = useContext(TimContext);
@@ -82,6 +82,7 @@ const DetailtimPage = () => {
               totalData={totalData}
               totalPage={totalPage}
               setCurrentPage={setCurrentPage}
+              timId={timId}
             />
           </div>
           <div className="w-8" />

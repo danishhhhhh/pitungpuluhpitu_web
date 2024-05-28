@@ -14,7 +14,6 @@ import {TimProvider} from "../context/Context.jsx";
 
 const Router = () => {
     return (
-        <TimProvider>
             <BrowserRouter>
                 <Routes>
                     <Route path="/login" element={<Login/>}/>
@@ -30,7 +29,6 @@ const Router = () => {
                     <Route path="/rekap" element={<RekapPage/>}/>
                 </Routes>
             </BrowserRouter>
-        </TimProvider>
     );
 };
 

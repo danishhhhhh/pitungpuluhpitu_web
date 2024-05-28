@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "../../App.css";
 import DeleteModal from "../Modal/DeleteModal.jsx";
 import EditStockModal from "../Modal/EditStockModal.jsx";
 import SparepartModal from "../Modal/SparepartModal.jsx";
 import { FaSearch } from "react-icons/fa";
 import Pagination from "./Pagination.jsx";
+import {TimContext} from "../../context/Context.jsx";
+import {useNavigate} from "react-router-dom";
 
 const TableBesarDetail = ({
   name,
@@ -14,7 +16,10 @@ const TableBesarDetail = ({
   totalPage,
   totalData,
   setCurrentPage,
+  timId
 }) => {
+  const navigate = useNavigate();
+  const { setTimId } = useContext(TimContext);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -26,6 +31,12 @@ const TableBesarDetail = ({
     kategori: "",
   });
   const [deleteIndex, setDeleteIndex] = useState(null);
+
+  const handleCabangClick = (event) => {
+    event.preventDefault();
+    setTimId(timId);
+    navigate('/cabang');
+};
 
   const toggleAddModal = () => {
     setIsAddModalOpen(!isAddModalOpen);
@@ -86,7 +97,7 @@ const TableBesarDetail = ({
         </div>
         <div className="flex flex-row gap-4">
           <a
-            href="/cabang"
+               onClick={handleCabangClick}
             className="bg-yellow px-4 py-2 rounded-lg text-black font-normal font-poppins text-sm"
           >
             Cabang
