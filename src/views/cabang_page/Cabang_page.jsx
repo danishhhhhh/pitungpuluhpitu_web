@@ -12,7 +12,7 @@ import { TimContext } from "../../context/Context.jsx";
 const CabangPage = () => {
   const { timId } = useContext(TimContext);
   const [cabang, setCabang] = useState([]);
-  const [cabangValue, setCabangValue] = useState([]);
+  const [cabangValue, setCabangValue] = useState();
 
   const fetchData = async () => {
     try {
