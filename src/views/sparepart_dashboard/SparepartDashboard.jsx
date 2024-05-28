@@ -6,6 +6,9 @@ import DefaultSecondaryTable from "../../component/Table/DefaultSecondaryTable.j
 import {
   getKategoriRequest,
   getSparepartRequest,
+  postAddKategoriRequest,
+  postEditKategoriRequest,
+  deleteKategoriRequest,
 } from "../../features/Sparepart.jsx";
 
 const SparepartDashboard = () => {
@@ -14,6 +17,7 @@ const SparepartDashboard = () => {
   const [totalPage, setTotalPage] = useState();
   const [spareparts, setSpareparts] = useState([]);
   const [category, setCategory] = useState([]);
+  const [categoryValue, setCategoryValue] = useState();
 
   const fetchData = async (page = 1) => {
     try {
@@ -26,6 +30,31 @@ const SparepartDashboard = () => {
 
       setSpareparts(responseSparepart.data);
       setCategory(responseKategori.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+  const postAddKategori = async () => {
+    try {
+      await postAddKategoriRequest(categoryValue);
+      console.log("sadasdsadasdasdsa");
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  const postEditKategori = async (id) => {
+    try {
+      await postEditKategoriRequest(categoryValue, id);
+      console.log("sadasdsadasdasdsa");
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+  const deleteKategori = async (id) => {
+    try {
+      await deleteKategoriRequest(id);
+      console.log("sadasdsadasdasdsa");
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -57,6 +86,12 @@ const SparepartDashboard = () => {
               name={"Kategori"}
               data={category}
               setData={setCategory}
+              value={categoryValue}
+              setValue={setCategoryValue}
+              handleSubmitPost={postAddKategori}
+              handleEditPost={postEditKategori}
+              handleDeletePost={deleteKategori}
+            
             />
           </div>
         </div>

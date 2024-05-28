@@ -30,3 +30,50 @@ export const getKategoriRequest = async () => {
 
   return await apiRequest("GET", "/kategori", null, additionalHeaders);
 };
+export const postAddKategoriRequest = async (name) => {
+  const token = localStorage.getItem("token");
+  console.log(token);
+  const additionalHeaders = {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`,
+  };
+
+  console.log(additionalHeaders);
+  const response = await apiRequest("POST", `/kategori`, { name }, additionalHeaders);
+
+  console.log(response.data);
+
+  return response;
+};
+
+export const postEditKategoriRequest = async (name,id) => {
+  const token = localStorage.getItem("token");
+  console.log(token);
+  const additionalHeaders = {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`,
+  };
+
+  console.log(additionalHeaders);
+  const response = await apiRequest("POST", `/kategori/${id}`, { name }, additionalHeaders);
+
+  console.log(response.data);
+
+  return response;
+};
+
+export const deleteKategoriRequest = async (id) => {
+  const token = localStorage.getItem("token");
+  console.log(token);
+  const additionalHeaders = {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`,
+  };
+
+  console.log(additionalHeaders);
+  const response = await apiRequest("DELETE", `/kategori/${id}`, null, additionalHeaders);
+
+  console.log(response.data);
+
+  return response;
+};
