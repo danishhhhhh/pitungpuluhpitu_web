@@ -23,12 +23,16 @@ const StockDashboard = () => {
               Export Lapor Pengerjaan
             </button>
           </div>
-          <div className="my-6 justify-start flex flex-row mt-8">
-            <TimCard name="Tim 1" />
-            <TimCard name="Tim 2" />
-            <TimCard name="Tim 3" />
-            <TimCard name="Tim 4" />
-            <TimCard name="Tim 5" />
+          <div className="my-6 flex flex-row mt-8 w-full">
+            <div className="flex flex-row overflow-x-auto scroll-smooth scroll whitespace-nowrap max-w-7xl  scrollbar-thin scrollbar-track-white scrollbar-thumb-grey">
+              <TimCard name="Tim 1" />
+              <TimCard name="Tim 2" />
+              <TimCard name="Tim 3" />
+              <TimCard name="Tim 4" />
+              <TimCard name="Tim 5" />
+              <TimCard name="Tim 5" />
+              <TimCard name="Tim 5" />
+            </div>
           </div>
           <div className="mt-12">
             <div className="flex flex-row justify-between bg-lightgrey rounded-lg w-1/3">
