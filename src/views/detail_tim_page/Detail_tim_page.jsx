@@ -1,25 +1,23 @@
-import { useState, useEffect } from "react";
+import {useState, useEffect, useContext} from "react";
 import Sidebar from "../../component/Sidebar/sidebar";
 import Navbar from "../../component/Navbar/navbar";
 import DefaultSecondaryTable from "../../component/Table/DefaultSecondaryTable.jsx";
 import DetailMainTable from "../../component/Table/DetailMainTable.jsx";
 import { getMekanikRequest, getDetailTimRequest } from "../../features/Detail.jsx"
-import { useParams } from "react-router-dom";
+import {TimContext} from "../../context/Context.jsx";
 
 
 const DetailtimPage = () => {
-    const { timId } = useParams();
+    const { timId } = useContext(TimContext);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalData, setTotalData] = useState();
     const [totalPage, setTotalPage] = useState();
-    const [tim, setTim] = useState();
     const [mekanik, setMekanik] = useState([]);
     const [stocktim, setStockTim] = useState([]);
 
     const fetchData = async (page = 1) => {
-        setTim(timId)
         try {
-            const responseDetail = await getDetailTimRequest(page, tim);
+            const responseDetail = await getDetailTimRequest(page, timId);
             const responseMekanik = await getMekanikRequest();
 
             setCurrentPage(responseDetail.current_page);

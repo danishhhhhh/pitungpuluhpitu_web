@@ -1,6 +1,6 @@
 import {apiRequest} from "../features/Api.jsx";
 
-export const getDetailTimRequest = async (page = 1, tim) => {
+export const getDetailTimRequest = async (page = 1, timId) => {
     const token = localStorage.getItem("token");
     console.log(token);
     const additionalHeaders = {
@@ -8,9 +8,9 @@ export const getDetailTimRequest = async (page = 1, tim) => {
         "Authorization": `Bearer ${token}`,
     };
 
-    const url = `/tim/${tim}/stock?page=${page}`;
+    const url = `/tim/${timId}/stock?page=${page}`;
 
-    console.log(additionalHeaders);
+    console.log(url);
     const response = await apiRequest(
         "GET",
         url,
