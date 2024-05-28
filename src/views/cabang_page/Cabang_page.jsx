@@ -23,7 +23,7 @@ const CabangPage = () => {
       <div className="flex-grow">
         <Navbar data="Cabang Tim 1" showBackButton={true} />
         <div className="p-12 flex flex-row justify-center">
-          <div className="w-3/5">
+          <div className="w-4/6">
             <DefaultMainTable
               name={"Cabang"}
               data={cabang}

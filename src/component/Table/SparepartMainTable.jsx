@@ -3,8 +3,9 @@ import "../../App.css";
 import DeleteModal from "../Modal/DeleteModal.jsx";
 import SparepartModal from "../Modal/SparepartModal.jsx";
 import {FaSearch} from "react-icons/fa";
+import Pagination from "./Pagination.jsx";
 
-const SparepartMainTable = ({spareparts, setSpareparts }) => {
+const SparepartMainTable = ({spareparts, setSpareparts, currentPage, totalPage, totalData, setCurrentPage }) => {
     const [isAddModalOpen, setIsAddModalOpen] = useState(false);
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -134,6 +135,8 @@ const SparepartMainTable = ({spareparts, setSpareparts }) => {
                 ))}
                 </tbody>
             </table>
+            <div className="h-6"/>
+            <Pagination currentPage={currentPage} totalPage={totalPage} totalData={totalData} setCurrentPage={setCurrentPage}/>
 
             {/* Add Modal */}
             <SparepartModal

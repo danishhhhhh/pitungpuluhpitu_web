@@ -8,7 +8,7 @@ const StockDashboard = () => {
     <div className="min-h-screen flex flex-row">
       <Sidebar />
       <div className="flex-grow">
-        <Navbar data="Data Stock" />
+        <Navbar data="Stock Dashboard" />
         <div className="p-12 flex flex-col">
           <div className="flex justify-between ">
             <div className="flex flex-row justify-between bg-lightgrey rounded-lg w-1/3">
@@ -19,7 +19,7 @@ const StockDashboard = () => {
               />
               <FaSearch className="my-auto mx-4  text-darkgrey" />
             </div>
-            <button className="bg-yellow  h-10  px-4 py-2 rounded-lg text-black font-normal font-poppins text-sm ">
+            <button className="bg-yellow h-10 px-4 py-2 rounded-lg text-black font-normal font-poppins text-sm ">
               Export Lapor Pengerjaan
             </button>
           </div>

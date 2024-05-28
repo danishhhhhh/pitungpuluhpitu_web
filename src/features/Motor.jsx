@@ -1,6 +1,6 @@
-import { apiRequest } from "../features/Api.jsx";
+import { apiRequest } from "./Api.jsx";
 
-export const getMotorRequest = async () => {
+export const getMotorRequest = async (page = 1) => {
     const token = localStorage.getItem("token");
     console.log(token);
   const additionalHeaders = {
@@ -8,15 +8,18 @@ export const getMotorRequest = async () => {
     "Authorization": `Bearer ${token}`,
   };
 
-  console.log(additionalHeaders);
+  const url = `/motor?page=${page}`;
+
+
   const response = await apiRequest(
     "GET",
-    "/motor",
+      url,
     null,
     additionalHeaders
   );
+  console.log("sdasdasdasdasdsasdasdadsasasddsasdasda");
 
-  console.log(response.data);
+  console.log(response);
 
   return response;
 };

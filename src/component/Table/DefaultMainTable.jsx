@@ -6,7 +6,7 @@ import {IoIosClose} from "react-icons/io";
 import DeleteModal from "../Modal/DeleteModal.jsx";
 import CommonModal from "../Modal/CommonModal.jsx";
 
-const DefaultMainTable = ({name, data, setData}) => {
+const DefaultMainTable = ({ name, data, setData, currentPage, totalPage, totalData, setCurrentPage }) => {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [isAddModalOpen, setIsAddModalOpen] = useState(false);
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -107,7 +107,7 @@ const DefaultMainTable = ({name, data, setData}) => {
                 </table>
             </div>
             <div className="h-6"/>
-            <Pagination/>
+            <Pagination currentPage={currentPage} totalPage={totalPage} totalData={totalData} setCurrentPage={setCurrentPage}/>
 
             {/* Add Modal */}
             <CommonModal name={name} isOpen={isAddModalOpen} value={value} setValue={setValue}

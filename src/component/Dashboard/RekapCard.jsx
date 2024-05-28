@@ -62,13 +62,11 @@ const RekapCard = () => {
             <div className="self-stretch justify-end items-end gap-2.5 inline-flex">
                 <button
                     className="w-[34px] h-[34px] bg-lightred rounded-[32px] justify-center items-center gap-2.5 flex">
-                    <IoIosClose className="w-8 h-8 relative text-red"/>
+                    <IoIosClose className="w-8 h-8 text-red"/>
                 </button>
                 <button
                     className="w-[34px] h-[34px] bg-lightgreen rounded-[32px] justify-center items-center gap-2.5 flex">
-                    <div className="w-4 h-4 relative">
-                        <FaCheck className="w-4 h-4 left-0 top-0 absolute text-green"/>
-                    </div>
+                    <FaCheck className="w-4 h-4 text-green"/>
                 </button>
             </div>
 

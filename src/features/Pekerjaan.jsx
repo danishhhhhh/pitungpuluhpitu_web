@@ -1,6 +1,6 @@
 import { apiRequest } from "../features/Api.jsx";
 
-export const getPekerjaanRequest = async () => {
+export const getPekerjaanRequest = async (page = 1) => {
     const token = localStorage.getItem("token");
     console.log(token);
   const additionalHeaders = {
@@ -8,10 +8,12 @@ export const getPekerjaanRequest = async () => {
     "Authorization": `Bearer ${token}`,
   };
 
+  const url = `/pekerjaan?page=${page}`;
+
   console.log(additionalHeaders);
   const response = await apiRequest(
     "GET",
-    "/pekerjaan",
+      url,
     null,
     additionalHeaders
   );

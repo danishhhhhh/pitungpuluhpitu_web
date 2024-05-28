@@ -1,57 +1,54 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Sidebar from "../../component/Sidebar/sidebar";
 import Navbar from "../../component/Navbar/navbar";
-import { FaSearch } from "react-icons/fa";
-import { IoIosClose } from "react-icons/io";
 import SparepartMainTable from "../../component/Table/SparepartMainTable.jsx";
 import DefaultSecondaryTable from "../../component/Table/DefaultSecondaryTable.jsx";
-
-// Import your API function
 import {
   getKategoriRequest,
   getSparepartRequest,
 } from "../../features/Sparepart.jsx";
 
 const SparepartDashboard = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalData, setTotalData] = useState();
+  const [totalPage, setTotalPage] = useState();
   const [spareparts, setSpareparts] = useState([]);
   const [category, setCategory] = useState([]);
 
-  const [column] = useState(["Nama Sparepart", "Kategori"]);
+  const fetchData = async (page = 1) => {
+    try {
+      const responseSparepart = await getSparepartRequest(page);
+      const responseKategori = await getKategoriRequest();
 
-  // useEffect to fetch data when component mounts
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const responseSparepart = await getSparepartRequest();
-        const responseKategori = await getKategoriRequest();
+      setCurrentPage(responseSparepart.current_page);
+      setTotalData(responseSparepart.total_item);
+      setTotalPage(responseSparepart.total_page);
 
-        setSpareparts(responseSparepart.data);
-        setCategory(responseKategori.data);
-        
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-
-    fetchData();
-  }, []); // Empty dependency array to ensure it runs only once when component mounts
-
-  const toggleModal = () => {
-    setIsModalOpen(!isModalOpen);
+      setSpareparts(responseSparepart.data);
+      setCategory(responseKategori.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
   };
+
+  useEffect(() => {
+    fetchData(currentPage);
+  }, [currentPage]);
 
   return (
     <div className="min-h-screen flex flex-row">
       <Sidebar />
       <div className="flex-grow">
-        <Navbar data="Data Sparepart" />
+        <Navbar data="Sparepart Dashboard" />
         <div className="p-12 flex flex-row">
-          <div className="w-3/5">
+          <div className="w-4/6">
             <SparepartMainTable
               spareparts={spareparts}
               setSpareparts={setSpareparts}
-              columns={column}
+              currentPage={currentPage}
+              totalData={totalData}
+              totalPage={totalPage}
+              setCurrentPage={setCurrentPage}
             />
           </div>
           <div className="w-8" />

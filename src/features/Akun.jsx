@@ -1,6 +1,6 @@
 import { apiRequest } from "../features/Api.jsx";
 
-export const getAkunRequest = async () => {
+export const getAkunRequest = async (page = 1) => {
   const token = localStorage.getItem("token");
   console.log(token);
   const additionalHeaders = {
@@ -8,10 +8,12 @@ export const getAkunRequest = async () => {
     "Authorization": `Bearer ${token}`,
   };
 
+  const url = `/user?page=${page}`;
+
   console.log(additionalHeaders);
   const response = await apiRequest(
     "GET",
-    "/user",
+      url,
     null,
     additionalHeaders
   );

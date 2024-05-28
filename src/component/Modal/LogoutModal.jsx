@@ -5,7 +5,7 @@ const LogoutModal = ({ isOpen, handleCloseModal, handleLogout }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center ">
+    <div className="fixed inset-0 flex items-center justify-center">
       <div
         className="absolute inset-0 z-0 bg-black bg-opacity-50"
         onClick={handleCloseModal}

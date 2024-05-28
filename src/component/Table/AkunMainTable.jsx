@@ -3,8 +3,9 @@ import "../../App.css";
 import DeleteModal from "../Modal/DeleteModal.jsx";
 import AkunModal from "../Modal/AkunModal.jsx";
 import { FaSearch } from "react-icons/fa";
+import Pagination from "./Pagination.jsx";
 
-const AkunMainTable = ({ name, data, setData }) => {
+const AkunMainTable = ({ name, data, setData, currentPage, totalPage, totalData, setCurrentPage  }) => {
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -137,6 +138,7 @@ const AkunMainTable = ({ name, data, setData }) => {
           ))}
         </tbody>
       </table>
+      <Pagination currentPage={currentPage} totalPage={totalPage} totalData={totalData} setCurrentPage={setCurrentPage}/>
 
       {/* Add Modal */}
       <AkunModal

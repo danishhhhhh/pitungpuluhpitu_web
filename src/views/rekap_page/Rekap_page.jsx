@@ -32,7 +32,6 @@ const RekapPage = () => {
               data={rekap}
               setData={setRekap} />
           </div>
-          <div className="w-8" />
         </div>
       </div>
     </div>

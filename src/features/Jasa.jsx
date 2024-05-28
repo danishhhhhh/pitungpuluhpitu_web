@@ -1,6 +1,6 @@
 import { apiRequest } from "../features/Api.jsx";
 
-export const getJasaRequest = async () => {
+export const getJasaRequest = async (page = 1) => {
     const token = localStorage.getItem("token");
     console.log(token);
   const additionalHeaders = {
@@ -8,10 +8,12 @@ export const getJasaRequest = async () => {
     "Authorization": `Bearer ${token}`,
   };
 
+  const url = `/jasa?page=${page}`;
+
   console.log(additionalHeaders);
   const response = await apiRequest(
     "GET",
-    "/jasa",
+      url,
     null,
     additionalHeaders
   );

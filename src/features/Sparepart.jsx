@@ -1,6 +1,6 @@
-import { apiRequest } from "../features/Api.jsx";
+import {apiRequest} from "./Api.jsx";
 
-export const getSparepartRequest = async () => {
+export const getSparepartRequest = async (page = 1) => {
   const token = localStorage.getItem("token");
   console.log(token);
   const additionalHeaders = {
@@ -9,16 +9,15 @@ export const getSparepartRequest = async () => {
   };
 
   console.log(additionalHeaders);
-  const response = await apiRequest(
-    "GET",
-    "/sparepart",
-    null,
-    additionalHeaders
+
+  const url = `/sparepart?page=${page}`;
+
+  return await apiRequest(
+      "GET",
+      url,
+      null,
+      additionalHeaders
   );
-
-  console.log(response.data);
-
-  return response;
 };
 
 export const getKategoriRequest = async () => {
@@ -29,10 +28,5 @@ export const getKategoriRequest = async () => {
     "Authorization": `Bearer ${token}`,
   };
 
-  console.log(additionalHeaders);
-  const response = await apiRequest("GET", "/kategori", null, additionalHeaders);
-
-  console.log(response.data);
-
-  return response;
+  return await apiRequest("GET", "/kategori", null, additionalHeaders);
 };
