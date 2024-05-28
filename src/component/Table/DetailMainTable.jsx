@@ -6,7 +6,15 @@ import SparepartModal from "../Modal/SparepartModal.jsx";
 import { FaSearch } from "react-icons/fa";
 import Pagination from "./Pagination.jsx";
 
-const TableBesarDetail = ({ name, data, setData, currentPage, totalPage, totalData, setCurrentPage }) => {
+const TableBesarDetail = ({
+  name,
+  data,
+  setData,
+  currentPage,
+  totalPage,
+  totalData,
+  setCurrentPage,
+}) => {
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -77,12 +85,18 @@ const TableBesarDetail = ({ name, data, setData, currentPage, totalPage, totalDa
           <FaSearch className="my-auto mx-4 text-darkgrey" />
         </div>
         <div className="flex flex-row gap-4">
-          <button
+          <a
+            href="/cabang"
             className="bg-yellow px-4 py-2 rounded-lg text-black font-normal font-poppins text-sm"
-            onClick={toggleAddModal}
           >
-            Tambah Sparepart
-          </button>
+            Cabang
+          </a>
+          <a
+            href="/rekap"
+            className="bg-yellow px-4 py-2 rounded-lg text-black font-normal font-poppins text-sm"
+          >
+            Rekap Pengerjaan
+          </a>
         </div>
       </div>
       <div className="h-6" />
@@ -123,18 +137,17 @@ const TableBesarDetail = ({ name, data, setData, currentPage, totalPage, totalDa
                 >
                   Edit
                 </button>
-                <button
-                  className="bg-red font-poppins font-medium text-sm text-white px-4 py-1.5 rounded-md mr-2"
-                  onClick={() => toggleDeleteModal(index)}
-                >
-                  Hapus
-                </button>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
-      <Pagination currentPage={currentPage} totalPage={totalPage} totalData={totalData} setCurrentPage={setCurrentPage}/>
+      <Pagination
+        currentPage={currentPage}
+        totalPage={totalPage}
+        totalData={totalData}
+        setCurrentPage={setCurrentPage}
+      />
 
       {/* Add Modal */}
       <SparepartModal

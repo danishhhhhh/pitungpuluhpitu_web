@@ -3,7 +3,7 @@ import { FaCheck } from "react-icons/fa";
 import { IoIosClose } from "react-icons/io";
 import { postConfirmRequest } from "../../features/Stock.jsx";
 
-const RekapCard = ({ data }) => {
+const RekapCard = ({ data,  }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleDetailClick = () => {
