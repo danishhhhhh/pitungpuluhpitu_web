@@ -78,10 +78,12 @@ const RekapMainTable = ({ name, data }) => {
                   {sparepart.pekerjaan}
                 </td>
                 <td className="px-3 py-2 font-poppins border border-grey">
-                  {sparepart.jasa}
+                {sparepart.jasa && sparepart.jasa.length > 0 ? sparepart.jasa.join(", ") : "-"}
+
                 </td>
                 <td className="px-3 py-2 font-poppins border border-grey">
-                  {sparepart.sparepart}
+                {sparepart.sparepart && sparepart.sparepart.length > 0 ? sparepart.sparepart.join(", ") : "-"}
+
                 </td>
                 <td className="px-3 py-2 font-poppins border border-grey">
                   {sparepart.tanggal}

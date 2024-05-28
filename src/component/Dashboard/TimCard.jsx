@@ -4,7 +4,7 @@ import {TimContext} from "../../context/Context.jsx";
 import {useContext} from "react";
 import {useNavigate} from "react-router-dom";
 
-const TimCard = ({name, id}) => {
+const TimCard = ({name, id , sa}) => {
     const navigate = useNavigate();
     const { setTimId } = useContext(TimContext);
 
@@ -25,7 +25,7 @@ const TimCard = ({name, id}) => {
                         {name}
                     </div>
                     <div className="text-center text-gray-800 text-sm font-medium font-poppins mb-2">
-                        Danish Ardiyanta
+                        {sa}
                     </div>
                 </div>
                 <div className="w-20 py-1 justify-between items-center inline-flex">
