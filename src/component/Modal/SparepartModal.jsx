@@ -1,14 +1,28 @@
 import {IoIosClose} from 'react-icons/io';
+import {useEffect} from "react";
 
 const SparepartModal = ({
-                                isEdit,
-                                isOpen,
-                                handleCloseModal,
-                                sparepartValue,
-                                onChange,
-                                kategoriValue,
-                                handleSubmit,
-                            }) => {
+                            isEdit,
+                            isOpen,
+                            handleCloseModal,
+                            sparepartValue,
+                            kategoriValue,
+                            handleSubmit,
+                            kategori,
+                            setSparepartValue,
+                            setKategoriValue,
+                            setIdKategori
+                        }) => {
+
+    useEffect(() => {
+        if (kategoriValue) {
+            const selectedOption = document.querySelector(`option[value="${kategoriValue}"]`);
+            if (selectedOption) {
+                setIdKategori(selectedOption.getAttribute('kategori-id'));
+            }
+        }
+    }, [kategoriValue]);
+
     if (!isOpen) return null;
 
     return (
@@ -39,7 +53,7 @@ const SparepartModal = ({
                             type="text"
                             name="value"
                             value={sparepartValue}
-                            onChange={onChange}
+                            onChange={(e) => setSparepartValue(e.target.value)}
                             className="w-full focus:outline-none text-black text-base font-poppins placeholder:text-sm"
                             placeholder={isEdit ? 'Edit Nama Sparepart' : 'Masukan Nama Sparepart'}
                             style={{
@@ -57,21 +71,21 @@ const SparepartModal = ({
                         className="self-stretch px-[15px] py-3 bg-white rounded-2xl border border-zinc-200 justify-start items-center gap-2.5 inline-flex">
                         <select
                             name="editKategori"
-                            value={kategoriValue}
-                            onChange={onChange}
+                            value={kategoriValue || 'Lainnya'}
+                            onChange={
+                                (e) => {
+                                    setKategoriValue(e.target.value);
+                                    setIdKategori(e.target.selectedOptions[0].getAttribute('kategori-id'))
+                                }
+                            }
                             className="w-full text-zinc-900 text-base font-poppins focus:outline-none bg-transparent border-none"
                         >
+                            {kategori.map(option => (
+                                <option value={option.value} kategori-id={option.id}>
+                                    {option.name}
+                                </option>
+                            ))}
                             <option value="Lainnya">Lainnya</option>
-                            <option value="Ban">Ban</option>
-                            <option value="Oli">Oli</option>
-                            <option value="Rem">Rem</option>
-                            <option value="Busi">Busi</option>
-                            <option value="Lampu">Lampu</option>
-                            <option value="Aki">Aki</option>
-                            <option value="Rantai">Rantai</option>
-                            <option value="Filter">Filter</option>
-                            <option value="Aksesoris">Aksesoris</option>
-                            <option value="Jok">Jok</option>
                         </select>
                     </div>
                 </div>

@@ -2,15 +2,13 @@ import React, { useState, useEffect } from "react";
 import Sidebar from "../../component/Sidebar/sidebar.jsx";
 import Navbar from "../../component/Navbar/navbar.jsx";
 import DefaultSecondaryTable from "../../component/Table/DefaultSecondaryTable.jsx";
-import DetailMainTable from "../../component/Table/DetailMainTable.jsx";
-import DefaultMainTable from "../../component/Table/DefaultMainTable.jsx";
 import AkunMainTable from "../../component/Table/AkunMainTable.jsx";
 import {
   getAkunRequest,
   getTimRequest,
   postAddTimRequest,
   postEditTimRequest,
-  deleteTimRequest,
+  deleteTimRequest, postAkunRequest,postEditAkunRequest, deleteAkunRequest
 } from "../../features/Akun.jsx";
 
 const AkunPage = () => {
@@ -61,12 +59,36 @@ const AkunPage = () => {
       console.error("Error fetching data:", error);
     }
   };
+  const postAddAkun = async (role, username, password, name, tim) => {
+    try {
+      await postAkunRequest(role, username, password, name, tim);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+  const postEditAkun = async (role, username, password, name, tim, id) => {
+    try {
+      console.log("halo gaisssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss");
+      await postEditAkunRequest(role, username, password, name, tim, id);
+      console.log("halo gaisssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss");
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+  const postDeleteAkun = async (id) => {
+    try {
+      await deleteAkunRequest(id);
+      console.log("sadasdsadasdasdsa");
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
 
   useEffect(() => {
     fetchData(currentPage);
   }, [currentPage]);
   return (
-    <div className="min-h-screen flex flex-row">
+    <div className="h-full flex flex-row">
       <Sidebar />
       <div className="flex-grow">
         <Navbar data="Akun Dashboard" />
@@ -80,6 +102,10 @@ const AkunPage = () => {
               totalData={totalData}
               totalPage={totalPage}
               setCurrentPage={setCurrentPage}
+              tim={tim}
+              handleSubmitPost={postAddAkun}
+              handleEditPost={postEditAkun}
+              handleDeletePost={postDeleteAkun}
             />
           </div>
           <div className="w-8" />

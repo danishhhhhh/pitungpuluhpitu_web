@@ -61,7 +61,7 @@ const JasaPage = () => {
   }, [currentPage]);
 
   return (
-    <div className="min-h-screen flex flex-row">
+    <div className="h-full flex flex-row">
       <Sidebar />
       <div className="flex-grow">
         <Navbar data="Jasa Dashboard" />

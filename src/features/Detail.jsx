@@ -87,4 +87,18 @@ export const deleteMekanikRequest = async (id) => {
     return response;
 };
 
+export const postEditStockRequest = async (quantity, sparepart, timId) => {
+    const token = localStorage.getItem("token");
+    console.log(token);
+    const additionalHeaders = {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`,
+    };
 
+    console.log(additionalHeaders);
+    const response = await apiRequest("POST", `/tim/${timId}/stock`, { quantity, sparepart }, additionalHeaders);
+
+    console.log(response.data);
+
+    return response;
+};

@@ -1,19 +1,18 @@
-import React, {useState} from "react";
+import {useState} from "react";
 import "../../App.css";
 import DeleteModal from "../Modal/DeleteModal.jsx";
 import SparepartModal from "../Modal/SparepartModal.jsx";
 import {FaSearch} from "react-icons/fa";
 import Pagination from "./Pagination.jsx";
 
-const SparepartMainTable = ({spareparts, setSpareparts, currentPage, totalPage, totalData, setCurrentPage }) => {
+const SparepartMainTable = ({spareparts, setSpareparts, currentPage, totalPage, totalData, setCurrentPage, kategori, handleSubmitPost, handleEditPost, handleDeletePost }) => {
     const [isAddModalOpen, setIsAddModalOpen] = useState(false);
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-
-    const [editIndex, setEditIndex] = useState(null);
+    const [idSparepart, setIdSparepart] = useState(null);
+    const [idKategori, setIdKategori] = useState(null);
     const [sparepartValue, setSparepartValue] = useState("");
-    const [kategoriValue, setKategoriValue] = useState("");
-    const [deleteIndex, setDeleteIndex] = useState(null);
+    const [kategoriValue, setKategoriValue] = useState("Lainnya");
 
     const toggleAddModal = () => {
         setIsAddModalOpen(!isAddModalOpen);
@@ -23,39 +22,35 @@ const SparepartMainTable = ({spareparts, setSpareparts, currentPage, totalPage, 
         setIsEditModalOpen(!isEditModalOpen);
     };
 
-    const toggleDeleteModal = (index) => {
-        setIsDeleteModalOpen(true);
-        setDeleteIndex(index);
+    const toggleDeleteModal = () => {
+        setIsDeleteModalOpen(!isDeleteModalOpen);
+    };
+
+    const handleTambahSparepart = (name, kategoriId) => {
+        handleSubmitPost(name, kategoriId);
+        setIsAddModalOpen(false);
+    };
+
+    const handleEditSparepart = (name, kategoriId, id) => {
+        handleEditPost(name, kategoriId, id);
+        setIsEditModalOpen(false);
+    };
+
+    const handleDeleteSparepart = (id) => {
+        handleDeletePost(id);
+        setIsDeleteModalOpen(false);
     };
 
     const handleEditClick = (index) => {
-        setEditIndex(index);
-        setSparepartValue(spareparts[index].nama);
+        setIdSparepart(spareparts[index].id)
+        setSparepartValue(spareparts[index].name);
         setKategoriValue(spareparts[index].kategori);
         toggleEditModal();
     };
 
-    const handleUpdateSparepart = () => {
-        const updatedSparepart = {nama: sparepartValue, kategori: kategoriValue};
-        const updatedSpareparts = [...spareparts];
-        updatedSpareparts[editIndex] = updatedSparepart;
-        setSpareparts(updatedSpareparts);
-        toggleEditModal();
-    };
-
-    const handleChangeEdit = (e) => {
-        const {name, value} = e.target;
-        if (name === "editNama") {
-            setSparepartValue(value);
-        } else if (name === "editKategori") {
-            setKategoriValue(value);
-        }
-    };
-
     const handleDeleteClick = (index) => {
-        const updatedSpareparts = [...spareparts];
-        updatedSpareparts.splice(index, 1);
-        setSpareparts(updatedSpareparts);
+        setIdSparepart(spareparts[index].id);
+        toggleDeleteModal();
     };
 
     const handleCloseModal = () => {
@@ -64,14 +59,6 @@ const SparepartMainTable = ({spareparts, setSpareparts, currentPage, totalPage, 
         setIsDeleteModalOpen(false);
         setKategoriValue("")
         setSparepartValue("")
-    };
-
-    const handleDelete = () => {
-        const updatedSpareparts = [...spareparts];
-        updatedSpareparts.splice(deleteIndex, 1);
-        setSpareparts(updatedSpareparts);
-        setIsDeleteModalOpen(false);
-        setDeleteIndex(null);
     };
 
     return (
@@ -126,7 +113,7 @@ const SparepartMainTable = ({spareparts, setSpareparts, currentPage, totalPage, 
                             </button>
                             <button
                                 className="bg-red font-poppins font-medium text-sm text-white px-4 py-1.5 rounded-md mr-2"
-                                onClick={() => toggleDeleteModal(index)}
+                                onClick={() => handleDeleteClick(index)}
                             >
                                 Hapus
                             </button>
@@ -144,9 +131,11 @@ const SparepartMainTable = ({spareparts, setSpareparts, currentPage, totalPage, 
                 isOpen={isAddModalOpen}
                 handleCloseModal={handleCloseModal}
                 sparepartValue={sparepartValue}
+                setSparepartValue={setSparepartValue}
+                setKategoriValue={setKategoriValue}
                 kategoriValue={kategoriValue}
-                onChange={handleChangeEdit}
-                handleSubmit={handleUpdateSparepart}
+                handleSubmit={() => handleTambahSparepart(sparepartValue, idKategori)}
+                kategori={kategori}
             />
 
             {/* Edit Modal */}
@@ -155,9 +144,13 @@ const SparepartMainTable = ({spareparts, setSpareparts, currentPage, totalPage, 
                 isOpen={isEditModalOpen}
                 handleCloseModal={handleCloseModal}
                 sparepartValue={sparepartValue}
+                setSparepartValue={setSparepartValue}
+                setKategoriValue={setKategoriValue}
                 kategoriValue={kategoriValue}
-                onChange={handleChangeEdit}
-                handleSubmit={handleUpdateSparepart}
+                handleSubmit={() => handleEditSparepart(sparepartValue, idKategori, idSparepart)}
+                kategori={kategori}
+                idKategori={idKategori}
+                setIdKategori={setIdKategori}
             />
 
             {/* Delete Modal */}
@@ -165,7 +158,7 @@ const SparepartMainTable = ({spareparts, setSpareparts, currentPage, totalPage, 
                 name={name.toLowerCase()}
                 isOpen={isDeleteModalOpen}
                 handleCloseModal={handleCloseModal}
-                handleDelete={handleDelete}
+                handleDelete={() => handleDeleteSparepart(idSparepart)}
             />
         </div>
     );

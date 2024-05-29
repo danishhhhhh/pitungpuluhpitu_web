@@ -20,6 +20,61 @@ export const getSparepartRequest = async (page = 1) => {
   );
 };
 
+export const postSparepartRequest = async (name, kategori) => {
+  const token = localStorage.getItem("token");
+  console.log(token);
+  const additionalHeaders = {
+    "Content-Type": "application/json",
+    "Authorization": `Bearer ${token}`,
+  };
+
+  console.log(additionalHeaders);
+
+  const url = `/sparepart`;
+
+  return await apiRequest(
+      "POST",
+      url,
+      { name, kategori },
+      additionalHeaders
+  );
+};
+
+export const editSparepartRequest = async (name, kategori,id) => {
+  const token = localStorage.getItem("token");
+  console.log(token);
+  const additionalHeaders = {
+    "Content-Type": "application/json",
+    "Authorization": `Bearer ${token}`,
+  };
+
+  console.log(additionalHeaders);
+
+  const url = `/sparepart/${id}`;
+
+  return await apiRequest(
+      "POST",
+      url,
+      { name, kategori },
+      additionalHeaders
+  );
+};
+
+export const deleteSparepartRequest = async (id) => {
+  const token = localStorage.getItem("token");
+  console.log(token);
+  const additionalHeaders = {
+    "Content-Type": "application/json",
+    "Authorization": `Bearer ${token}`,
+  };
+
+  const response = await apiRequest("DELETE", `/sparepart/${id}`, null, additionalHeaders);
+
+  console.log(response.data);
+
+  return response;
+};
+
 export const getKategoriRequest = async () => {
   const token = localStorage.getItem("token");
   console.log(token);

@@ -49,13 +49,13 @@ const CabangPage = () => {
       console.error("Error fetching data:", error);
     }
   };
-  
+
 
   useEffect(() => {
     fetchData();
   }, []);
   return (
-    <div className="min-h-screen flex flex-row">
+    <div className="h-full flex flex-row">
       <div className="flex-grow">
         <Navbar data="Cabang Tim 1" showBackButton={true} />
         <div className="p-12 flex flex-row justify-center">

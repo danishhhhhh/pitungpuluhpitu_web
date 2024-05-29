@@ -5,21 +5,37 @@ import AkunModal from "../Modal/AkunModal.jsx";
 import { FaSearch } from "react-icons/fa";
 import Pagination from "./Pagination.jsx";
 
-const AkunMainTable = ({ name, data, setData, currentPage, totalPage, totalData, setCurrentPage  }) => {
-  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+const AkunMainTable = ({ name, data, setData, currentPage, totalPage, totalData, setCurrentPage, tim, handleSubmitPost, handleEditPost, handleDeletePost }) => {
 
-  const [editIndex, setEditIndex] = useState(null);
   const [akunValue, setAkunValue] = useState({
-    nama: "",
+    name: "",
     username: "",
     password: "",
-    role: "",
-  });
-  const [deleteIndex, setDeleteIndex] = useState(null);
+    role: "Admin",
+    tim: tim.length > 0 ? tim[0].value : "",
+  });const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [idTim, setIdTim] = useState();
+  const [idAkun, setIdAkun] = useState();
+
+  const roleMapping = {
+    "Owner": 1,
+    "Admin": 2,
+    "Service Advisor": 3,
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setAkunValue((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+    console.log(akunValue)
+  };
 
   const toggleAddModal = () => {
+    console.log(akunValue)
     setIsAddModalOpen(!isAddModalOpen);
   };
 
@@ -27,42 +43,48 @@ const AkunMainTable = ({ name, data, setData, currentPage, totalPage, totalData,
     setIsEditModalOpen(!isEditModalOpen);
   };
 
-  const toggleDeleteModal = (index) => {
-    setIsDeleteModalOpen(true);
-    setDeleteIndex(index);
+  const toggleDeleteModal = () => {
+    setIsDeleteModalOpen(!isDeleteModalOpen);
+  };
+
+  const handleAddSubmit = (role, username, password, name, tim) => {
+    console.log(`abc abc ${tim}`)
+    const roleId = roleMapping[role] || null;
+    handleSubmitPost(roleId, username, password, name, tim)
+    toggleAddModal()
+  };
+
+  const handleEditSubmit = (role, username, password, name, tim, id) => {
+    console.log(`ini name ${name}`);
+    const roleId = roleMapping[role] || null;
+    handleEditPost(roleId, username, password, name, tim, id)
+    toggleEditModal()
+  };
+
+  const handleDeleteSubmit = (id) => {
+    console.log(`ini iasdadadsads ${id}`);
+    handleDeletePost(id)
+    toggleDeleteModal()
   };
 
   const handleEditClick = (index) => {
-    setEditIndex(index);
     setAkunValue(data[index]);
+    setIdAkun(data[index].id);
+    console.log(`ini name ${name}`)
     toggleEditModal();
   };
 
-  const handleUpdateAkun = () => {
-    const updatedAkun = { ...akunValue };
-    const updatedData = [...data];
-    updatedData[editIndex] = updatedAkun;
-    setData(updatedData);
-    toggleEditModal();
-  };
-
-  const handleChangeEdit = (e) => {
-    const { name, value } = e.target;
-    setAkunValue((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleDeleteClick = () => {
-    const updatedData = [...data];
-    updatedData.splice(deleteIndex, 1);
-    setData(updatedData);
-    setIsDeleteModalOpen(false);
+  const handleDeleteClick = (index) => {
+    setAkunValue(data[index]);
+    setIdAkun(data[index].id);
+    toggleDeleteModal()
   };
 
   const handleCloseModal = () => {
     setIsAddModalOpen(false);
     setIsEditModalOpen(false);
     setIsDeleteModalOpen(false);
-    setAkunValue({ nama: "", username: "", password: "", role: "" });
+    setAkunValue({ name: "", username: "", password: "", role: "", tim: "" });
   };
 
   return (
@@ -129,7 +151,7 @@ const AkunMainTable = ({ name, data, setData, currentPage, totalPage, totalData,
                 </button>
                 <button
                   className="bg-red font-poppins font-medium text-sm text-white px-4 py-1.5 rounded-md mr-2"
-                  onClick={() => toggleDeleteModal(index)}
+                  onClick={() => handleDeleteClick(index)}
                 >
                   Hapus
                 </button>
@@ -145,19 +167,23 @@ const AkunMainTable = ({ name, data, setData, currentPage, totalPage, totalData,
         isEdit={false}
         isOpen={isAddModalOpen}
         handleCloseModal={handleCloseModal}
+        tim={tim}
         akunValue={akunValue}
-        onChange={handleChangeEdit}
-        handleSubmit={handleUpdateAkun}
+        handleInputChange={handleInputChange}
+        handleSubmit={() => handleAddSubmit(akunValue.role, akunValue.username, akunValue.password, akunValue.name, idTim)}
+        setIdTim={setIdTim}
       />
 
       {/* Edit Modal */}
       <AkunModal
-        isEdit={true}
-        isOpen={isEditModalOpen}
-        handleCloseModal={handleCloseModal}
-        akunValue={akunValue}
-        onChange={handleChangeEdit}
-        handleSubmit={handleUpdateAkun}
+          isEdit={true}
+          isOpen={isEditModalOpen}
+          handleCloseModal={handleCloseModal}
+          tim={tim}
+          akunValue={akunValue}
+          handleInputChange={handleInputChange}
+          setIdTim={setIdTim}
+          handleSubmit={() => handleEditSubmit(akunValue.role, akunValue.username, akunValue.password, akunValue.name, idTim, idAkun)}
       />
 
       {/* Delete Modal */}
@@ -165,7 +191,7 @@ const AkunMainTable = ({ name, data, setData, currentPage, totalPage, totalData,
         name={name.toLowerCase()}
         isOpen={isDeleteModalOpen}
         handleCloseModal={handleCloseModal}
-        handleDelete={handleDeleteClick}
+        handleDelete={() => handleDeleteSubmit(idAkun)}
       />
     </div>
   );
