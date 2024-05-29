@@ -11,7 +11,8 @@ import {
   deleteMotorRequest,
   deleteTahunRequest,
   postAddTahunRequest,
-  postEditTahunRequest
+  postEditTahunRequest,
+  getSearchMotorRequest,
 } from "../../features/Motor.jsx";
 
 const MotordashboardPage = () => {
@@ -20,7 +21,7 @@ const MotordashboardPage = () => {
   const [totalPage, setTotalPage] = useState();
   const [motor, setMotor] = useState([]);
   const [year, setYear] = useState([]);
- 
+
   const [motorValue, setMotorValue] = useState();
   const [yearValue, setYearValue] = useState();
 
@@ -39,10 +40,21 @@ const MotordashboardPage = () => {
       console.error("Error fetching data:", error);
     }
   };
+
+  const getSearchMotor = async (query) => {
+    try {
+      const responseMotor = await getSearchMotorRequest(query);
+      setMotor(responseMotor.data);
+     
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
   const postAddMotor = async () => {
     try {
       await postAddMotorRequest(motorValue);
-      console.log("sadasdsadasdasdsa");
+      fetchData(currentPage)
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -50,7 +62,7 @@ const MotordashboardPage = () => {
   const postEditMotor = async (id) => {
     try {
       await postEditMotorRequest(motorValue, id);
-      console.log("sadasdsadasdasdsa");
+      fetchData(currentPage)
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -58,7 +70,7 @@ const MotordashboardPage = () => {
   const deleteMotor = async (id) => {
     try {
       await deleteMotorRequest(id);
-      console.log("sadasdsadasdasdsa");
+      fetchData(currentPage)
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -67,7 +79,7 @@ const MotordashboardPage = () => {
   const postAddTahun = async () => {
     try {
       await postAddTahunRequest(yearValue);
-      console.log("sadasdsadasdasdsa");
+      fetchData(currentPage)
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -75,7 +87,7 @@ const MotordashboardPage = () => {
   const postEditTahun = async (id) => {
     try {
       await postEditTahunRequest(yearValue, id);
-      console.log("sadasdsadasdasdsa");
+      fetchData(currentPage)
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -83,7 +95,7 @@ const MotordashboardPage = () => {
   const deleteTahun = async (id) => {
     try {
       await deleteTahunRequest(id);
-      console.log("sadasdsadasdasdsa");
+      fetchData(currentPage)
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -112,6 +124,7 @@ const MotordashboardPage = () => {
               handleSubmitPost={postAddMotor}
               handleEditPost={postEditMotor}
               handleDeletePost={deleteMotor}
+              handleSearch={getSearchMotor}
             />
           </div>
           <div className="w-8" />

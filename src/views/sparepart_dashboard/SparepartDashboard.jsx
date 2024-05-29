@@ -4,134 +4,148 @@ import Navbar from "../../component/Navbar/navbar";
 import SparepartMainTable from "../../component/Table/SparepartMainTable.jsx";
 import DefaultSecondaryTable from "../../component/Table/DefaultSecondaryTable.jsx";
 import {
-    getKategoriRequest,
-    getSparepartRequest,
-    postAddKategoriRequest,
-    postEditKategoriRequest,
-    deleteKategoriRequest,
-    postSparepartRequest,
-    editSparepartRequest,
-    deleteSparepartRequest
+  getKategoriRequest,
+  getSparepartRequest,
+  postAddKategoriRequest,
+  postEditKategoriRequest,
+  deleteKategoriRequest,
+  postSparepartRequest,
+  editSparepartRequest,
+  deleteSparepartRequest,
+  getSearchSparepartRequest, // Import fungsi pencarian
 } from "../../features/Sparepart.jsx";
 
 const SparepartDashboard = () => {
-    const [currentPage, setCurrentPage] = useState(1);
-    const [totalData, setTotalData] = useState();
-    const [totalPage, setTotalPage] = useState();
-    const [spareparts, setSpareparts] = useState([]);
-    const [category, setCategory] = useState([]);
-    const [categoryValue, setCategoryValue] = useState();
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalData, setTotalData] = useState();
+  const [totalPage, setTotalPage] = useState();
+  const [spareparts, setSpareparts] = useState([]);
+  const [category, setCategory] = useState([]);
+  const [categoryValue, setCategoryValue] = useState();
+  const [searchQuery, setSearchQuery] = useState(""); // State untuk menyimpan input pencarian
 
-    const fetchData = async (page = 1) => {
-        try {
-            const responseSparepart = await getSparepartRequest(page);
-            const responseKategori = await getKategoriRequest();
+  const fetchData = async (page = 1) => {
+    try {
+      const responseSparepart = await getSparepartRequest(page);
+      const responseKategori = await getKategoriRequest();
 
-            setCurrentPage(responseSparepart.current_page);
-            setTotalData(responseSparepart.total_item);
-            setTotalPage(responseSparepart.total_page);
+      setCurrentPage(responseSparepart.current_page);
+      setTotalData(responseSparepart.total_item);
+      setTotalPage(responseSparepart.total_page);
 
-            setSpareparts(responseSparepart.data);
-            setCategory(responseKategori.data);
-        } catch (error) {
-            console.error("Error fetching data:", error);
-        }
-    };
+      setSpareparts(responseSparepart.data);
+      setCategory(responseKategori.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
 
-    const postAddSparepart = async (name, kategoriId) => {
-        try {
-            await postSparepartRequest(name, kategoriId);
-            console.log("sadasdsadasdasdsa");
-        } catch (error) {
-            console.error("Error fetching data:", error);
-        }
-    };
+  const postAddSparepart = async (name, kategoriId) => {
+    try {
+      await postSparepartRequest(name, kategoriId);
+      fetchData(currentPage)
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
 
-    const postEditSparepart = async (name, kategoriId, id) => {
-        try {
-            await editSparepartRequest(name, kategoriId, id);
-            console.log("sadasdsadasdasdsa");
-        } catch (error) {
-            console.error("Error fetching data:", error);
-        }
-    };
+  const postEditSparepart = async (name, kategoriId, id) => {
+    try {
+      await editSparepartRequest(name, kategoriId, id);
+      fetchData(currentPage)
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
 
-    const deleteSparepart = async (id) => {
-        try {
-            await deleteSparepartRequest(id);
-            console.log("sadasdsadasdasdsa");
-        } catch (error) {
-            console.error("Error fetching data:", error);
-        }
-    };
+  const deleteSparepart = async (id) => {
+    try {
+      await deleteSparepartRequest(id);
+      fetchData(currentPage)
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
 
-    const postAddKategori = async () => {
-        try {
-            await postAddKategoriRequest(categoryValue);
-            console.log("sadasdsadasdasdsa");
-        } catch (error) {
-            console.error("Error fetching data:", error);
-        }
-    };
+  const postAddKategori = async () => {
+    try {
+      await postAddKategoriRequest(categoryValue);
+      fetchData(currentPage)
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
 
-    const postEditKategori = async (id) => {
-        try {
-            await postEditKategoriRequest(categoryValue, id);
-            console.log("sadasdsadasdasdsa");
-        } catch (error) {
-            console.error("Error fetching data:", error);
-        }
-    };
-    const deleteKategori = async (id) => {
-        try {
-            await deleteKategoriRequest(id);
-            console.log("sadasdsadasdasdsa");
-        } catch (error) {
-            console.error("Error fetching data:", error);
-        }
-    };
+  const postEditKategori = async (id) => {
+    try {
+      await postEditKategoriRequest(categoryValue, id);
+      fetchData(currentPage)
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+  const deleteKategori = async (id) => {
+    try {
+      await deleteKategoriRequest(id);
+      fetchData(currentPage)
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
 
-    useEffect(() => {
-        fetchData(currentPage);
-    }, [currentPage]);
+  // Fungsi untuk melakukan pencarian
+  const getSearchSparepart = async (query) => {
+    try {
+      const responseSparepart = await getSearchSparepartRequest(query);
+      setSpareparts(responseSparepart.data);
+      
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
 
-    return (
-        <div className="h-full flex flex-row">
-            <Sidebar/>
-            <div className="flex-grow">
-                <Navbar data="Sparepart Dashboard"/>
-                <div className="p-12 flex flex-row">
-                    <div className="w-4/6">
-                        <SparepartMainTable
-                            spareparts={spareparts}
-                            setSpareparts={setSpareparts}
-                            currentPage={currentPage}
-                            totalData={totalData}
-                            totalPage={totalPage}
-                            setCurrentPage={setCurrentPage}
-                            kategori={category}
-                            handleSubmitPost={postAddSparepart}
-                            handleEditPost={postEditSparepart}
-                            handleDeletePost={deleteSparepart}
-                        />
-                    </div>
-                    <div className="w-8"/>
-                    <div className="w-2/6">
-                        <DefaultSecondaryTable
-                            name={"Kategori"}
-                            data={category}
-                            setData={setCategory}
-                            value={categoryValue}
-                            setValue={setCategoryValue}
-                            handleSubmitPost={postAddKategori}
-                            handleEditPost={postEditKategori}
-                            handleDeletePost={deleteKategori}
-                        />
-                    </div>
-                </div>
-            </div>
+  useEffect(() => {
+    fetchData(currentPage);
+  }, [currentPage]);
+
+  return (
+    <div className="h-full flex flex-row">
+      <Sidebar />
+      <div className="flex-grow">
+        <Navbar data="Sparepart Dashboard" />
+        <div className="p-12 flex flex-row">
+          <div className="w-4/6">
+            <SparepartMainTable
+              spareparts={spareparts}
+              setSpareparts={setSpareparts}
+              currentPage={currentPage}
+              totalData={totalData}
+              totalPage={totalPage}
+              setCurrentPage={setCurrentPage}
+              kategori={category}
+              handleSubmitPost={postAddSparepart}
+              handleEditPost={postEditSparepart}
+              handleDeletePost={deleteSparepart}
+              handleSearch={getSearchSparepart} // Kirim fungsi pencarian ke komponen SparepartMainTable
+            />
+          </div>
+          <div className="w-8" />
+          <div className="w-2/6">
+            <DefaultSecondaryTable
+              name={"Kategori"}
+              data={category}
+              setData={setCategory}
+              value={categoryValue}
+              setValue={setCategoryValue}
+              handleSubmitPost={postAddKategori}
+              handleEditPost={postEditKategori}
+              handleDeletePost={deleteKategori}
+            />
+          </div>
         </div>
-    );
+      </div>
+    </div>
+  );
 };
 
 export default SparepartDashboard;

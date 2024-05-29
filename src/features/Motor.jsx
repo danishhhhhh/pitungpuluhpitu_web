@@ -24,6 +24,26 @@ export const getMotorRequest = async (page = 1) => {
   return response;
 };
 
+export const getSearchMotorRequest = async (query) => {
+  const token = localStorage.getItem("token");
+  console.log(token);
+const additionalHeaders = {
+  "Content-Type": "application/json",
+  "Authorization": `Bearer ${token}`,
+};
+
+console.log(additionalHeaders);
+const response = await apiRequest(
+  "GET",
+  `/motor?search=${query}`,
+  null,
+  additionalHeaders
+);
+
+console.log(response.data);
+
+return response;
+};
 
 
 
@@ -76,9 +96,6 @@ export const deleteMotorRequest = async (id) => {
 };
 
 
-
-
-
 export const getTahunRequest = async () => {
     const token = localStorage.getItem("token");
     console.log(token);
@@ -99,7 +116,6 @@ export const getTahunRequest = async () => {
 
   return response;
 };
-
 
 
 export const postAddTahunRequest = async (name) => {

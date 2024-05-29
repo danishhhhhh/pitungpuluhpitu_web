@@ -7,6 +7,7 @@ import {
   postAddJasaRequest,
   postEditJasaRequest,
   deleteJasaRequest,
+  getSearchJasaRequest
 } from "../../features/Jasa.jsx";
 
 const JasaPage = () => {
@@ -30,11 +31,20 @@ const JasaPage = () => {
       console.error("Error fetching data:", error);
     }
   };
+  const getSearchJasa = async (query) => {
+    try {
+      const responseJasa = await getSearchJasaRequest(query);
+      setJasa(responseJasa.data);
+    
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
 
   const postAddJasa = async () => {
     try {
       await postAddJasaRequest(jasaValue);
-      console.log("sadasdsadasdasdsa");
+      fetchData(currentPage)
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -43,7 +53,7 @@ const JasaPage = () => {
   const postEditJasa = async (id) => {
     try {
       await postEditJasaRequest(jasaValue, id);
-      console.log("sadasdsadasdasdsa");
+      fetchData(currentPage)
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -51,7 +61,7 @@ const JasaPage = () => {
   const deleteJasa = async (id) => {
     try {
       await deleteJasaRequest(id);
-      console.log("sadasdsadasdasdsa");
+      fetchData(currentPage)
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -80,6 +90,7 @@ const JasaPage = () => {
               handleSubmitPost={postAddJasa}
               handleEditPost={postEditJasa}
               handleDeletePost={deleteJasa}
+              handleSearch={getSearchJasa}
             />
           </div>
         </div>

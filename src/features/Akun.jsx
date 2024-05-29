@@ -23,6 +23,28 @@ export const getAkunRequest = async (page = 1) => {
     return response;
 };
 
+
+export const getSearchAkunRequest = async (query) => {
+    const token = localStorage.getItem("token");
+    console.log(token);
+  const additionalHeaders = {
+    "Content-Type": "application/json",
+    "Authorization": `Bearer ${token}`,
+  };
+  
+  console.log(additionalHeaders);
+  const response = await apiRequest(
+    "GET",
+    `/user?search=${query}`,
+    null,
+    additionalHeaders
+  );
+  
+  console.log(response.data);
+  
+  return response;
+  };
+
 export const getTimRequest = async () => {
     const token = localStorage.getItem("token");
     console.log(token);

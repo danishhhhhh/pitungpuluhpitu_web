@@ -1,22 +1,30 @@
-import { useState, useEffect, useContext } from "react";
-import Navbar from "../../component/Navbar/navbar";
+import React, { useState, useEffect, useContext } from "react";
+import Navbar from "../../component/Navbar/navbar.jsx";
 import DefaultMainTable from "../../component/Table/DefaultMainTable.jsx";
 import {
   getCabangRequest,
   postAddCabangRequest,
   postEditCabangRequest,
   deleteCabangRequest,
+  getSearchCabangRequest,
 } from "../../features/Cabang.jsx";
 import { TimContext } from "../../context/Context.jsx";
 
 const CabangPage = () => {
   const { timId } = useContext(TimContext);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalData, setTotalData] = useState();
+  const [totalPage, setTotalPage] = useState();
   const [cabang, setCabang] = useState([]);
   const [cabangValue, setCabangValue] = useState();
 
-  const fetchData = async () => {
+  const fetchData = async (page = 1) => {
     try {
-      const responseCabang = await getCabangRequest();
+      const responseCabang = await getCabangRequest(page);
+
+      setCurrentPage(responseCabang.current_page);
+      setTotalData(responseCabang.total_item);
+      setTotalPage(responseCabang.total_page);
 
       setCabang(responseCabang.data);
     } catch (error) {
@@ -24,54 +32,68 @@ const CabangPage = () => {
     }
   };
 
+  const getSearchCabang = async (query) => {
+    try {
+      const responseCabang = await getSearchCabangRequest(query);
+      setCabang(responseCabang.data);
+    } catch (error) {
+      console.error("Error searching data:", error);
+    }
+  };
+
   const postAddCabang = async () => {
     try {
       await postAddCabangRequest(cabangValue, timId);
-      console.log("sadasdsadasdasdsa");
+      fetchData(currentPage); // Refresh data after adding
     } catch (error) {
-      console.error("Error fetching data:", error);
+      console.error("Error adding data:", error);
     }
   };
 
   const postEditCabang = async (id) => {
     try {
       await postEditCabangRequest(cabangValue, id);
-      console.log("sadasdsadasdasdsa");
+      fetchData(currentPage); // Refresh data after editing
     } catch (error) {
-      console.error("Error fetching data:", error);
+      console.error("Error editing data:", error);
     }
   };
-    const deleteCabang = async (id) => {
+
+  const deleteCabang = async (id) => {
     try {
       await deleteCabangRequest(id);
-      console.log("sadasdsadasdasdsa");
+      fetchData(currentPage); // Refresh data after deleting
     } catch (error) {
-      console.error("Error fetching data:", error);
+      console.error("Error deleting data:", error);
     }
   };
 
-
   useEffect(() => {
-    fetchData();
-  }, []);
+    fetchData(currentPage);
+  }, [currentPage]);
+
   return (
     <div className="h-full flex flex-row">
       <div className="flex-grow">
-        <Navbar data="Cabang Tim 1" showBackButton={true} />
+        <Navbar data="Cabang Dashboard" showBackButton={true}/>
         <div className="p-12 flex flex-row justify-center">
           <div className="w-4/6">
             <DefaultMainTable
               name={"Cabang"}
               data={cabang}
               setData={setCabang}
+              currentPage={currentPage}
+              totalData={totalData}
+              totalPage={totalPage}
+              setCurrentPage={setCurrentPage}
               value={cabangValue}
               setValue={setCabangValue}
               handleSubmitPost={postAddCabang}
               handleEditPost={postEditCabang}
               handleDeletePost={deleteCabang}
+              handleSearch={getSearchCabang}
             />
           </div>
-          <div className="w-8" />
         </div>
       </div>
     </div>

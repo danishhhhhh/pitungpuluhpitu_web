@@ -20,6 +20,29 @@ export const getSparepartRequest = async (page = 1) => {
   );
 };
 
+
+export const getSearchSparepartRequest = async (query) => {
+  const token = localStorage.getItem("token");
+  console.log(token);
+const additionalHeaders = {
+  "Content-Type": "application/json",
+  "Authorization": `Bearer ${token}`,
+};
+
+console.log(additionalHeaders);
+const response = await apiRequest(
+  "GET",
+  `/sparepart?search=${query}`,
+  null,
+  additionalHeaders
+);
+
+console.log(response.data);
+
+return response;
+};
+
+
 export const postSparepartRequest = async (name, kategori) => {
   const token = localStorage.getItem("token");
   console.log(token);

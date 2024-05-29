@@ -41,7 +41,7 @@ const DetailtimPage = () => {
     const postAddMekanik = async () => {
         try {
             await postAddMekanikRequest(mekanikValue, timId);
-            console.log("sadasdsadasdasdsa");
+            fetchData(currentPage)
         } catch (error) {
             console.error("Error fetching data:", error);
         }
@@ -50,7 +50,7 @@ const DetailtimPage = () => {
     const postEditMekanik = async (id) => {
         try {
             await postEditMekanikRequest(mekanikValue, id);
-            console.log("sadasdsadasdasdsa");
+            fetchData(currentPage)
         } catch (error) {
             console.error("Error fetching data:", error);
         }
@@ -58,7 +58,7 @@ const DetailtimPage = () => {
     const postDeleteMekanik = async (id) => {
         try {
             await deleteMekanikRequest(id);
-            console.log("sadasdsadasdasdsa");
+            fetchData(currentPage)
         } catch (error) {
             console.error("Error fetching data:", error);
         }
@@ -67,7 +67,7 @@ const DetailtimPage = () => {
     const postStockTim = async (quantity, sparepartId) => {
         try {
             await postEditStockRequest(quantity, sparepartId, timId);
-            console.log("sadasdsadasdasdsa");
+            fetchData(currentPage)
         } catch (error) {
             console.error("Error fetching data:", error);
         }

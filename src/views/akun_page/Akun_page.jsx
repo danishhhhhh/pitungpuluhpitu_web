@@ -8,7 +8,11 @@ import {
   getTimRequest,
   postAddTimRequest,
   postEditTimRequest,
-  deleteTimRequest, postAkunRequest,postEditAkunRequest, deleteAkunRequest
+  deleteTimRequest,
+  postAkunRequest,
+  postEditAkunRequest,
+  deleteAkunRequest,
+  getSearchAkunRequest
 } from "../../features/Akun.jsx";
 
 const AkunPage = () => {
@@ -34,10 +38,20 @@ const AkunPage = () => {
       console.error("Error fetching data:", error);
     }
   };
+
+  const getSearchAkun = async (query) => {
+    try {
+      const responseAkun = await getSearchAkunRequest(query);
+      setAkun(responseAkun.data);
+      
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
   const postAddTim = async () => {
     try {
       await postAddTimRequest(timValue);
-      console.log("sadasdsadasdasdsa");
+      fetchData(currentPage);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -46,7 +60,7 @@ const AkunPage = () => {
   const postEditTim = async (id) => {
     try {
       await postEditTimRequest(timValue, id);
-      console.log("sadasdsadasdasdsa");
+      fetchData(currentPage);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -54,7 +68,7 @@ const AkunPage = () => {
   const deleteTim = async (id) => {
     try {
       await deleteTimRequest(id);
-      console.log("sadasdsadasdasdsa");
+      fetchData(currentPage);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -62,15 +76,21 @@ const AkunPage = () => {
   const postAddAkun = async (role, username, password, name, tim) => {
     try {
       await postAkunRequest(role, username, password, name, tim);
+      fetchData(currentPage);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
   const postEditAkun = async (role, username, password, name, tim, id) => {
     try {
-      console.log("halo gaisssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss");
+      console.log(
+        "halo gaisssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"
+      );
       await postEditAkunRequest(role, username, password, name, tim, id);
-      console.log("halo gaisssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss");
+      fetchData(currentPage);
+      console.log(
+        "halo gaisssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"
+      );
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -78,11 +98,12 @@ const AkunPage = () => {
   const postDeleteAkun = async (id) => {
     try {
       await deleteAkunRequest(id);
-      console.log("sadasdsadasdasdsa");
+      fetchData(currentPage);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
+  
 
   useEffect(() => {
     fetchData(currentPage);
@@ -106,6 +127,7 @@ const AkunPage = () => {
               handleSubmitPost={postAddAkun}
               handleEditPost={postEditAkun}
               handleDeletePost={postDeleteAkun}
+              handleSearch={getSearchAkun}
             />
           </div>
           <div className="w-8" />

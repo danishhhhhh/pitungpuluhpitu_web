@@ -9,6 +9,7 @@ import {
   postAddPekerjaanRequest,
   postEditPekerjaanRequest,
   deletePekerjaanRequest,
+  getSearchPekerjaanRequest
 } from "../../features/Pekerjaan.jsx";
 
 const PekerjaanPage = () => {
@@ -32,11 +33,20 @@ const PekerjaanPage = () => {
       console.error("Error fetching data:", error);
     }
   };
+  const getSearchPekerjaan = async (query) => {
+    try {
+      const responsePekerjaan = await getSearchPekerjaanRequest(query);
+      setPekerjaan(responsePekerjaan.data);
+     
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
 
   const postAddPekerjaan = async () => {
     try {
       await postAddPekerjaanRequest(pekerjaanValue);
-      console.log("sadasdsadasdasdsa");
+      fetchData(currentPage)
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -45,7 +55,7 @@ const PekerjaanPage = () => {
   const postEditPekerjaan = async (id) => {
     try {
       await postEditPekerjaanRequest(pekerjaanValue, id);
-      console.log("sadasdsadasdasdsa");
+      fetchData(currentPage)
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -53,7 +63,7 @@ const PekerjaanPage = () => {
   const deletePekerjaan = async (id) => {
     try {
       await deletePekerjaanRequest(id);
-      console.log("sadasdsadasdasdsa");
+      fetchData(currentPage)
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -82,6 +92,7 @@ const PekerjaanPage = () => {
               handleSubmitPost={postAddPekerjaan}
               handleEditPost={postEditPekerjaan}
               handleDeletePost={deletePekerjaan}
+              handleSearch={getSearchPekerjaan}
             />
           </div>
           <div className="w-8" />

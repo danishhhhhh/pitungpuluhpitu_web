@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import "../../App.css";
 import Pagination from "./Pagination.jsx";
-import { FaSearch } from "react-icons/fa";
-import { IoIosClose } from "react-icons/io";
+import { debounce } from "../../component/debounce/Debounce.jsx";
 import DeleteModal from "../Modal/DeleteModal.jsx";
 import CommonModal from "../Modal/CommonModal.jsx";
+import {FaSearch} from "react-icons/fa";
+
 
 const DefaultMainTable = ({
   name,
@@ -19,11 +20,13 @@ const DefaultMainTable = ({
   handleSubmitPost,
   handleEditPost,
   handleDeletePost,
+  handleSearch,
 }) => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [index, setIndex] = useState();
+  const [searchQuery, setSearchQuery] = useState("");
 
   const toggleAddModal = () => {
     setValue("");
@@ -62,16 +65,28 @@ const DefaultMainTable = ({
     setIsDeleteModalOpen(false);
   };
 
+  const handleSearchInputChange = (e) => {
+    setSearchQuery(e.target.value);
+    debouncedSearch(e.target.value);
+  };
+
+  // Debounced search function
+  const debouncedSearch = debounce((query) => {
+    handleSearch(query);
+  }, 1500);
+
   return (
-    <div className="grid grid-rows-1 ">
+    <div className="grid grid-rows-1">
       <div className="flex justify-between items-center">
         <div className="flex flex-row justify-between bg-lightgrey rounded-lg w-1/3">
           <input
             type="text"
             placeholder={`Cari ${name.toLowerCase()} ...`}
             className="w-64 py-2 px-4 bg-lightgrey rounded-lg text-darkgrey focus:outline-none font-poppins text-sm"
+            onChange={handleSearchInputChange}
+            value={searchQuery}
           />
-          <FaSearch className="my-auto mx-4  text-darkgrey" />
+             <FaSearch className="my-auto mx-4 text-darkgrey cursor-pointer"  />
         </div>
         <button
           className="bg-yellow px-4 py-2 rounded-lg text-black font-normal font-poppins text-sm"

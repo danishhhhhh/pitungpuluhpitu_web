@@ -4,24 +4,42 @@ import DeleteModal from "../Modal/DeleteModal.jsx";
 import AkunModal from "../Modal/AkunModal.jsx";
 import { FaSearch } from "react-icons/fa";
 import Pagination from "./Pagination.jsx";
+import { debounce } from "../../component/debounce/Debounce.jsx"; 
 
-const AkunMainTable = ({ name, data, setData, currentPage, totalPage, totalData, setCurrentPage, tim, handleSubmitPost, handleEditPost, handleDeletePost }) => {
 
+const AkunMainTable = ({
+  name,
+  data,
+  setData,
+  currentPage,
+  totalPage,
+  totalData,
+  setCurrentPage,
+  tim,
+  handleSubmitPost,
+  handleEditPost,
+  handleDeletePost,
+  handleSearch,
+
+}) => {
   const [akunValue, setAkunValue] = useState({
     name: "",
     username: "",
     password: "",
     role: "Admin",
     tim: tim.length > 0 ? tim[0].value : "",
-  });const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  });
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [idTim, setIdTim] = useState();
   const [idAkun, setIdAkun] = useState();
+  const [searchQuery, setSearchQuery] = useState("");
+
 
   const roleMapping = {
-    "Owner": 1,
-    "Admin": 2,
+    Owner: 1,
+    Admin: 2,
     "Service Advisor": 3,
   };
 
@@ -31,11 +49,11 @@ const AkunMainTable = ({ name, data, setData, currentPage, totalPage, totalData,
       ...prevState,
       [name]: value,
     }));
-    console.log(akunValue)
+    console.log(akunValue);
   };
 
   const toggleAddModal = () => {
-    console.log(akunValue)
+    console.log(akunValue);
     setIsAddModalOpen(!isAddModalOpen);
   };
 
@@ -48,36 +66,36 @@ const AkunMainTable = ({ name, data, setData, currentPage, totalPage, totalData,
   };
 
   const handleAddSubmit = (role, username, password, name, tim) => {
-    console.log(`abc abc ${tim}`)
+    console.log(`abc abc ${tim}`);
     const roleId = roleMapping[role] || null;
-    handleSubmitPost(roleId, username, password, name, tim)
-    toggleAddModal()
+    handleSubmitPost(roleId, username, password, name, tim);
+    toggleAddModal();
   };
 
   const handleEditSubmit = (role, username, password, name, tim, id) => {
     console.log(`ini name ${name}`);
     const roleId = roleMapping[role] || null;
-    handleEditPost(roleId, username, password, name, tim, id)
-    toggleEditModal()
+    handleEditPost(roleId, username, password, name, tim, id);
+    toggleEditModal();
   };
 
   const handleDeleteSubmit = (id) => {
     console.log(`ini iasdadadsads ${id}`);
-    handleDeletePost(id)
-    toggleDeleteModal()
+    handleDeletePost(id);
+    toggleDeleteModal();
   };
 
   const handleEditClick = (index) => {
     setAkunValue(data[index]);
     setIdAkun(data[index].id);
-    console.log(`ini name ${name}`)
+    console.log(`ini name ${name}`);
     toggleEditModal();
   };
 
   const handleDeleteClick = (index) => {
     setAkunValue(data[index]);
     setIdAkun(data[index].id);
-    toggleDeleteModal()
+    toggleDeleteModal();
   };
 
   const handleCloseModal = () => {
@@ -87,14 +105,26 @@ const AkunMainTable = ({ name, data, setData, currentPage, totalPage, totalData,
     setAkunValue({ name: "", username: "", password: "", role: "", tim: "" });
   };
 
+  const handleSearchInputChange = (e) => {
+    setSearchQuery(e.target.value);
+    debouncedSearch(e.target.value);
+  };
+
+  // Debounced search function
+  const debouncedSearch = debounce((query) => {
+    handleSearch(query);
+  }, 1500);
+
   return (
     <div className="grid grid-rows-1">
       <div className="flex justify-between items-center">
         <div className="flex flex-row justify-between bg-lightgrey rounded-lg w-1/2">
-          <input
+        <input
             type="text"
-            placeholder="Cari akun ..."
+            placeholder={`Cari ${name.toLowerCase()} ...`}
             className="w-64 py-2 px-4 bg-lightgrey rounded-lg text-darkgrey focus:outline-none font-poppins text-sm"
+            onChange={handleSearchInputChange}
+            value={searchQuery}
           />
           <FaSearch className="my-auto mx-4  text-darkgrey" />
         </div>
@@ -160,7 +190,12 @@ const AkunMainTable = ({ name, data, setData, currentPage, totalPage, totalData,
           ))}
         </tbody>
       </table>
-      <Pagination currentPage={currentPage} totalPage={totalPage} totalData={totalData} setCurrentPage={setCurrentPage}/>
+      <Pagination
+        currentPage={currentPage}
+        totalPage={totalPage}
+        totalData={totalData}
+        setCurrentPage={setCurrentPage}
+      />
 
       {/* Add Modal */}
       <AkunModal
@@ -170,20 +205,37 @@ const AkunMainTable = ({ name, data, setData, currentPage, totalPage, totalData,
         tim={tim}
         akunValue={akunValue}
         handleInputChange={handleInputChange}
-        handleSubmit={() => handleAddSubmit(akunValue.role, akunValue.username, akunValue.password, akunValue.name, idTim)}
+        handleSubmit={() =>
+          handleAddSubmit(
+            akunValue.role,
+            akunValue.username,
+            akunValue.password,
+            akunValue.name,
+            idTim
+          )
+        }
         setIdTim={setIdTim}
       />
 
       {/* Edit Modal */}
       <AkunModal
-          isEdit={true}
-          isOpen={isEditModalOpen}
-          handleCloseModal={handleCloseModal}
-          tim={tim}
-          akunValue={akunValue}
-          handleInputChange={handleInputChange}
-          setIdTim={setIdTim}
-          handleSubmit={() => handleEditSubmit(akunValue.role, akunValue.username, akunValue.password, akunValue.name, idTim, idAkun)}
+        isEdit={true}
+        isOpen={isEditModalOpen}
+        handleCloseModal={handleCloseModal}
+        tim={tim}
+        akunValue={akunValue}
+        handleInputChange={handleInputChange}
+        setIdTim={setIdTim}
+        handleSubmit={() =>
+          handleEditSubmit(
+            akunValue.role,
+            akunValue.username,
+            akunValue.password,
+            akunValue.name,
+            idTim,
+            idAkun
+          )
+        }
       />
 
       {/* Delete Modal */}
