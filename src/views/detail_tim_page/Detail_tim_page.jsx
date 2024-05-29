@@ -10,8 +10,10 @@ import {
     postAddMekanikRequest,
     postEditMekanikRequest,
     deleteMekanikRequest,
-    postEditStockRequest
+    postEditStockRequest,
+    getSearchStockRequest
 } from "../../features/Detail.jsx";
+
 
 const DetailtimPage = () => {
     const {timId} = useContext(TimContext);
@@ -37,6 +39,17 @@ const DetailtimPage = () => {
             console.error("Error fetching data:", error);
         }
     };
+
+    
+  const getSearchStock = async (query) => {
+    try {
+      const responseDetail = await getSearchStockRequest(query,timId);
+      setStockTim(responseDetail.data);
+     
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
 
     const postAddMekanik = async () => {
         try {
@@ -94,6 +107,8 @@ const DetailtimPage = () => {
                             setCurrentPage={setCurrentPage}
                             timId={timId}
                             handleEditStock={postStockTim}
+                            handleSearch={getSearchStock}
+
                         />
                     </div>
                     <div className="w-8"/>
