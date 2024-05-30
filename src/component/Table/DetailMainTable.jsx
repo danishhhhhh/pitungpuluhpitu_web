@@ -7,7 +7,7 @@ import { FaSearch } from "react-icons/fa";
 import Pagination from "./Pagination.jsx";
 import { TimContext } from "../../context/Context.jsx";
 import { useNavigate } from "react-router-dom";
-import { debounce } from "../../component/debounce/Debounce.jsx"; 
+import { debounce } from "../../component/debounce/Debounce.jsx";
 
 const TableBesarDetail = ({
   data,
@@ -18,7 +18,7 @@ const TableBesarDetail = ({
   setCurrentPage,
   timId,
   handleEditStock,
-  handleSearch,
+  handleSearch
 }) => {
   const { setTimId } = useContext(TimContext);
   const navigate = useNavigate();

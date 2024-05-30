@@ -10,20 +10,28 @@ import {
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { MdModeEditOutline } from "react-icons/md";
 import LogoutModal from "../Modal/LogoutModal.jsx";
+import {getExportTimStok} from "../../features/Stock.jsx";
+import {logoutRequest} from "../../features/Auth.jsx";
 
 const Sidebar = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const activeClass = "bg-yellow text-bluegrey";
   const inactiveClass = "bg-bluegrey text-white";
-  const [isModalOpen, setModalOpen] = useState(false);  // State to manage modal visibility
+  const [isModalOpen, setModalOpen] = useState(false);
 
   const handleNavigation = (route) => {
     navigate(route);
   };
 
-  const handleLogout = () => {
-    navigate("/login", { replace: true });
+  const handleLogout = async () => {
+    try {
+      const response = await logoutRequest();
+      navigate("/login", { replace: true });
+      console.log(response)
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
   };
 
   const handleOpenModal = () => {

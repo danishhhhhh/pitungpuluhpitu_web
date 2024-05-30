@@ -9,13 +9,19 @@ export const loginRequest = async (username, password) => {
     localStorage.setItem('token', response.data.token);
     localStorage.setItem('name', response.data.name);
     localStorage.setItem('role', response.data.role);
-    localStorage.setItem('iamge', response.data.image);
+    localStorage.setItem('image', response.data.image);
     return response;
 };
 
-export const logoutRequest = async (token) => {
+export const logoutRequest = async () => {
+    const token = localStorage.getItem("token");
     const additionalHeaders = {
         'Authorization': `Bearer ${token}`,
     };
-    return await apiRequest('POST', '/logout', null, additionalHeaders);
+    const response = await apiRequest('DELETE', '/logout', null, additionalHeaders);
+    localStorage.removeItem('token');
+    localStorage.removeItem('name');
+    localStorage.removeItem('role');
+    localStorage.removeItem('image');
+    return response;
 };

@@ -4,8 +4,8 @@ import Navbar from "../../component/Navbar/navbar";
 import { FaSearch } from "react-icons/fa";
 import TimCard from "../../component/Dashboard/TimCard.jsx";
 import RekapCard from "../../component/Dashboard/RekapCard.jsx";
-import { getTimRequest, getPendingRequest ,getSearchTimRequest } from "../../features/Stock.jsx";
-import { debounce } from "../../component/debounce/Debounce.jsx"; 
+import {getTimRequest, getPendingRequest, getSearchTimRequest, getExportPengerjaan} from "../../features/Stock.jsx";
+import { debounce } from "../../component/debounce/Debounce.jsx";
 
 
 const StockDashboard = () => {
@@ -30,12 +30,21 @@ const StockDashboard = () => {
     try {
       const responseTim = await getSearchTimRequest(query);
       setTim(responseTim.data);
-     
+
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
-  
+
+  const exportPengerjaan = async () => {
+    try {
+      const response = await getExportPengerjaan();
+      console.log(response)
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
   const handleSearchInputChange = (e) => {
     setSearchQuery(e.target.value);
     debouncedSearch(e.target.value);
@@ -67,7 +76,7 @@ const StockDashboard = () => {
           />
               <FaSearch className="my-auto mx-4  text-darkgrey" />
             </div>
-            <button className="bg-yellow  h-10  px-4 py-2 rounded-lg text-black font-normal font-poppins text-sm ">
+            <button className="bg-yellow  h-10  px-4 py-2 rounded-lg text-black font-normal font-poppins text-sm" onClick={exportPengerjaan}>
               Export Lapor Pengerjaan
             </button>
           </div>
