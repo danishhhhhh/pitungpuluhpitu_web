@@ -23,7 +23,7 @@ export const getDetailTimRequest = async (page = 1, timId) => {
     return response;
 };
 
-export const getSearchStockRequest = async (query,id) => {
+export const getSearchStockRequest = async (query,timId) => {
     const token = localStorage.getItem("token");
     console.log(token);
   const additionalHeaders = {
@@ -34,7 +34,7 @@ export const getSearchStockRequest = async (query,id) => {
   console.log(additionalHeaders);
   const response = await apiRequest(
     "GET",
-    `/tim/${id}/stock?search=${query}`,
+    `/tim/${timId}/stock?search=${query}`,
     null,
     additionalHeaders
   );
@@ -44,7 +44,7 @@ export const getSearchStockRequest = async (query,id) => {
   return response;
   };
 
-export const getMekanikRequest = async () => {
+export const getMekanikRequest = async (timId) => {
     const token = localStorage.getItem("token");
     console.log(token);
     const additionalHeaders = {
@@ -53,7 +53,7 @@ export const getMekanikRequest = async () => {
     };
 
     console.log(additionalHeaders);
-    const response = await apiRequest("GET", "/tim/1/mekanik", null, additionalHeaders);
+    const response = await apiRequest("GET", `/tim/${timId}/mekanik`, null, additionalHeaders);
 
     console.log(response.data);
 

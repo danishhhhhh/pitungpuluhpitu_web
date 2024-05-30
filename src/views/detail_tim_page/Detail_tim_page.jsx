@@ -28,7 +28,7 @@ const DetailtimPage = () => {
     const fetchData = async (page = 1) => {
         try {
             const responseDetail = await getDetailTimRequest(page, timId);
-            const responseMekanik = await getMekanikRequest();
+            const responseMekanik = await getMekanikRequest(timId);
 
             setCurrentPage(responseDetail.current_page);
             setTotalData(responseDetail.total_item);

@@ -34,7 +34,7 @@ const CabangPage = () => {
 
   const getSearchCabang = async (query) => {
     try {
-      const responseCabang = await getSearchCabangRequest(query);
+      const responseCabang = await getSearchCabangRequest(query,timId);
       setCabang(responseCabang.data);
     } catch (error) {
       console.error("Error searching data:", error);

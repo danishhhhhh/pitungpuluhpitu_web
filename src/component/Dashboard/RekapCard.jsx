@@ -3,7 +3,7 @@ import { FaCheck } from "react-icons/fa";
 import { IoIosClose } from "react-icons/io";
 import { postConfirmRequest } from "../../features/Stock.jsx";
 
-const RekapCard = ({ data,  }) => {
+const RekapCard = ({ data, fetchFunction }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleDetailClick = () => {
@@ -17,6 +17,7 @@ const RekapCard = ({ data,  }) => {
   const handleConfirm = async () => {
     try {
       await postConfirmRequest(true, data.id);
+      fetchFunction()
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -25,6 +26,7 @@ const RekapCard = ({ data,  }) => {
   const handleReject = async () => {
     try {
       await postConfirmRequest(false, data.id);
+      fetchFunction()
     } catch (error) {
       console.error("Error fetching data:", error);
     }

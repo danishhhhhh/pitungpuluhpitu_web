@@ -20,7 +20,7 @@ export const getCabangRequest = async () => {
 
   return response;
 };
-export const getSearchCabangRequest = async (query) => {
+export const getSearchCabangRequest = async (query,id) => {
   const token = localStorage.getItem("token");
   console.log(token);
 const additionalHeaders = {
@@ -31,7 +31,7 @@ const additionalHeaders = {
 console.log(additionalHeaders);
 const response = await apiRequest(
   "GET",
-  `/tim/1/cabang?search=${query}`,
+  `/tim/${id}/cabang?search=${query}`,
   null,
   additionalHeaders
 );

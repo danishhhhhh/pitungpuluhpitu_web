@@ -1,17 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import "../../App.css";
 import Pagination from "./Pagination.jsx";
 import { FaSearch } from "react-icons/fa";
+import { debounce } from "../../component/debounce/Debounce.jsx";
 
-const RekapMainTable = ({ name, data }) => {
+
+const RekapMainTable = ({ name, data, handleSearch }) => {
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const handleSearchInputChange = (e) => {
+    setSearchQuery(e.target.value);
+    debouncedSearch(e.target.value);
+  };
+
+  const debouncedSearch = debounce((query) => {
+    handleSearch(query);
+  }, 1500);
+
   return (
     <div className="grid grid-rows-1 ">
       <div className="flex justify-between items-center">
         <div className="flex flex-row justify-between bg-lightgrey rounded-lg w-1/3">
-          <input
+        <input
             type="text"
             placeholder={`Cari ${name.toLowerCase()} ...`}
             className="w-64 py-2 px-4 bg-lightgrey rounded-lg text-darkgrey focus:outline-none font-poppins text-sm"
+            onChange={handleSearchInputChange}
+            value={searchQuery}
           />
           <FaSearch className="my-auto mx-4 text-darkgrey" />
         </div>
@@ -78,12 +93,14 @@ const RekapMainTable = ({ name, data }) => {
                   {sparepart.pekerjaan}
                 </td>
                 <td className="px-3 py-2 font-poppins border border-grey">
-                {sparepart.jasa && sparepart.jasa.length > 0 ? sparepart.jasa.join(", ") : "-"}
-
+                  {sparepart.jasa && sparepart.jasa.length > 0
+                    ? sparepart.jasa.join(", ")
+                    : "-"}
                 </td>
                 <td className="px-3 py-2 font-poppins border border-grey">
-                {sparepart.sparepart && sparepart.sparepart.length > 0 ? sparepart.sparepart.join(", ") : "-"}
-
+                  {sparepart.sparepart && sparepart.sparepart.length > 0
+                    ? sparepart.sparepart.join(", ")
+                    : "-"}
                 </td>
                 <td className="px-3 py-2 font-poppins border border-grey">
                   {sparepart.tanggal}

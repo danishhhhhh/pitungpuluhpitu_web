@@ -18,7 +18,7 @@ const TableBesarDetail = ({
   setCurrentPage,
   timId,
   handleEditStock,
-  handleSearch
+  handleSearch,
 }) => {
   const { setTimId } = useContext(TimContext);
   const navigate = useNavigate();
@@ -28,11 +28,16 @@ const TableBesarDetail = ({
   const [name, setName] = useState();
   const [searchQuery, setSearchQuery] = useState("");
 
-
   const handleCabangClick = (event) => {
     event.preventDefault();
     setTimId(timId);
     navigate("/cabang");
+  };
+
+  const handleRekapClick = (event) => {
+    event.preventDefault();
+    setTimId(timId);
+    navigate("/rekap");
   };
 
   const toggleEditModal = (id) => {
@@ -84,7 +89,7 @@ const TableBesarDetail = ({
             Cabang
           </a>
           <a
-            href="/rekap"
+            onClick={handleRekapClick}
             className="bg-yellow px-4 py-2 rounded-lg text-black font-normal font-poppins text-sm"
           >
             Rekap Pengerjaan
