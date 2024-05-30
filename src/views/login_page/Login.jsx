@@ -11,10 +11,6 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
-  const handleNavigation = (route) => {
-    navigate(route);
-  };
-
   const handleLogin = async () => {
     if (!username || !password) {
       setError('Username and password are required.');
@@ -24,7 +20,7 @@ const Login = () => {
 
     try {
       const response = await loginRequest(username, password);
-      handleNavigation("/stock");
+      navigate("/stock");
       console.log(response);
     } catch (error) {
       setError(error.response.data.message);

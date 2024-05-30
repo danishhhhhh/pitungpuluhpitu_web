@@ -52,9 +52,9 @@ const Sidebar = () => {
       <div className="top-10 my-14 flex items-center justify-between">
         <div className="flex flex-row">
           <img
-            src="src/assets/img/profile.svg"
+            src={localStorage.getItem("image")}
             alt=""
-            className="rounded-lg w-10"
+            className="rounded-lg w-10 object-cover"
           />
           <div className="w-3" />
           <div className="">
@@ -141,18 +141,20 @@ const Sidebar = () => {
             </div>
           </li>
 
-          <li
-            className={`mb-4 rounded-lg py-4 px-10 ${
-              location.pathname === "/akun" ? activeClass : inactiveClass
-            }`}
-            onClick={() => handleNavigation("/akun")}
-          >
-            <div className="flex flex-row items-center">
-              <FaUserCircle />
-              <div className="w-3" />
-              Akun
-            </div>
-          </li>
+          {localStorage.getItem("role") === "Owner" && (
+              <li
+                  className={`mb-4 rounded-lg py-4 px-10 ${
+                      location.pathname === "/akun" ? activeClass : inactiveClass
+                  }`}
+                  onClick={() => handleNavigation("/akun")}
+              >
+                <div className="flex flex-row items-center">
+                  <FaUserCircle />
+                  <div className="w-3" />
+                  Akun
+                </div>
+              </li>
+          )}
         </ul>
         <button
           onClick={handleOpenModal}

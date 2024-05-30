@@ -8,7 +8,7 @@ const axiosInstance = axios.create({
   headers: {
     "Content-Type" : "application/json",
     "Accept" : "application/json",
-    "ngrok-skip-browser-warning" : true, 
+    "ngrok-skip-browser-warning" : true,
   },
 });
 
@@ -23,9 +23,9 @@ export const apiRequest = async (method, endpoint, data = null, header = {}) => 
       headers,
     });
 
-    if(response.status == 401) {
-      // navigate("/login", { replace: true });
-    }
+    /*if(response.status == 401) {
+      navigate("/login", { replace: true });
+    }*/
 
     return response.data;
   } catch (error) {
