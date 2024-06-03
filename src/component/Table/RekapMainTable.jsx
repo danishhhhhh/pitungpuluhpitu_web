@@ -3,6 +3,8 @@ import "../../App.css";
 import Pagination from "./Pagination.jsx";
 import { FaSearch } from "react-icons/fa";
 import { debounce } from "../../component/debounce/Debounce.jsx";
+import { FaEllipsisV } from "react-icons/fa";
+
 
 
 const RekapMainTable = ({ name, data, handleSearch }) => {
@@ -16,6 +18,10 @@ const RekapMainTable = ({ name, data, handleSearch }) => {
   const debouncedSearch = debounce((query) => {
     handleSearch(query);
   }, 1500);
+
+  const handleRowClick = (index) => {
+    console.log("Row clicked:", index);
+  };
 
   return (
     <div className="grid grid-rows-1 ">
@@ -66,11 +72,13 @@ const RekapMainTable = ({ name, data, handleSearch }) => {
               <th className="px-3 py-3 font-poppins border border-grey text-darkgrey font-medium">
                 Tanggal
               </th>
+              <th className="px-3 py-3 font-poppins border border-grey text-darkgrey font-medium">
+              </th>
             </tr>
           </thead>
           <tbody>
             {data.map((sparepart, index) => (
-              <tr key={index}>
+              <tr key={index} onClick={() => handleRowClick(index)} >
                 <td className="px-3 py-2 font-poppins border border-grey">
                   {sparepart.cabang}
                 </td>
@@ -104,6 +112,9 @@ const RekapMainTable = ({ name, data, handleSearch }) => {
                 </td>
                 <td className="px-3 py-2 font-poppins border border-grey">
                   {sparepart.tanggal}
+                </td>
+                <td className="px-3 py-2 font-poppins border border-grey text-center justify-center">
+                <FaEllipsisV className="mx-auto" />
                 </td>
               </tr>
             ))}

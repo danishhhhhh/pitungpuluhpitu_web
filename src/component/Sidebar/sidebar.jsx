@@ -19,6 +19,8 @@ const Sidebar = () => {
   const activeClass = "bg-yellow text-bluegrey";
   const inactiveClass = "bg-bluegrey text-white";
   const [isModalOpen, setModalOpen] = useState(false);
+  const imageSrc = localStorage.getItem("image");
+  const defaultImage ="src/assets/default_image.png"
 
   const handleNavigation = (route) => {
     navigate(route);
@@ -51,8 +53,8 @@ const Sidebar = () => {
       />
       <div className="top-10 my-14 flex items-center justify-between">
         <div className="flex flex-row">
-          <img
-            src={localStorage.getItem("image")}
+           <img
+            src={imageSrc ? imageSrc : defaultImage}
             alt=""
             className="rounded-lg w-10 object-cover"
           />

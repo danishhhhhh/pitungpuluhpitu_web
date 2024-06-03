@@ -5,6 +5,8 @@ import { postConfirmRequest } from "../../features/Stock.jsx";
 
 const RekapCard = ({ data, fetchFunction }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  
+  const defaultImage = "src/assets/default_image.png";
 
   const handleDetailClick = () => {
     setIsModalOpen(true);
@@ -17,16 +19,16 @@ const RekapCard = ({ data, fetchFunction }) => {
   const handleConfirm = async () => {
     try {
       await postConfirmRequest(true, data.id);
-      fetchFunction()
+      fetchFunction();
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
-  
+
   const handleReject = async () => {
     try {
       await postConfirmRequest(false, data.id);
-      fetchFunction()
+      fetchFunction();
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -37,9 +39,9 @@ const RekapCard = ({ data, fetchFunction }) => {
       <div className="flex flex-col w-full gap-3">
         <div className="justify-between flex flex-row items-center">
           <div className="justify-start items-center gap-2.5 flex">
-            <div className="w-10 h-10 bg-grey rounded-full" />
-            <div className="text-center text-black text-base font-medium font-poppins">
-              Danish Ardiyanta
+           
+            <div className="text-center text-black text-xl font-medium font-poppins">
+              {data.user}
             </div>
           </div>
           <button
@@ -79,7 +81,10 @@ const RekapCard = ({ data, fetchFunction }) => {
         </div>
       </div>
       <div className="self-stretch justify-end items-end gap-2.5 inline-flex">
-        <button className="w-[34px] h-[34px] bg-lightred rounded-[32px] justify-center items-center gap-2.5 flex" onClick={handleReject}>
+        <button
+          className="w-[34px] h-[34px] bg-lightred rounded-[32px] justify-center items-center gap-2.5 flex"
+          onClick={handleReject}
+        >
           <IoIosClose className="w-8 h-8 text-red" />
         </button>
         <button
@@ -100,9 +105,9 @@ const RekapCard = ({ data, fetchFunction }) => {
             <div className="self-stretch max-h-[80vh] overflow-y-auto flex-col justify-start items-start gap-2.5 flex">
               <div className="self-stretch justify-between items-center gap-2.5 inline-flex">
                 <div className="justify-start items-center gap-2.5 flex">
-                  <div className="w-10 h-10 bg-grey rounded-full" />
-                  <p className="text-center text-black text-base font-medium font-poppins leading-snug">
-                    Danish Ardiyanta
+                
+                  <p className="text-center text-black text-xl font-medium font-poppins leading-snug">
+                    {data.user}
                   </p>
                 </div>
                 <div>
@@ -184,7 +189,9 @@ const RekapCard = ({ data, fetchFunction }) => {
                     Jasa
                   </p>
                   <p className="text-darkgrey text-sm font-normal font-poppins leading-snug">
-                  {data.jasa && data.jasa.length > 0 ? data.jasa.join(", ") : "-"}
+                    {data.jasa && data.jasa.length > 0
+                      ? data.jasa.join(", ")
+                      : "-"}
                   </p>
                 </div>
                 <div className="self-stretch h-[103px] flex-col justify-start items-start flex">
@@ -192,7 +199,10 @@ const RekapCard = ({ data, fetchFunction }) => {
                     Sparepart
                   </p>
                   <p className="self-stretch text-gray-600 text-sm font-normal font-poppins leading-snug">
-                  {data.sparepart && data.sparepart.length > 0 ? data.sparepart.join(", ") : "-"}                  </p>
+                    {data.sparepart && data.sparepart.length > 0
+                      ? data.sparepart.join(", ")
+                      : "-"}{" "}
+                  </p>
                 </div>
               </div>
               <button
