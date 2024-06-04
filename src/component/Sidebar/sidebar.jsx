@@ -78,7 +78,7 @@ const Sidebar = () => {
         <ul className="text-white font-poppins">
           <li
             className={`mb-4 rounded-lg py-4 px-10 ${
-              location.pathname === "/stock" || location.pathname === "/detail"
+              location.pathname === "/stock" || location.pathname === "/detail" || location.pathname === "/rekap"|| location.pathname === "/cabang"||location.pathname === "/editrekap"
                 ? activeClass
                 : inactiveClass
             }`}

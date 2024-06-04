@@ -11,6 +11,7 @@ import CabangPage from "../views/cabang_page/Cabang_page.jsx";
 import RekapPage from "../views/rekap_page/Rekap_page.jsx";
 import StockDashboard from "../views/stock_dashboard/StockDashboard.jsx";
 import {TimProvider} from "../context/Context.jsx";
+import EditRekappage from "../views/edit_rekap_page/Edit_rekap_page.jsx";
 
 const Router = () => {
     return (
@@ -27,6 +28,7 @@ const Router = () => {
                     <Route path="/detail" element={<DetailtimPage/>}/>
                     <Route path="/cabang" element={<CabangPage/>}/>
                     <Route path="/rekap" element={<RekapPage/>}/>
+                    <Route path="/editrekap" element={<EditRekappage/>}/>
                 </Routes>
             </BrowserRouter>
     );

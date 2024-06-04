@@ -8,6 +8,8 @@ import Pagination from "./Pagination.jsx";
 import { TimContext } from "../../context/Context.jsx";
 import { useNavigate } from "react-router-dom";
 import { debounce } from "../../component/debounce/Debounce.jsx";
+import { Bounce, ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const TableBesarDetail = ({
   data,
@@ -52,6 +54,7 @@ const TableBesarDetail = ({
     console.log(name);
     console.log(stock);
     handleEditStock(stock, index);
+    notifEditSuccess();
     setIsEditModalOpen(false);
   };
 
@@ -63,6 +66,20 @@ const TableBesarDetail = ({
     debouncedSearch(e.target.value);
   };
 
+  const notifEditSuccess = () =>
+    toast.success("Data berhasil diedit", {
+      position: "bottom-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      transition: Bounce,
+      className: "font-poppins",
+    });
+
   // Debounced search function
   const debouncedSearch = debounce((query) => {
     handleSearch(query);
@@ -70,6 +87,19 @@ const TableBesarDetail = ({
 
   return (
     <div className="grid grid-rows-1">
+      <ToastContainer
+        position="bottom-right"
+        autoClose={4000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        transition={Bounce}
+      />
       <div className="flex justify-between items-center">
         <div className="flex flex-row justify-between bg-lightgrey rounded-lg w-1/2">
           <input

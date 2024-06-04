@@ -92,10 +92,9 @@ const AkunModal = ({
                             <input
                                 type="text"
                                 name="password"
-                                value={akunValue.password}
                                 onChange={handleInputChange}
                                 className="w-full focus:outline-none text-black text-base font-poppins placeholder:text-sm"
-                                placeholder="Masukan password"
+                                placeholder= {isEdit ? 'Masukkan Password Baru (opsional)' : 'Masukan Password'}
                                 style={{
                                     caretColor: "black",
                                     backgroundColor: "transparent",

@@ -4,8 +4,9 @@ import DeleteModal from "../Modal/DeleteModal.jsx";
 import AkunModal from "../Modal/AkunModal.jsx";
 import { FaSearch } from "react-icons/fa";
 import Pagination from "./Pagination.jsx";
-import { debounce } from "../../component/debounce/Debounce.jsx"; 
-
+import { debounce } from "../../component/debounce/Debounce.jsx";
+import { Bounce, ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const AkunMainTable = ({
   name,
@@ -20,7 +21,6 @@ const AkunMainTable = ({
   handleEditPost,
   handleDeletePost,
   handleSearch,
-
 }) => {
   const [akunValue, setAkunValue] = useState({
     name: "",
@@ -35,7 +35,6 @@ const AkunMainTable = ({
   const [idTim, setIdTim] = useState();
   const [idAkun, setIdAkun] = useState();
   const [searchQuery, setSearchQuery] = useState("");
-
 
   const roleMapping = {
     Owner: 1,
@@ -69,6 +68,7 @@ const AkunMainTable = ({
     console.log(`abc abc ${tim}`);
     const roleId = roleMapping[role] || null;
     handleSubmitPost(roleId, username, password, name, tim);
+    notifAddSuccess();
     toggleAddModal();
   };
 
@@ -76,12 +76,14 @@ const AkunMainTable = ({
     console.log(`ini name ${name}`);
     const roleId = roleMapping[role] || null;
     handleEditPost(roleId, username, password, name, tim, id);
+    notifEditSuccess();
     toggleEditModal();
   };
 
   const handleDeleteSubmit = (id) => {
     console.log(`ini iasdadadsads ${id}`);
     handleDeletePost(id);
+    notifDeleteSuccess();
     toggleDeleteModal();
   };
 
@@ -109,6 +111,45 @@ const AkunMainTable = ({
     setSearchQuery(e.target.value);
     debouncedSearch(e.target.value);
   };
+  const notifAddSuccess = () =>
+    toast.success("Data berhasil ditambahkan", {
+      position: "bottom-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      transition: Bounce,
+      className: "font-poppins",
+    });
+  const notifEditSuccess = () =>
+    toast.success("Data berhasil diedit", {
+      position: "bottom-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      transition: Bounce,
+      className: "font-poppins",
+    });
+  const notifDeleteSuccess = () =>
+    toast.success("Data berhasil dihapus", {
+      position: "bottom-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      transition: Bounce,
+      className: "font-poppins",
+    });
 
   // Debounced search function
   const debouncedSearch = debounce((query) => {
@@ -117,9 +158,22 @@ const AkunMainTable = ({
 
   return (
     <div className="grid grid-rows-1">
+      <ToastContainer
+        position="bottom-right"
+        autoClose={4000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        transition={Bounce}
+      />
       <div className="flex justify-between items-center">
         <div className="flex flex-row justify-between bg-lightgrey rounded-lg w-1/2">
-        <input
+          <input
             type="text"
             placeholder={`Cari ${name.toLowerCase()} ...`}
             className="w-64 py-2 px-4 bg-lightgrey rounded-lg text-darkgrey focus:outline-none font-poppins text-sm"
@@ -146,9 +200,7 @@ const AkunMainTable = ({
             <th className="py-3 font-poppins border border-grey text-darkgrey font-medium">
               Username
             </th>
-            <th className="py-3 font-poppins border border-grey text-darkgrey font-medium">
-              Password
-            </th>
+
             <th className="py-3 font-poppins border border-grey text-darkgrey font-medium">
               Role
             </th>
@@ -166,9 +218,7 @@ const AkunMainTable = ({
               <td className="px-4 py-2 font-poppins border border-grey">
                 {akun.username}
               </td>
-              <td className="px-4 py-2 font-poppins border border-grey">
-                {akun.password}
-              </td>
+
               <td className="px-4 py-2 font-poppins border border-grey">
                 {akun.role}
               </td>

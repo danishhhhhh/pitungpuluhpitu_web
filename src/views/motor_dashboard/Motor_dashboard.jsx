@@ -100,6 +100,7 @@ const MotordashboardPage = () => {
       console.error("Error fetching data:", error);
     }
   };
+  
   useEffect(() => {
     fetchData(currentPage);
   }, [currentPage]);

@@ -2,6 +2,8 @@ import React, { useState, useEffect, useContext } from "react";
 import Navbar from "../../component/Navbar/navbar";
 import { TimContext } from "../../context/Context.jsx";
 import RekapMainTable from "../../component/Table/RekapMainTable.jsx";
+import Sidebar from "../../component/Sidebar/sidebar";
+
 import {
   getRekapRequest,
   getSearchRekapRequest,
@@ -34,6 +36,7 @@ const RekapPage = () => {
   }, []);
   return (
     <div className="h-full flex flex-row">
+      <Sidebar />
       <div className="flex-grow">
         <Navbar data="Rekap Pengerjaan Tim 1" showBackButton={true} />
         <div className="p-12 flex flex-row justify-start">

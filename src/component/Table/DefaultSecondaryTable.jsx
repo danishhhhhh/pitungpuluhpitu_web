@@ -3,18 +3,70 @@ import "../../App.css";
 import { IoIosClose } from "react-icons/io";
 import DeleteModal from "../Modal/DeleteModal.jsx";
 import CommonModal from "../Modal/CommonModal.jsx";
+import { Bounce, ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-const DefaultSecondaryTable = ({ name, data, setData, value, setValue,handleSubmitPost ,handleEditPost, handleDeletePost }) => {
+const DefaultSecondaryTable = ({
+  name,
+  data,
+  setData,
+  value,
+  setValue,
+  handleSubmitPost,
+  handleEditPost,
+  handleDeletePost,
+}) => {
   const [isTambahModalOpen, setIsTambahModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [index, setIndex] = useState();
-  
 
   const toggleTambahModal = () => {
     setValue("");
     setIsTambahModalOpen(!isTambahModalOpen);
   };
+
+  const notifAddSuccess = () =>
+    toast.success("Data berhasil ditambahkan", {
+      position: "bottom-right",
+      autoClose: 4000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      transition: Bounce,
+      className: "font-poppins",
+    });
+
+  const notifEditSuccess = () =>
+    toast.success("Data berhasil diedit", {
+      position: "bottom-right",
+      autoClose: 4000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      transition: Bounce,
+      className: "font-poppins",
+    });
+
+  const notifDeleteSuccess = () =>
+    toast.success("Data berhasil dihapus", {
+      position: "bottom-right",
+      autoClose: 4000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      transition: Bounce,
+      className: "font-poppins",
+    });
 
   const toggleEditModal = (id, index) => {
     setValue(data[index].name);
@@ -29,17 +81,19 @@ const DefaultSecondaryTable = ({ name, data, setData, value, setValue,handleSubm
 
   const handleTambahKategori = () => {
     handleSubmitPost();
+    notifAddSuccess();
     setIsTambahModalOpen(false);
   };
 
   const handleEdit = () => {
     handleEditPost(index);
+    notifEditSuccess();
     setIsEditModalOpen(false);
   };
 
   const handleDelete = () => {
-    console.log(`skajdlksajdas;ljdsa;ljdas ${index}`)
     handleDeletePost(index);
+    notifDeleteSuccess();
     setIsDeleteModalOpen(false);
   };
 
@@ -51,6 +105,19 @@ const DefaultSecondaryTable = ({ name, data, setData, value, setValue,handleSubm
 
   return (
     <div className="grid grid-rows-1">
+      <ToastContainer
+        position="bottom-right"
+        autoClose={4000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        transition={Bounce}
+      />
       <div className="flex justify-end items-center">
         <button
           className="ml-4 bg-yellow px-4 py-2 rounded-lg text-black font-normal font-poppins text-sm"
@@ -107,7 +174,6 @@ const DefaultSecondaryTable = ({ name, data, setData, value, setValue,handleSubm
         handleSubmit={handleTambahKategori}
         handleCloseModal={handleCloseModal}
         isEdit={false}
-
       />
 
       {/* Edit Modal */}
@@ -116,7 +182,7 @@ const DefaultSecondaryTable = ({ name, data, setData, value, setValue,handleSubm
         isOpen={isEditModalOpen}
         value={value}
         setValue={setValue}
-        handleSubmit={() => handleEdit(index)}
+        handleSubmit={handleEdit}
         handleCloseModal={handleCloseModal}
         isEdit={true}
       />
@@ -125,10 +191,11 @@ const DefaultSecondaryTable = ({ name, data, setData, value, setValue,handleSubm
       <DeleteModal
         name={name.toLowerCase()}
         isOpen={isDeleteModalOpen}
-        handleDelete={() => handleDelete(index)}
+        handleDelete={handleDelete}
         handleCloseModal={handleCloseModal}
       />
     </div>
   );
 };
+
 export default DefaultSecondaryTable;

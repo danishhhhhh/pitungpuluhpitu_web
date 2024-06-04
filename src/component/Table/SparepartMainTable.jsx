@@ -4,7 +4,9 @@ import DeleteModal from "../Modal/DeleteModal.jsx";
 import SparepartModal from "../Modal/SparepartModal.jsx";
 import { FaSearch } from "react-icons/fa";
 import Pagination from "./Pagination.jsx";
-import { debounce } from "../../component/debounce/Debounce.jsx"; 
+import { debounce } from "../../component/debounce/Debounce.jsx";
+import { Bounce, ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const SparepartMainTable = ({
   spareparts,
@@ -28,7 +30,6 @@ const SparepartMainTable = ({
   const [kategoriValue, setKategoriValue] = useState("Lainnya");
   const [searchQuery, setSearchQuery] = useState("");
 
-
   const toggleAddModal = () => {
     setIsAddModalOpen(!isAddModalOpen);
   };
@@ -43,16 +44,19 @@ const SparepartMainTable = ({
 
   const handleTambahSparepart = (name, kategoriId) => {
     handleSubmitPost(name, kategoriId);
+    notifAddSuccess();
     setIsAddModalOpen(false);
   };
 
   const handleEditSparepart = (name, kategoriId, id) => {
     handleEditPost(name, kategoriId, id);
+    notifEditSuccess();
     setIsEditModalOpen(false);
   };
 
   const handleDeleteSparepart = (id) => {
     handleDeletePost(id);
+    notifDeleteSuccess();
     setIsDeleteModalOpen(false);
   };
 
@@ -79,6 +83,45 @@ const SparepartMainTable = ({
     setSearchQuery(e.target.value);
     debouncedSearch(e.target.value);
   };
+  const notifAddSuccess = () =>
+    toast.success("Data berhasil ditambahkan", {
+      position: "bottom-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      transition: Bounce,
+      className: "font-poppins",
+    });
+  const notifEditSuccess = () =>
+    toast.success("Data berhasil diedit", {
+      position: "bottom-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      transition: Bounce,
+      className: "font-poppins",
+    });
+  const notifDeleteSuccess = () =>
+    toast.success("Data berhasil dihapus", {
+      position: "bottom-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      transition: Bounce,
+      className: "font-poppins",
+    });
 
   // Debounced search function
   const debouncedSearch = debounce((query) => {
@@ -87,9 +130,22 @@ const SparepartMainTable = ({
 
   return (
     <div className="grid grid-rows-1">
+      <ToastContainer
+        position="bottom-right"
+        autoClose={4000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        transition={Bounce}
+      />
       <div className="flex justify-between items-center">
         <div className="flex flex-row justify-between bg-lightgrey rounded-lg w-1/2">
-        <input
+          <input
             type="text"
             placeholder={`Cari ${name.toLowerCase()} ...`}
             className="w-64 py-2 px-4 bg-lightgrey rounded-lg text-darkgrey focus:outline-none font-poppins text-sm"

@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import Navbar from "../../component/Navbar/navbar.jsx";
 import DefaultMainTable from "../../component/Table/DefaultMainTable.jsx";
+import Sidebar from "../../component/Sidebar/sidebar";
+
 import {
   getCabangRequest,
   postAddCabangRequest,
@@ -34,7 +36,7 @@ const CabangPage = () => {
 
   const getSearchCabang = async (query) => {
     try {
-      const responseCabang = await getSearchCabangRequest(query,timId);
+      const responseCabang = await getSearchCabangRequest(query, timId);
       setCabang(responseCabang.data);
     } catch (error) {
       console.error("Error searching data:", error);
@@ -74,8 +76,9 @@ const CabangPage = () => {
 
   return (
     <div className="h-full flex flex-row">
+      <Sidebar />
       <div className="flex-grow">
-        <Navbar data="Cabang Dashboard" showBackButton={true}/>
+        <Navbar data="Cabang Dashboard" showBackButton={true} />
         <div className="p-12 flex flex-row justify-center">
           <div className="w-4/6">
             <DefaultMainTable

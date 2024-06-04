@@ -32,7 +32,7 @@ const Clock = () => {
     const hours = time.getHours();
     if (hours >= 6 && hours < 12) {
       return "Good Morning";
-    } else if (hours >= 12 && hours <= 18) {
+    } else if (hours >= 15 && hours <= 18) {
       return "Good Afternoon";
     } else {
       return "Good Night";

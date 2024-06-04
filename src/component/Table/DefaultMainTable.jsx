@@ -4,7 +4,10 @@ import Pagination from "./Pagination.jsx";
 import { debounce } from "../../component/debounce/Debounce.jsx";
 import DeleteModal from "../Modal/DeleteModal.jsx";
 import CommonModal from "../Modal/CommonModal.jsx";
-import {FaSearch} from "react-icons/fa";
+import { FaSearch } from "react-icons/fa";
+import { Bounce, ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { fontFamily } from "@mui/system";
 
 
 const DefaultMainTable = ({
@@ -27,6 +30,46 @@ const DefaultMainTable = ({
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [index, setIndex] = useState();
   const [searchQuery, setSearchQuery] = useState("");
+  const notifAddSuccess = () =>
+    toast.success("Data berhasil ditambahkan", {
+      position: "bottom-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      transition: Bounce,
+      className: "font-poppins"
+   
+    });
+  const notifEditSuccess = () =>
+    toast.success("Data berhasil diedit", {
+      position: "bottom-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      transition: Bounce,
+      className: "font-poppins"
+    });
+  const notifDeleteSuccess = () =>
+    toast.success("Data berhasil dihapus", {
+      position: "bottom-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      transition: Bounce,
+      className: "font-poppins"
+    });
 
   const toggleAddModal = () => {
     setValue("");
@@ -46,16 +89,19 @@ const DefaultMainTable = ({
 
   const handleUpdateSparepart = () => {
     handleEditPost(index);
+    notifEditSuccess();
     setIsEditModalOpen(false);
   };
 
   const handleAddSparepart = () => {
     handleSubmitPost();
+    notifAddSuccess();
     setIsAddModalOpen(false);
   };
 
   const handleDelete = () => {
     handleDeletePost(index);
+    notifDeleteSuccess();
     setIsDeleteModalOpen(false);
   };
 
@@ -77,6 +123,19 @@ const DefaultMainTable = ({
 
   return (
     <div className="grid grid-rows-1">
+      <ToastContainer
+        position="bottom-right"
+        autoClose={4000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        transition={Bounce}
+      />
       <div className="flex justify-between items-center">
         <div className="flex flex-row justify-between bg-lightgrey rounded-lg w-1/3">
           <input
@@ -86,7 +145,7 @@ const DefaultMainTable = ({
             onChange={handleSearchInputChange}
             value={searchQuery}
           />
-             <FaSearch className="my-auto mx-4 text-darkgrey cursor-pointer"  />
+          <FaSearch className="my-auto mx-4 text-darkgrey cursor-pointer" />
         </div>
         <button
           className="bg-yellow px-4 py-2 rounded-lg text-black font-normal font-poppins text-sm"
