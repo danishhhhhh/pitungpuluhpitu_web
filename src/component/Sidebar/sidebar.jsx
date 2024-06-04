@@ -37,6 +37,7 @@ const Sidebar = () => {
   };
 
   const handleOpenModal = () => {
+    console.log(imageSrc ? "imageSrc" : "defaultImage")
     setModalOpen(true);
   };
 
