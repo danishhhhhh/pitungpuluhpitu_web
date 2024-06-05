@@ -1,211 +1,217 @@
-import React, { useState, useEffect } from "react";
+import {useState} from "react";
 import Sidebar from "../../component/Sidebar/sidebar";
 import Navbar from "../../component/Navbar/navbar";
-import { FaChevronLeft } from "react-icons/fa";
-import { Select, Option, Input } from "@material-tailwind/react";
-import flatpickr from "flatpickr";
+import {FaChevronLeft} from "react-icons/fa";
+import {
+    Select,
+    Option,
+    Input,
+    Popover,
+    PopoverHandler,
+    PopoverContent,
+} from "@material-tailwind/react";
+import {format} from "date-fns";
+import {DayPicker} from "react-day-picker";
+import {ChevronRightIcon, ChevronLeftIcon} from "@heroicons/react/24/outline";
+import EditSparepartModal from "../../component/Modal/EditSparepartModal.jsx";
+import EditSelectSection from "../../component/EditRekap/EditSelectSection.jsx";
 
 const EditRekappage = () => {
-  const [isOpen, setIsOpen] = useState(false);
+    const [isOpenSparepart, setIsOpenSparepart] = useState(false);
+    const [isOpenJasa, setIsOpenJasa] = useState(false);
+    const [date, setDate] = useState();
+    const [confirmDate, setConfirmDate] = useState();
+    const [popoverOpen, setPopoverOpen] = useState(false);
 
-  useEffect(() => {
-    const datepicker = flatpickr("#date-picker", {
-      dateFormat: "Y-m-d", // Day-Month-Year
-    });
+    const toggleSelectSparepart = () => {
+        setIsOpenSparepart(!isOpenSparepart);
+    };
 
-    const calendarContainer = datepicker.calendarContainer;
-    const calendarMonthNav = datepicker.monthNav;
-    const calendarNextMonthNav = datepicker.nextMonthNav;
-    const calendarPrevMonthNav = datepicker.prevMonthNav;
-    const calendarDaysContainer = datepicker.daysContainer;
+    const toggleSelectJasa = () => {
+        setIsOpenJasa(!isOpenJasa);
+    };
 
-    calendarContainer.className = `${calendarContainer.className} bg-white p-4 border border-blue-gray-50 rounded-lg shadow-lg shadow-blue-gray-500/10 font-sans text-sm font-normal text-blue-gray-500 focus:outline-none break-words whitespace-normal`;
-    calendarMonthNav.className = `${calendarMonthNav.className} flex items-center justify-between mb-4 [&>div.flatpickr-month]:-translate-y-3`;
-    calendarNextMonthNav.className = `${calendarNextMonthNav.className} absolute !top-2.5 !right-1.5 h-6 w-6 bg-transparent hover:bg-blue-gray-50 !p-1 rounded-md transition-colors duration-300`;
-    calendarPrevMonthNav.className = `${calendarPrevMonthNav.className} absolute !top-2.5 !left-1.5 h-6 w-6 bg-transparent hover:bg-blue-gray-50 !p-1 rounded-md transition-colors duration-300`;
-    calendarDaysContainer.className = `${calendarDaysContainer.className} [&_span.flatpickr-day]:!rounded-md [&_span.flatpickr-day.selected]:!bg-gray-900 [&_span.flatpickr-day.selected]:!border-gray-900`;
-  }, []);
+    const handleCloseModal = () => {
+        setIsOpenSparepart(false);
+        setIsOpenJasa(false);
+    };
 
-  const toggleModal = () => {
-    setIsOpen(!isOpen);
-  };
+    const handleDayClick = (day) => {
+        setDate(day);
+    };
 
-  const handleCloseModal = () => {
-    setIsOpen(false);
-  };
 
-  return (
-    <div className="h-full flex flex-row">
-      <Sidebar />
-      <div className="flex-grow">
-        <Navbar data="Edit Rekap" showBackButton={true} />
-        <div className="w-full p-10 flex-col justify-start items-start gap-[30px] inline-flex">
-          <div className="flex-col justify-start items-start gap-[5px] flex">
-            <div className="text-slate-800 text-2xl font-semibold font-['Poppins'] leading-7">
-              Edit Rekap
-            </div>
-            <div className="text-gray-600 text-base font-normal font-['Poppins'] leading-7">
-              Perbarui rekap pengerjaan di sini.
-            </div>
-          </div>
-          <div className="self-stretch h-[0px] border-grey border"></div>
-          <div className="flex flex-col w-full gap-6">
-            <div className="w-1/3 font-poppins">
-              <div className="relative h-10 w-full min-w-[200px]">
-                <input
-                  id="date-picker"
-                  className="peer h-full w-full rounded-[7px] border border-border  bg-transparent px-3 py-2.5 font-sans text-sm font-normal text-blue-gray-700 
-                  outline outline-0 transition-all "
-                  placeholder=" "
-                />
-                <label className="before:content[' '] after:content[' '] pointer-events-none absolute left-0 -top-1.5 flex h-full w-full select-none !overflow-visible truncate text-[11px] font-normal leading-tight text-gray-500 transition-all before:pointer-events-none before:mt-[6.5px] before:mr-1 before:box-border before:block before:h-1.5 before:w-2.5 before:rounded-tl-md before:border-t before:border-l before:border-blue-gray-200 before:transition-all after:pointer-events-none after:mt-[6.5px] after:ml-1 after:box-border after:block after:h-1.5 after:w-2.5 after:flex-grow after:rounded-tr-md after:border-t after:border-r after:border-blue-gray-200 after:transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[3.75] peer-placeholder-shown:text-blue-gray-500 peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-gray-900 peer-focus:before:border-t-2 peer-focus:before:border-l-2 peer-focus:before:!border-gray-900 peer-focus:after:border-t-2 peer-focus:after:border-r-2 peer-focus:!border-gray-900 peer-disabled:text-transparent peer-disabled:before:border-transparent peer-disabled:after:border-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">
-                  Tanggal
-                </label>
-              </div>
-            </div>
-            <div className="w-1/3 font-poppins">
-              <Select
-                label="Cabang"
-                size="lg"
-                className="text-sm h-12 font-poppins"
-              >
-                <Option>Kalisat (Jember)</Option>
-                <Option>Kalisat (Jember)</Option>
-                <Option>Kalisat (Jember)</Option>
-              </Select>
-            </div>
-            <div className="w-1/3 font-poppins">
-              <Select
-                label="Mekanik"
-                size="lg"
-                className="text-sm h-12 font-poppins"
-              >
-                <Option>Mekanik 1</Option>
-                <Option>Mekanik 2</Option>
-                <Option>Mekanik 3</Option>
-              </Select>
-            </div>
-            <div className="w-1/3 font-poppins">
-              <Input
-                color="indigo"
-                label="Masukan Plat Motor"
-                size="lg"
-                className="text-sm h-12 font-poppins"
-              />
-            </div>
-            <div className="w-1/3 font-poppins">
-              <Select
-                label="Tipe Motor"
-                size="lg"
-                className="text-sm h-12 font-poppins"
-              >
-                <Option>Vario</Option>
-                <Option>Beat</Option>
-                <Option>CBR</Option>
-              </Select>
-            </div>
-            <div className="w-1/3 font-poppins">
-              <Select
-                label="Tahun"
-                size="lg"
-                className="text-sm h-12 font-poppins"
-              >
-                <Option>2022</Option>
-                <Option>2021</Option>
-                <Option>2020</Option>
-              </Select>
-            </div>
-            <div className="w-1/3 font-poppins">
-              <Input
-                color="indigo"
-                label="Masukan Km Motor"
-                size="lg"
-                className="text-sm h-12 font-poppins"
-              />
-            </div>
-            <div className="w-1/3 font-poppins">
-              <Select
-                label="Pekerjaan"
-                size="lg"
-                className="text-sm h-12 font-poppins"
-              >
-                <Option>Service Rutin</Option>
-                <Option>Ganti Oli</Option>
-                <Option>Perbaikan Mesin</Option>
-              </Select>
-            </div>
-            <div className="w-1/3 h-12 py-4 pl-4 pr-2.5 bg-white rounded-lg border border-border justify-between items-center inline-flex">
-              <div className="text-center text-bordericon text-sm font-normal font-['Poppins']">
-                Jasa
-              </div>
-              <FaChevronLeft className="w-3 h-3 rotate-180 text-bordericon" />
-            </div>
-            <div
-              className="w-1/3 h-12 py-4 pl-4 pr-2.5 bg-white rounded-lg border  border-border justify-between items-center inline-flex"
-              onClick={toggleModal}
-            >
-              <div className="text-center text-bordericon text-sm font-normal font-['Poppins']">
-                Sparepart
-              </div>
-              <FaChevronLeft className="w-3 h-3 rotate-180 text-bordericon" />
-            </div>
-          </div>
-        </div>
-      </div>
-      {isOpen && (
-        <div className="fixed inset-0 flex items-center justify-center">
-          <div
-            className="absolute inset-0 z-0 bg-black bg-opacity-50"
-            onClick={handleCloseModal}
-          />
-          <div className="p-10 bg-white rounded-2xl flex flex-col gap-8 z-10 w-1/3">
-            <div className="w-full flex flex-col justify-start items-center gap-10">
-              <div className="text-center text-zinc-900 text-2xl font-semibold font-['Poppins'] leading-9">
-                Sparepart
-              </div>
-              <div className="w-full flex flex-col justify-start items-center gap-6">
-                <div className="w-full px-5 py-2.5 bg-zinc-200 rounded-[10px] flex justify-between items-center">
-                  <div className="text-center text-gray-600 text-sm font-normal font-['Poppins']">
-                    Cari Sparepart ...
-                  </div>
-                  <div className="w-[18px] h-[18px] relative" />
-                </div>
-                <div className="w-full h-64 overflow-y-auto flex flex-col justify-center items-start gap-6">
-                  {Array.from({ length: 3 }).map((_, index) => (
-                    <div key={index} className="w-full flex flex-col gap-5">
-                      <div className="w-full flex justify-between items-center">
-                        <div className="flex items-start gap-2.5">
-                          <div className="text-center text-black text-sm font-medium font-['Poppins']">
-                            Ban Depan Vario
-                          </div>
+    const togglePopover = () => {
+        setPopoverOpen(!popoverOpen);
+    };
+
+    const handleConfirm = () => {
+        setConfirmDate(date);
+        setPopoverOpen(false);
+    };
+
+    return (
+        <div className="h-full flex flex-row">
+            <Sidebar/>
+            <div className="flex-grow">
+                <Navbar data="Edit Rekap" showBackButton={true}/>
+                <div className="w-full p-10 flex-col justify-start items-start gap-[30px] inline-flex">
+                    <div className="flex-col justify-start items-start gap-[5px] flex">
+                        <div className="text-slate-800 text-2xl font-semibold font-['Poppins'] leading-7">
+                            Edit Rekap
                         </div>
-                        <input
-                          type="checkbox"
-                          className="w-5 h-5 rounded-xl accent-yellow  mr-2"
-                        />
-                      </div>
-                      <div className="w-full border border-neutral-300"></div>
+                        <div className="text-gray-600 text-base font-normal font-['Poppins'] leading-7">
+                            Perbarui rekap pengerjaan di sini.
+                        </div>
                     </div>
-                  ))}
+                    <div className="self-stretch border-grey border"/>
+                    <div className="flex flex-row w-full">
+                        <div className="flex flex-col w-1/2 gap-6">
+                            <div className="w-2/3 font-poppins">
+                                <Popover placement="bottom" open={popoverOpen} handler={togglePopover}>
+                                    <PopoverHandler>
+                                        <Input
+                                            label="Select a Date"
+                                            size="lg"
+                                            onChange={() => null}
+                                            value={confirmDate ? format(confirmDate, "PPP") : ""}
+                                            readOnly
+                                        />
+                                    </PopoverHandler>
+                                    <PopoverContent>
+                                        <DayPicker
+                                            mode="single"
+                                            selected={date}
+                                            onSelect={setDate}
+                                            onDayClick={handleDayClick}
+                                            showOutsideDays
+                                            className="border-0"
+                                            classNames={{
+                                                caption: "flex justify-center py-2 mb-4 relative items-center",
+                                                caption_label: "text-sm font-medium text-gray-900",
+                                                nav: "flex items-center",
+                                                nav_button:
+                                                    "h-6 w-6 bg-transparent hover:bg-blue-gray-50 p-1 rounded-md transition-colors duration-300",
+                                                nav_button_previous: "absolute left-1.5",
+                                                nav_button_next: "absolute right-1.5",
+                                                table: "w-full border-collapse",
+                                                head_row: "flex font-medium text-gray-900",
+                                                head_cell: "m-0.5 w-9 font-normal text-sm",
+                                                row: "flex w-full mt-2",
+                                                cell: "text-gray-600 rounded-md h-9 w-9 text-center text-sm p-0 m-0.5 relative [&:has([aria-selected].day-range-end)]:rounded-r-md [&:has([aria-selected].day-outside)]:bg-gray-900/20 [&:has([aria-selected].day-outside)]:text-white [&:has([aria-selected])]:bg-gray-900/50 first:[&:has([aria-selected])]:rounded-l-md last:[&:has([aria-selected])]:rounded-r-md focus-within:relative focus-within:z-20",
+                                                day: "h-9 w-9 p-0 font-normal",
+                                                day_range_end: "day-range-end",
+                                                day_selected:
+                                                    "rounded-md bg-navy text-white hover:bg-gray-900 hover:text-white focus:bg-gray-900 focus:text-white",
+                                                day_today: "rounded-md bg-gray-200 text-gray-900",
+                                                day_outside:
+                                                    "day-outside text-gray-500 opacity-50 aria-selected:bg-gray-500 aria-selected:text-gray-900 aria-selected:bg-opacity-10",
+                                                day_disabled: "text-gray-500 opacity-50",
+                                                day_hidden: "invisible",
+                                            }}
+                                            components={{
+                                                IconLeft: ({...props}) => (
+                                                    <ChevronLeftIcon {...props} className="h-4 w-4 stroke-2"/>
+                                                ),
+                                                IconRight: ({...props}) => (
+                                                    <ChevronRightIcon {...props} className="h-4 w-4 stroke-2"/>
+                                                ),
+                                            }}
+                                        />
+                                        <button onClick={handleConfirm}
+                                                className="rounded-md bg-navy text-white font-poppins px-2 py-1 mt-3">Confirm
+                                        </button>
+                                    </PopoverContent>
+                                </Popover>
+                            </div>
+                            <div className="w-2/3 font-poppins">
+                                <Select
+                                    label="Cabang"
+                                    size="lg"
+                                    className="font-poppins"
+                                >
+                                    <Option className="font-poppins">Kalisat (Jember)</Option>
+                                </Select>
+                            </div>
+                            <div className="w-2/3 font-poppins">
+                                <Select
+                                    label="Mekanik"
+                                    size="lg"
+                                    className="font-poppins"
+                                >
+                                    <Option className="font-poppins">Mekanik 1</Option>
+                                    <Option className="font-poppins">Mekanik 2</Option>
+                                    <Option className="font-poppins">Mekanik 3</Option>
+                                </Select>
+                            </div>
+                            <div className="w-2/3 font-poppins">
+                                <Input
+                                    label="Masukan Plat Motor"
+                                    size="lg"
+                                    className="font-poppins"
+                                />
+                            </div>
+                            <div className="w-2/3 font-poppins">
+                                <Select
+                                    label="Tipe Motor"
+                                    size="lg"
+                                    className="font-poppins"
+                                >
+                                    <Option className="font-poppins">Vario</Option>
+                                </Select>
+                            </div>
+                            <div className="w-2/3 font-poppins">
+                                <Select
+                                    label="Tahun"
+                                    size="lg"
+                                    className="ont-poppins"
+                                >
+                                    <Option className="font-poppins">2022</Option>
+                                </Select>
+                            </div>
+                            <div className="w-2/3 font-poppins">
+                                <Input
+                                    label="Masukan Km Motor"
+                                    size="lg"
+                                    className="font-poppins"
+                                />
+                            </div>
+                            <div className="w-2/3 font-poppins">
+                                <Select
+                                    label="Pekerjaan"
+                                    size="lg"
+                                    className="font-poppins"
+                                >
+                                    <Option className="font-poppins">Service Rutin</Option>
+                                </Select>
+                            </div>
+                            <div
+                                className="w-2/3 h-11 py-4 pl-4 pr-2.5 bg-white rounded-lg border  border-border justify-between items-center inline-flex"
+                                onClick={toggleSelectJasa}
+                            >
+                                <div className="text-center text-bordericon text-sm font-normal font-['Poppins']">
+                                    Jasa
+                                </div>
+                                <FaChevronLeft className="w-3 h-3 rotate-180 text-bordericon"/>
+                            </div>
+                            <div
+                                className="w-2/3 h-11 py-4 pl-4 pr-2.5 bg-white rounded-lg border  border-border justify-between items-center inline-flex"
+                                onClick={toggleSelectSparepart}
+                            >
+                                <div className="text-center text-bordericon text-sm font-normal font-['Poppins']">
+                                    Sparepart
+                                </div>
+                                <FaChevronLeft className="w-3 h-3 rotate-180 text-bordericon"/>
+                            </div>
+                        </div>
+                        <EditSelectSection isOpen={isOpenJasa} />
+                        <EditSelectSection isOpen={isOpenSparepart} />
+                    </div>
                 </div>
-              </div>
             </div>
-            <div className="w-full h-12 bg-yellow-400 rounded-[15px] flex justify-center items-center">
-              <div className="text-center text-zinc-900 text-sm font-medium font-['Poppins']">
-                Tambah
-              </div>
-            </div>
-            <button
-              onClick={toggleModal}
-              className="absolute top-4 right-4 text-gray-600"
-            >
-              Close
-            </button>
-          </div>
+            <EditSparepartModal isOpen={isOpenSparepart} handleCloseModal={handleCloseModal}/>
         </div>
-      )}
-    </div>
-  );
+    );
 };
 
 export default EditRekappage;
