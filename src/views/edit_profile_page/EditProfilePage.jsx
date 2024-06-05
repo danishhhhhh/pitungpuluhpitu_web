@@ -9,7 +9,7 @@ const EditProfilePage = () => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(localStorage.getItem("image"));
   const [adminName, setAdminName] = useState(localStorage.getItem("name"));
-  const [deleteImage, setDeleteImage] = useState(false);
+  const [deleteImage, setDeleteImage] = useState(0);
   const navigate = useNavigate();
 
   const handleImageChange = (e) => {
@@ -20,13 +20,13 @@ const EditProfilePage = () => {
       reader.readAsDataURL(file);
       reader.onloadend = () => {
         setImagePreview(reader.result);
-        setDeleteImage(false)
+        setDeleteImage(0)
       };
     }
   };
 
   const handleRemoveImage = () => {
-    setDeleteImage(true)
+    setDeleteImage(1)
     setSelectedImage(null);
     setImagePreview("");
   };
@@ -44,6 +44,10 @@ const EditProfilePage = () => {
       if (response.data.image){
         localStorage.setItem('image', response.data.image);
       }
+      if (deleteImage === 1){
+        localStorage.setItem('image', "");
+      }
+
       navigate("/stock");
     } catch (error) {
       console.error("Error fetching data:", error);

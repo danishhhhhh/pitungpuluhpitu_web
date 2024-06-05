@@ -6,16 +6,23 @@ export const postProfile = async ({ image, name, deleteImage }) => {
         throw new Error('No token found');
     }
 
+    let data = {};
+
     const formData = new FormData();
     if (name) {
         formData.append('name', name);
+        data["name"] = name;
     }
     if (deleteImage) {
         formData.append('delete', deleteImage);
+        data["delete"] = deleteImage;
     }
     if (image) {
         formData.append('image', image);
+        data["image"] = image;
     }
+
+    console.log(data)
 
     const additionalHeaders = {
         'Accept': 'application/json',
@@ -23,5 +30,5 @@ export const postProfile = async ({ image, name, deleteImage }) => {
         'Content-Type': 'multipart/form-data'
     };
 
-    return await apiRequest("POST", `/profile`, formData, additionalHeaders);
+    return await apiRequest("POST", `/profile`, data, additionalHeaders);
 };
