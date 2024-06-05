@@ -1,7 +1,12 @@
 /** @type {import('tailwindcss').Config} */
 const withMT = require("@material-tailwind/react/utils/withMT");
 module.exports = withMT({
-  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+ 
+    
+  ],
   theme: {
     extend: {
       colors: {
@@ -19,14 +24,19 @@ module.exports = withMT({
         bluegrey: "#283342",
         lightgreen: "#E0FAE3",
         lightred: "#FFD1D2",
+        border: "#B0BEC5",
+        bordericon: "#78909C",
       },
     },
+
 
     fontFamily: {
       poppins: ["Poppins", "sans-serif"],
     },
   },
   plugins: [
-    require('tailwind-scrollbar'),
+    require("tailwind-scrollbar"),
+   
+  
   ],
 });
