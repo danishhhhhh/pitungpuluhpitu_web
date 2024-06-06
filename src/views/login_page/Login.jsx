@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash, FaUser } from "react-icons/fa";
 import './Login.css';
 import { loginRequest } from "../../features/Auth";
@@ -67,6 +67,9 @@ const Login = () => {
               {showPassword ? <FaEyeSlash className="w-6 h-6 text-darkgrey mr-2" /> : <FaEye className="w-6 h-6 text-darkgrey mr-2" />}
             </div>
           </div>
+          <NavLink className="font-poppins text-base text-bluegrey text-end mt-2 font-semibold mr-1" to="/password">
+            Lupa Password?
+          </NavLink>
           {error && (
             <div className="text-left text-red-500 mt-2 text-sm font-medium">
               {error}
