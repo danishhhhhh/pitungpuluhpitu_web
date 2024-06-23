@@ -3,10 +3,9 @@ import Sidebar from "../../component/Sidebar/sidebar";
 import Navbar from "../../component/Navbar/navbar";
 import { FaSearch } from "react-icons/fa";
 import TimCard from "../../component/Dashboard/TimCard.jsx";
-import RekapCard from "../../component/Dashboard/RekapCard.jsx";
+
 import {
   getTimRequest,
-  getPendingRequest,
   getSearchTimRequest,
   getExportPengerjaan,
 } from "../../features/Stock.jsx";
@@ -15,16 +14,13 @@ import ChartComponent from "../../component/Chart/ChartComponent.jsx";
 
 const StockDashboard = () => {
   const [tim, setTim] = useState([]);
-  const [pending, setPending] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
 
   const fetchData = async () => {
     try {
       const responseTim = await getTimRequest();
-      const responsePending = await getPendingRequest(); // Fix this line
 
       setTim(responseTim.data);
-      setPending(responsePending.data);
     } catch (error) {
       console.error("Error fetching data:", error);
     }

@@ -1,91 +1,92 @@
-import { apiRequest } from "../features/Api.jsx";
+import {apiRequest} from "../features/Api.jsx";
 
-export const getCabangRequest = async () => {
+export const getCabangRequest = async (page = 1) => {
     const token = localStorage.getItem("token");
     console.log(token);
-  const additionalHeaders = {
-    "Content-Type": "application/json",
-    "Authorization": `Bearer ${token}`,
-  };
+    const additionalHeaders = {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`,
+    };
 
-  console.log(additionalHeaders);
-  const response = await apiRequest(
-    "GET",
-    "/tim/1/cabang",
-    null,
-    additionalHeaders
-  );
+    const url = `/cabang?page=${page}`;
 
-  console.log(response.data);
+    const response = await apiRequest(
+        "GET",
+        url,
+        null,
+        additionalHeaders
+    );
 
-  return response;
+    console.log(response.data);
+
+    return response;
 };
-export const getSearchCabangRequest = async (query,id) => {
-  const token = localStorage.getItem("token");
-  console.log(token);
-const additionalHeaders = {
-  "Content-Type": "application/json",
-  "Authorization": `Bearer ${token}`,
-};
+export const getSearchCabangRequest = async (query) => {
+    const token = localStorage.getItem("token");
+    console.log(token);
+    const additionalHeaders = {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`,
+    };
 
-console.log(additionalHeaders);
-const response = await apiRequest(
-  "GET",
-  `/tim/${id}/cabang?search=${query}`,
-  null,
-  additionalHeaders
-);
+    console.log(additionalHeaders);
+    const response = await apiRequest(
+        "GET",
+        `/cabang?search=${query}`,
+        null,
+        additionalHeaders
+    );
 
-console.log(response.data);
+    console.log(response.data);
 
-return response;
-};
-
-
-export const postAddCabangRequest = async (name, timId) => {
-  const token = localStorage.getItem("token");
-  console.log(token);
-  const additionalHeaders = {
-      "Content-Type": "application/json",
-      "Authorization": `Bearer ${token}`,
-  };
-
-  console.log(additionalHeaders);
-  const response = await apiRequest("POST", `/tim/${timId}/cabang`, { name }, additionalHeaders);
-
-  console.log(response.data);
-
-  return response;
+    return response;
 };
 
-export const postEditCabangRequest = async (name,id) => {
-  const token = localStorage.getItem("token");
-  console.log(token);
-  const additionalHeaders = {
-      "Content-Type": "application/json",
-      "Authorization": `Bearer ${token}`,
-  };
 
-  console.log(additionalHeaders);
-  const response = await apiRequest("POST", `/cabang/${id}`, { name }, additionalHeaders);
+export const postAddCabangRequest = async (name) => {
+    const token = localStorage.getItem("token");
+    console.log(token);
+    const additionalHeaders = {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`,
+    };
 
-  console.log(response.data);
+    console.log(additionalHeaders);
+    const response = await apiRequest("POST", `/cabang`, {name}, additionalHeaders);
 
-  return response;
+    console.log(response.data);
+
+    return response;
+};
+
+export const postEditCabangRequest = async (name, id) => {
+    const token = localStorage.getItem("token");
+    console.log(token);
+    const additionalHeaders = {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`,
+    };
+
+    console.log(additionalHeaders);
+    const response = await apiRequest("POST", `/cabang/${id}`, {name}, additionalHeaders);
+
+    console.log(response.data);
+
+    return response;
 };
 
 export const deleteCabangRequest = async (id) => {
-  const token = localStorage.getItem("token");
-  console.log(token);
-  const additionalHeaders = {
-      "Content-Type": "application/json",
-      "Authorization": `Bearer ${token}`,
-  };
+    const token = localStorage.getItem("token");
+    console.log(token);
+    const additionalHeaders = {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`,
+    };
 
-  console.log(additionalHeaders);
-  const response = await apiRequest("DELETE", `/cabang/${id}`, null, additionalHeaders);
+    console.log(additionalHeaders);
+    const response = await apiRequest("DELETE", `/cabang/${id}`, null, additionalHeaders);
 
-  console.log(response.data);
+    console.log(response.data);
 
-  return response;
+    return response;
 };

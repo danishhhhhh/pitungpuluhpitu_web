@@ -98,7 +98,7 @@ const SparepartDashboard = () => {
     try {
       const responseSparepart = await getSearchSparepartRequest(query);
       setSpareparts(responseSparepart.data);
-      
+
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -126,7 +126,7 @@ const SparepartDashboard = () => {
               handleSubmitPost={postAddSparepart}
               handleEditPost={postEditSparepart}
               handleDeletePost={deleteSparepart}
-              handleSearch={getSearchSparepart} // Kirim fungsi pencarian ke komponen SparepartMainTable
+              handleSearch={getSearchSparepart}
             />
           </div>
           <div className="w-8" />

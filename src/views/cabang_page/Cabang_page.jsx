@@ -78,7 +78,7 @@ const CabangPage = () => {
     <div className="h-full flex flex-row">
       <Sidebar />
       <div className="flex-grow">
-        <Navbar data="Cabang Dashboard" showBackButton={true} />
+        <Navbar data="Cabang Dashboard" />
         <div className="p-12 flex flex-row justify-center">
           <div className="w-4/6">
             <DefaultMainTable

@@ -1,167 +1,163 @@
-import { apiRequest } from "./Api.jsx";
+import {apiRequest} from "./Api.jsx";
 
 export const getMotorRequest = async (page = 1) => {
     const token = localStorage.getItem("token");
     console.log(token);
-  const additionalHeaders = {
-    "Content-Type": "application/json",
-    "Authorization": `Bearer ${token}`,
-  };
+    const additionalHeaders = {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`,
+    };
 
-  const url = `/motor?page=${page}`;
+    const url = `/motor?page=${page}`;
 
+    const response = await apiRequest(
+        "GET",
+        url,
+        null,
+        additionalHeaders
+    );
+    console.log(response);
 
-  const response = await apiRequest(
-    "GET",
-      url,
-    null,
-    additionalHeaders
-  );
-  console.log("sdasdasdasdasdsasdasdadsasasddsasdasda");
-
-  console.log(response);
-
-  return response;
+    return response;
 };
 
 export const getSearchMotorRequest = async (query) => {
-  const token = localStorage.getItem("token");
-  console.log(token);
-const additionalHeaders = {
-  "Content-Type": "application/json",
-  "Authorization": `Bearer ${token}`,
+    const token = localStorage.getItem("token");
+    console.log(token);
+    const additionalHeaders = {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`,
+    };
+
+    console.log(additionalHeaders);
+    const response = await apiRequest(
+        "GET",
+        `/motor?search=${query}`,
+        null,
+        additionalHeaders
+    );
+
+    console.log(response.data);
+
+    return response;
 };
-
-console.log(additionalHeaders);
-const response = await apiRequest(
-  "GET",
-  `/motor?search=${query}`,
-  null,
-  additionalHeaders
-);
-
-console.log(response.data);
-
-return response;
-};
-
 
 
 export const postAddMotorRequest = async (name) => {
-  const token = localStorage.getItem("token");
-  console.log(token);
-  const additionalHeaders = {
-      "Content-Type": "application/json",
-      "Authorization": `Bearer ${token}`,
-  };
+    const token = localStorage.getItem("token");
+    console.log(token);
+    const additionalHeaders = {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`,
+    };
 
-  console.log(additionalHeaders);
-  const response = await apiRequest("POST", `/motor`, { name }, additionalHeaders);
+    console.log(additionalHeaders);
+    const response = await apiRequest("POST", `/motor`, {name}, additionalHeaders);
 
-  console.log(response.data);
+    console.log(response.data);
 
-  return response;
+    return response;
 };
 
-export const postEditMotorRequest = async (name,id) => {
-  const token = localStorage.getItem("token");
-  console.log(token);
-  const additionalHeaders = {
-      "Content-Type": "application/json",
-      "Authorization": `Bearer ${token}`,
-  };
+export const postEditMotorRequest = async (name, id) => {
+    const token = localStorage.getItem("token");
+    console.log(token);
+    const additionalHeaders = {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`,
+    };
 
-  console.log(additionalHeaders);
-  const response = await apiRequest("POST", `/motor/${id}`, { name }, additionalHeaders);
+    console.log(additionalHeaders);
+    const response = await apiRequest("POST", `/motor/${id}`, {name}, additionalHeaders);
 
-  console.log(response.data);
+    console.log(response.data);
 
-  return response;
+    return response;
 };
 
 export const deleteMotorRequest = async (id) => {
-  const token = localStorage.getItem("token");
-  console.log(token);
-  const additionalHeaders = {
-      "Content-Type": "application/json",
-      "Authorization": `Bearer ${token}`,
-  };
+    const token = localStorage.getItem("token");
+    console.log(token);
+    const additionalHeaders = {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`,
+    };
 
-  console.log(additionalHeaders);
-  const response = await apiRequest("DELETE", `/motor/${id}`, null, additionalHeaders);
+    console.log(additionalHeaders);
+    const response = await apiRequest("DELETE", `/motor/${id}`, null, additionalHeaders);
 
-  console.log(response.data);
+    console.log(response.data);
 
-  return response;
+    return response;
 };
 
 
 export const getTahunRequest = async () => {
     const token = localStorage.getItem("token");
     console.log(token);
-  const additionalHeaders = {
-    "Content-Type": "application/json",
-    "Authorization": `Bearer ${token}`,
-  };
+    const additionalHeaders = {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`,
+    };
 
-  console.log(additionalHeaders);
-  const response = await apiRequest(
-    "GET",
-    "/tahun",
-    null,
-    additionalHeaders
-  );
+    console.log(additionalHeaders);
+    const response = await apiRequest(
+        "GET",
+        "/tahun",
+        null,
+        additionalHeaders
+    );
 
-  console.log(response.data);
+    console.log(response.data);
 
-  return response;
+    return response;
 };
 
 
 export const postAddTahunRequest = async (name) => {
-  const token = localStorage.getItem("token");
-  console.log(token);
-  const additionalHeaders = {
-      "Content-Type": "application/json",
-      "Authorization": `Bearer ${token}`,
-  };
+    const token = localStorage.getItem("token");
+    console.log(token);
+    const additionalHeaders = {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`,
+    };
 
-  console.log(additionalHeaders);
-  const response = await apiRequest("POST", `/tahun`, { name }, additionalHeaders);
+    console.log(additionalHeaders);
+    const response = await apiRequest("POST", `/tahun`, {name}, additionalHeaders);
 
-  console.log(response.data);
+    console.log(response.data);
 
-  return response;
+    return response;
 };
 
-export const postEditTahunRequest = async (name,id) => {
-  const token = localStorage.getItem("token");
-  console.log(token);
-  const additionalHeaders = {
-      "Content-Type": "application/json",
-      "Authorization": `Bearer ${token}`,
-  };
+export const postEditTahunRequest = async (name, id) => {
+    const token = localStorage.getItem("token");
+    console.log(token);
+    const additionalHeaders = {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`,
+    };
 
-  console.log(additionalHeaders);
-  const response = await apiRequest("POST", `/tahun/${id}`, { name }, additionalHeaders);
+    console.log(additionalHeaders);
+    const response = await apiRequest("POST", `/tahun/${id}`, {name}, additionalHeaders);
 
-  console.log(response.data);
+    console.log(response.data);
 
-  return response;
+    return response;
 };
 
 export const deleteTahunRequest = async (id) => {
-  const token = localStorage.getItem("token");
-  console.log(token);
-  const additionalHeaders = {
-      "Content-Type": "application/json",
-      "Authorization": `Bearer ${token}`,
-  };
+    const token = localStorage.getItem("token");
+    console.log(token);
+    const additionalHeaders = {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`,
+    };
 
-  console.log(additionalHeaders);
-  const response = await apiRequest("DELETE", `/tahun/${id}`, null, additionalHeaders);
+    console.log(additionalHeaders);
+    const response = await apiRequest("DELETE", `/tahun/${id}`, null, additionalHeaders);
 
-  console.log(response.data);
+    console.log(response.data);
 
-  return response;
+    return response;
 };

@@ -79,7 +79,7 @@ const Sidebar = () => {
         <ul className="text-white font-poppins">
           <li
             className={`mb-4 rounded-lg py-4 px-10 ${
-              location.pathname === "/stock" || location.pathname === "/detail" || location.pathname === "/rekap"|| location.pathname === "/cabang"||location.pathname === "/editrekap"
+              location.pathname === "/stock" || location.pathname === "/detail" || location.pathname === "/rekap"|| location.pathname === "/editrekap"
                 ? activeClass
                 : inactiveClass
             }`}
@@ -144,6 +144,19 @@ const Sidebar = () => {
             </div>
           </li>
 
+          <li
+            className={`mb-4 rounded-lg py-4 px-10 ${
+              location.pathname === "/cabang" ? activeClass : inactiveClass
+            }`}
+            onClick={() => handleNavigation("/cabang")}
+          >
+            <div className="flex flex-row items-center">
+              <FaToolbox />
+              <div className="w-3" />
+              Cabang
+            </div>
+          </li>
+
           {localStorage.getItem("role") === "Owner" && (
               <li
                   className={`mb-4 rounded-lg py-4 px-10 ${
@@ -158,6 +171,7 @@ const Sidebar = () => {
                 </div>
               </li>
           )}
+
         </ul>
         <button
           onClick={handleOpenModal}
