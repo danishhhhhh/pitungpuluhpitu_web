@@ -1,26 +1,32 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Navbar from "../../component/Navbar/navbar";
 import Sidebar from "../../component/Sidebar/sidebar";
 import { MdOutlineFileUpload } from "react-icons/md";
+import {postProfile} from "../../features/Profile.jsx";
+import { useNavigate } from "react-router-dom";
 
 const EditProfilePage = () => {
   const [selectedImage, setSelectedImage] = useState(null);
-  const [imagePreview, setImagePreview] = useState("");
-  const [adminName, setAdminName] = useState("Danish Ardiyanta");
+  const [imagePreview, setImagePreview] = useState(localStorage.getItem("image"));
+  const [adminName, setAdminName] = useState(localStorage.getItem("name"));
+  const [deleteImage, setDeleteImage] = useState(0);
+  const navigate = useNavigate();
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
       setSelectedImage(file);
       const reader = new FileReader();
+      reader.readAsDataURL(file);
       reader.onloadend = () => {
         setImagePreview(reader.result);
+        setDeleteImage(0)
       };
-      reader.readAsDataURL(file);
     }
   };
 
   const handleRemoveImage = () => {
+    setDeleteImage(1)
     setSelectedImage(null);
     setImagePreview("");
   };
@@ -29,11 +35,30 @@ const EditProfilePage = () => {
     setAdminName(e.target.value);
   };
 
+  const handleSubmitProfile = async () => {
+    try {
+      const response = await postProfile({name: adminName, image: selectedImage, deleteImage: deleteImage});
+      if (response.data.name){
+        localStorage.setItem('name', response.data.name);
+      }
+      if (response.data.image){
+        localStorage.setItem('image', response.data.image);
+      }
+      if (deleteImage === 1){
+        localStorage.setItem('image', "");
+      }
+
+      navigate("/stock");
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
   return (
-    <div className="min-h-screen flex flex-row">
+    <div className="h-full flex flex-row">
       <Sidebar />
       <div className="flex-grow">
-        <Navbar data="Edit" />
+        <Navbar data="Edit" showBackButton={true} />
         <div className="w-full p-10 flex-col justify-start items-start gap-[30px] inline-flex">
           <div className="flex-col justify-start items-start gap-[5px] flex">
             <div className="text-slate-800 text-2xl font-semibold font-['Poppins'] leading-7">
@@ -43,7 +68,7 @@ const EditProfilePage = () => {
               Perbarui detail foto dan nama anda di sini.
             </div>
           </div>
-          <div className="self-stretch h-[0px] border-grey border border-neutral-300"></div>
+          <div className="self-stretch h-[0px] border-grey border "></div>
           <div className="flex-col justify-start items-start gap-5 flex">
             <div className="justify-start items-start gap-5 inline-flex">
               <div className="w-[150px] h-[150px] bg-grey rounded-[20px] overflow-hidden">
@@ -107,7 +132,7 @@ const EditProfilePage = () => {
             </div>
           </div>
           <div className="justify-start items-start gap-2.5 inline-flex">
-            <button className="px-[15px] py-[5px] bg-yellow rounded-[10px] justify-center items-center gap-[5px] flex">
+            <button className="px-[15px] py-[5px] bg-yellow rounded-[10px] justify-center items-center gap-[5px] flex" onClick={handleSubmitProfile}>
               <div className="text-bluegrey text-sm font-normal font-['Poppins'] leading-7">
                 Simpan Perubahan
               </div>
