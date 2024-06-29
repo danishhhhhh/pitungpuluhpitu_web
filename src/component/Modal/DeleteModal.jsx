@@ -1,8 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { IoIosClose } from 'react-icons/io';
 
-const DeleteModal = ({ isOpen, handleCloseModal, handleDelete, name }) => {
+const DeleteModal = ({ isOpen, handleCloseModal, handleDelete, name, isActive }) => {
+    const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
+
     if (!isOpen) return null;
+
+    const handleDeleteConfirmation = () => {
+        setIsConfirmationOpen(true);
+    };
+
+    const handleConfirmDelete = () => {
+        handleDelete();
+        handleCloseModal();
+    };
+
+    const confirmationMessage = isActive
+        ? `Apakah Anda yakin ingin menonaktifkan ${name} ini?`
+        : `Apakah Anda yakin ingin mengaktifkan ${name} ini?`;
 
     return (
         <div className="fixed inset-0 flex items-center justify-center">
@@ -19,22 +34,26 @@ const DeleteModal = ({ isOpen, handleCloseModal, handleDelete, name }) => {
                         <IoIosClose className="w-8 h-8 relative" />
                     </button>
                     <div className="text-center text-zinc-900 text-2xl font-semibold font-['Poppins'] leading-9">
-                        Konfirmasi Hapus
+                        Konfirmasi
                     </div>
                 </div>
                 <div className="text-center text-zinc-900 text-sm font-medium font-['Poppins']">
-                    Apakah Anda yakin ingin menghapus {name} ini?
+                    {confirmationMessage}
                 </div>
-                <button
-                    type="button"
-                    className="w-full text-center text-white text-sm font-medium font-poppins rounded-xl py-3 bg-red"
-                    onClick={handleDelete}
-                >
-                    Hapus
-                </button>
+
+                <div className="flex justify-center items-center gap-4">
+                    <button
+                        type="button"
+                        className="w-full text-center text-white text-sm font-medium font-poppins rounded-xl py-3 bg-green"
+                        onClick={handleConfirmDelete}
+                    >
+                        Ok
+                    </button>
+                </div>
             </div>
         </div>
     );
 };
+
 
 export default DeleteModal;

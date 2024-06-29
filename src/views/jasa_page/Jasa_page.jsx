@@ -35,7 +35,7 @@ const JasaPage = () => {
     try {
       const responseJasa = await getSearchJasaRequest(query);
       setJasa(responseJasa.data);
-    
+
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -71,37 +71,10 @@ const JasaPage = () => {
   }, [currentPage]);
 
   return (
-<<<<<<< HEAD
     <div className="flex ">
       <Sidebar />
       <Navbar data="Data Jasa" />
 
-=======
-    <div className="h-full flex flex-row">
-      <Sidebar />
-      <div className="flex-grow">
-        <Navbar data="Jasa Dashboard" />
-        <div className="p-12 flex flex-row justify-center">
-          <div className="w-4/6">
-            <DefaultMainTable
-              name={"Jasa"}
-              data={jasa}
-              setData={setJasa}
-              currentPage={currentPage}
-              totalData={totalData}
-              totalPage={totalPage}
-              setCurrentPage={setCurrentPage}
-              value={jasaValue}
-              setValue={setJasaValue}
-              handleSubmitPost={postAddJasa}
-              handleEditPost={postEditJasa}
-              handleDeletePost={deleteJasa}
-              handleSearch={getSearchJasa}
-            />
-          </div>
-        </div>
-      </div>
->>>>>>> 7a2cdecc821a842df5aa43488dab026636cf5a1d
     </div>
   );
 };

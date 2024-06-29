@@ -3,6 +3,7 @@ import Sidebar from "../../component/Sidebar/sidebar.jsx";
 import Navbar from "../../component/Navbar/navbar.jsx";
 import DefaultSecondaryTable from "../../component/Table/DefaultSecondaryTable.jsx";
 import DefaultMainTable from "../../component/Table/DefaultMainTable.jsx";
+import { IoSearchOutline } from "react-icons/io5";
 import {
   getMotorRequest,
   getTahunRequest,
@@ -16,43 +17,13 @@ import {
 } from "../../features/Motor.jsx";
 
 const MotordashboardPage = () => {
-<<<<<<< HEAD
-    return (
-        <div className="flex">
-            <Sidebar />
-            <div className="w-full h-1 ">
-                <Navbar data="Data Motor" />
-                <div className="flex flex-col w-full">
-                    <div className="flex mt-20 ml-45 bg-gray-800 ">
-                        <div className="relative">
-                            <input
-                                type="text"
-                                placeholder="Cari Motor ..."
-                                className="w-96 h-9 md:pl-2 pr-10 bg-lightgrey rounded-xl text-darkgrey focus:outline-none font-poppins text-sm"
-                            />
-                            <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                                <IoSearchOutline className="text-gray-400" />
-                            </div>
-                        </div>
-                        <div className="ml-auto flex">
-                            <button className="bg-yellow px-5 py-2 rounded-lg text-black font-normal font-poppins text-sm">
-                                Tambah Motor
-                            </button>
-                            <button className="bg-yellow px-5 py-2 rounded-lg text-black font-normal font-poppins text-sm ml-40">
-                                Tambah Motor
-                            </button>
-                        </div>
-                    </div>
-=======
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalData, setTotalData] = useState();
-  const [totalPage, setTotalPage] = useState();
+  const [motorValue, setMotorValue] = useState("");
+  const [yearValue, setYearValue] = useState("");
   const [motor, setMotor] = useState([]);
   const [year, setYear] = useState([]);
->>>>>>> 7a2cdecc821a842df5aa43488dab026636cf5a1d
-
-  const [motorValue, setMotorValue] = useState();
-  const [yearValue, setYearValue] = useState();
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalData, setTotalData] = useState(0);
+  const [totalPage, setTotalPage] = useState(0);
 
   const fetchData = async (page = 1) => {
     try {
@@ -74,7 +45,6 @@ const MotordashboardPage = () => {
     try {
       const responseMotor = await getSearchMotorRequest(query);
       setMotor(responseMotor.data);
-     
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -83,53 +53,57 @@ const MotordashboardPage = () => {
   const postAddMotor = async () => {
     try {
       await postAddMotorRequest(motorValue);
-      fetchData(currentPage)
+      fetchData(currentPage);
     } catch (error) {
-      console.error("Error fetching data:", error);
+      console.error("Error adding motor:", error);
     }
   };
+
   const postEditMotor = async (id) => {
     try {
       await postEditMotorRequest(motorValue, id);
-      fetchData(currentPage)
+      fetchData(currentPage);
     } catch (error) {
-      console.error("Error fetching data:", error);
+      console.error("Error editing motor:", error);
     }
   };
+
   const deleteMotor = async (id) => {
     try {
       await deleteMotorRequest(id);
-      fetchData(currentPage)
+      fetchData(currentPage);
     } catch (error) {
-      console.error("Error fetching data:", error);
+      console.error("Error deleting motor:", error);
     }
   };
 
   const postAddTahun = async () => {
     try {
       await postAddTahunRequest(yearValue);
-      fetchData(currentPage)
+      fetchData(currentPage);
     } catch (error) {
-      console.error("Error fetching data:", error);
+      console.error("Error adding year:", error);
     }
   };
+
   const postEditTahun = async (id) => {
     try {
       await postEditTahunRequest(yearValue, id);
-      fetchData(currentPage)
+      fetchData(currentPage);
     } catch (error) {
-      console.error("Error fetching data:", error);
+      console.error("Error editing year:", error);
     }
   };
+
   const deleteTahun = async (id) => {
     try {
       await deleteTahunRequest(id);
-      fetchData(currentPage)
+      fetchData(currentPage);
     } catch (error) {
-      console.error("Error fetching data:", error);
+      console.error("Error deleting year:", error);
     }
   };
-  
+
   useEffect(() => {
     fetchData(currentPage);
   }, [currentPage]);

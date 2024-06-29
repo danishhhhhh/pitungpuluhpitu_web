@@ -43,7 +43,7 @@ const AkunPage = () => {
     try {
       const responseAkun = await getSearchAkunRequest(query);
       setAkun(responseAkun.data);
-      
+
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -97,24 +97,18 @@ const AkunPage = () => {
   };
   const postDeleteAkun = async (id) => {
     try {
-      await deleteAkunRequest(id);
-      fetchData(currentPage);
+      // await deleteAkunRequest(id);
+      // fetchData(currentPage);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
-  
+
 
   useEffect(() => {
     fetchData(currentPage);
   }, [currentPage]);
   return (
-<<<<<<< HEAD
-    <div className="flex ">
-      <Sidebar />
-      <Navbar data="Data Akun" />
-
-=======
     <div className="h-full flex flex-row">
       <Sidebar />
       <div className="flex-grow">
@@ -151,7 +145,6 @@ const AkunPage = () => {
           </div>
         </div>
       </div>
->>>>>>> 7a2cdecc821a842df5aa43488dab026636cf5a1d
     </div>
   );
 };

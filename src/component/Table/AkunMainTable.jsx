@@ -21,6 +21,7 @@ const AkunMainTable = ({
   handleEditPost,
   handleDeletePost,
   handleSearch,
+  handleToggleStatus,
 }) => {
   const [akunValue, setAkunValue] = useState({
     name: "",
@@ -32,9 +33,9 @@ const AkunMainTable = ({
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [idTim, setIdTim] = useState();
   const [idAkun, setIdAkun] = useState();
   const [searchQuery, setSearchQuery] = useState("");
+  const [isDeleting, setIsDeleting] = useState(null);
 
   const roleMapping = {
     Owner: 1,
@@ -48,11 +49,9 @@ const AkunMainTable = ({
       ...prevState,
       [name]: value,
     }));
-    console.log(akunValue);
   };
 
   const toggleAddModal = () => {
-    console.log(akunValue);
     setIsAddModalOpen(!isAddModalOpen);
   };
 
@@ -65,7 +64,6 @@ const AkunMainTable = ({
   };
 
   const handleAddSubmit = (role, username, password, name, tim) => {
-    console.log(`abc abc ${tim}`);
     const roleId = roleMapping[role] || null;
     handleSubmitPost(roleId, username, password, name, tim);
     notifAddSuccess();
@@ -73,31 +71,33 @@ const AkunMainTable = ({
   };
 
   const handleEditSubmit = (role, username, password, name, tim, id) => {
-    console.log(`ini name ${name}`);
     const roleId = roleMapping[role] || null;
     handleEditPost(roleId, username, password, name, tim, id);
     notifEditSuccess();
     toggleEditModal();
   };
 
-  const handleDeleteSubmit = (id) => {
-    console.log(`ini iasdadadsads ${id}`);
-    handleDeletePost(id);
-    notifDeleteSuccess();
+  const handleToggleAccountStatus = (id) => {
+    const updatedData = data.map((akun) =>
+      akun.id === id ? { ...akun, isActive: !akun.isActive } : akun
+    );
+    setData(updatedData);
+    notifToggleSuccess();
     toggleDeleteModal();
+    setIsDeleting(null);
   };
 
   const handleEditClick = (index) => {
     setAkunValue(data[index]);
     setIdAkun(data[index].id);
-    console.log(`ini name ${name}`);
     toggleEditModal();
   };
 
   const handleDeleteClick = (index) => {
     setAkunValue(data[index]);
     setIdAkun(data[index].id);
-    toggleDeleteModal();
+    setIsDeleteModalOpen(true);
+    setIsDeleting(index);
   };
 
   const handleCloseModal = () => {
@@ -105,12 +105,14 @@ const AkunMainTable = ({
     setIsEditModalOpen(false);
     setIsDeleteModalOpen(false);
     setAkunValue({ name: "", username: "", password: "", role: "", tim: "" });
+    setIsDeleting(null);
   };
 
   const handleSearchInputChange = (e) => {
     setSearchQuery(e.target.value);
     debouncedSearch(e.target.value);
   };
+
   const notifAddSuccess = () =>
     toast.success("Data berhasil ditambahkan", {
       position: "bottom-right",
@@ -124,6 +126,7 @@ const AkunMainTable = ({
       transition: Bounce,
       className: "font-poppins",
     });
+
   const notifEditSuccess = () =>
     toast.success("Data berhasil diedit", {
       position: "bottom-right",
@@ -137,8 +140,9 @@ const AkunMainTable = ({
       transition: Bounce,
       className: "font-poppins",
     });
-  const notifDeleteSuccess = () =>
-    toast.success("Data berhasil dihapus", {
+
+  const notifToggleSuccess = () =>
+    toast.success("Status akun berhasil diubah", {
       position: "bottom-right",
       autoClose: 5000,
       hideProgressBar: false,
@@ -151,7 +155,6 @@ const AkunMainTable = ({
       className: "font-poppins",
     });
 
-  // Debounced search function
   const debouncedSearch = debounce((query) => {
     handleSearch(query);
   }, 1500);
@@ -180,7 +183,7 @@ const AkunMainTable = ({
             onChange={handleSearchInputChange}
             value={searchQuery}
           />
-          <FaSearch className="my-auto mx-4  text-darkgrey" />
+          <FaSearch className="my-auto mx-4 text-darkgrey" />
         </div>
         <button
           className="bg-yellow px-4 py-2 rounded-lg text-black font-normal font-poppins text-sm"
@@ -200,7 +203,6 @@ const AkunMainTable = ({
             <th className="py-3 font-poppins border border-grey text-darkgrey font-medium">
               Username
             </th>
-
             <th className="py-3 font-poppins border border-grey text-darkgrey font-medium">
               Role
             </th>
@@ -218,7 +220,6 @@ const AkunMainTable = ({
               <td className="px-4 py-2 font-poppins border border-grey">
                 {akun.username}
               </td>
-
               <td className="px-4 py-2 font-poppins border border-grey">
                 {akun.role}
               </td>
@@ -230,11 +231,15 @@ const AkunMainTable = ({
                   Edit
                 </button>
                 <button
-                  className="bg-red font-poppins font-medium text-sm text-white px-4 py-1.5 rounded-md mr-2"
+                  className={`bg-red font-poppins font-medium text-sm text-white px-4 py-1.5 rounded-md mr-2 ${isDeleting === index ? "opacity-50 cursor-not-allowed" : ""}`}
                   onClick={() => handleDeleteClick(index)}
+                  disabled={isDeleting === index}
+                  style={{ opacity: akun.isActive ? 0.5 : 100 }}
                 >
-                  Hapus
+                  {akun.isActive ? `Disable` : `Enable`}
                 </button>
+
+
               </td>
             </tr>
           ))}
@@ -246,7 +251,6 @@ const AkunMainTable = ({
         totalData={totalData}
         setCurrentPage={setCurrentPage}
       />
-
       {/* Add Modal */}
       <AkunModal
         isEdit={false}
@@ -261,12 +265,10 @@ const AkunMainTable = ({
             akunValue.username,
             akunValue.password,
             akunValue.name,
-            idTim
+            akunValue.tim
           )
         }
-        setIdTim={setIdTim}
       />
-
       {/* Edit Modal */}
       <AkunModal
         isEdit={true}
@@ -275,25 +277,23 @@ const AkunMainTable = ({
         tim={tim}
         akunValue={akunValue}
         handleInputChange={handleInputChange}
-        setIdTim={setIdTim}
         handleSubmit={() =>
           handleEditSubmit(
             akunValue.role,
             akunValue.username,
             akunValue.password,
             akunValue.name,
-            idTim,
+            akunValue.tim,
             idAkun
           )
         }
       />
-
       {/* Delete Modal */}
       <DeleteModal
-        name={name.toLowerCase()}
         isOpen={isDeleteModalOpen}
         handleCloseModal={handleCloseModal}
-        handleDelete={() => handleDeleteSubmit(idAkun)}
+        handleDelete={() => handleToggleAccountStatus(idAkun)}
+        name={akunValue.name}
       />
     </div>
   );
