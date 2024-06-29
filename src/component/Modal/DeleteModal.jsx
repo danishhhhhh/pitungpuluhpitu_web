@@ -16,8 +16,8 @@ const DeleteModal = ({ isOpen, handleCloseModal, handleDelete, name, isActive })
     };
 
     const confirmationMessage = isActive
-        ? `Apakah Anda yakin ingin menonaktifkan ${name} ini?`
-        : `Apakah Anda yakin ingin mengaktifkan ${name} ini?`;
+        ? `Apakah Anda yakin ingin mengaktifkan ${name} ini?`
+        : `Apakah Anda yakin ingin menonaktifkan ${name} ini?`;
 
     return (
         <div className="fixed inset-0 flex items-center justify-center">
@@ -54,6 +54,5 @@ const DeleteModal = ({ isOpen, handleCloseModal, handleDelete, name, isActive })
         </div>
     );
 };
-
 
 export default DeleteModal;
